@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap'); */
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 :root{
     --bg-black-900: #f2f2fc;
     --bg-black-100: #fdf9ff;
@@ -25,14 +25,16 @@ body{
     outline: none;
     text-decoration: none;
     box-sizing: border-box;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
 }
 ::before,::after{
     box-sizing: border-box;
 }
 ul{
     list-style: none;
+    text-decoration: none;
 }
+
 .section{
     background: var(--bg-black-900);
     min-height: 100vh;
