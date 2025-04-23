@@ -3,486 +3,1434 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Norman.dev | Software Developer Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Norman Hategyekamukama</title>
-    <link rel="stylesheet" href="style.css">
-       <!-- css Files -->
-       <link rel="stylesheet" href="css/style.css">
-       <link rel="stylesheet" href="css/skin/color-1.css">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-       <!--========= Style switcher========= -->
-       <link rel="stylesheet" href="css/skin/color-1.css" class="alternate-style" title="color-1" disabled>
-       <link rel="stylesheet" href="css/skin/color-2.css" class="alternate-style" title="color-2" disabled>
-       <link rel="stylesheet" href="css/skin/color-3.css" class="alternate-style" title="color-3" disabled>
-       <link rel="stylesheet" href="css/skin/color-4.css" class="alternate-style" title="color-4" disabled>
-       <link rel="stylesheet" href="css/skin/color-5.css" class="alternate-style" title="color-5" disabled>
-       <link rel="stylesheet" href="css/style-witcher.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600); -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vue.js CDN -->
+    <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP Text Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <!-- GSAP ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
 
+        :root {
+            --primary: #00f0ff;
+            --secondary: #6e48aa;
+            --dark: #1a1a2e;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <!-- Fonts -->
-      <!-- <link rel="preconnect" href="https://fonts.bunny.net"> -->
-      <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" /> 
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background-color: var(--dark);
+        }
 
+        .code-font {
+            font-family: 'Space Mono', monospace;
+        }
+
+        .magic-text {
+            text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--primary);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: var(--primary);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 240, 255, 0.2);
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 1s ease-in-out;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes scrollBounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) translateX(-50%);
+            }
+
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .active-nav::after {
+            width: 100%;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, rgba(0, 240, 255, 0.1), rgba(110, 72, 170, 0.1));
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .timeline-content {
+            position: relative;
+            width: 45%;
+        }
+
+        .timeline-content.left {
+            margin-left: auto;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .timeline-content.right .timeline-dot {
+            left: -60px;
+        }
+
+        .timeline-content.left .timeline-dot {
+            right: -60px;
+        }
+
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+
+        .glow-on-hover:hover {
+            text-shadow: 0 0 8px var(--primary);
+        }
+
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .perspective-container {
+            perspective: 1000px;
+        }
+
+        .rotate-on-scroll {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        #webgl-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(0, 240, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .typewriter-text {
+            overflow: hidden;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--primary)
+            }
+        }
+
+        .animate-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: scale(1.2);
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: rgba(26, 26, 46, 0.95);
+                backdrop-filter: blur(10px);
+                transition: right 0.5s ease;
+                flex-direction: column;
+                padding: 2rem;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: 85%;
+                margin-left: auto;
+            }
+
+            .timeline-content.left,
+            .timeline-content.right {
+                margin-left: auto;
+            }
+
+            .timeline-content.right .timeline-dot,
+            .timeline-content.left .timeline-dot {
+                left: -40px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #6e48aa;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff;
+        }
+    </style>
 </head>
 
 <body>
-     <!-- main container start -->
-     <div class="main-container">
-        <!-- Aside Start -->
-        <div class="aside">
-            <div class="logo">
-                <img src="image/profile2.jpg" alt="">
-            </div>
-            <div class="nav-toggler">
-                <span></span>
-            </div>
-                <ul class="nav">
-                    <li><a class="text-decoration-none" href="#home" class="active"><i class="fa fa-home"></i> Home</a></li>
-                <li><a class="text-decoration-none" href="#about"><i class="fa fa-user"></i> About</a></li>
-                <li><a class="text-decoration-none" href="#services"><i class="fa fa-list"></i> Services</a></li>
-                <li><a class="text-decoration-none" href="#portfolio"><i class="fa fa-briefcase"></i> Portifolio</a></li>
-                <li><a class="text-decoration-none" href="#contact"><i class="fa fa-comments"></i> Contact</a></li>
-                </ul>
+    <div id="app">
+        <canvas id="webgl-container"></canvas>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="menu-toggle fixed top-6 right-8 z-50 cursor-pointer md:hidden" @click="toggleMobileMenu">
+            <div class="w-8 h-1 bg-white mb-1" :class="{'rotate-45 translate-y-2': mobileMenuOpen}"></div>
+            <div class="w-8 h-1 bg-white mb-1" :class="{'opacity-0': mobileMenuOpen}"></div>
+            <div class="w-8 h-1 bg-white" :class="{'-rotate-45 -translate-y-2': mobileMenuOpen}"></div>
         </div>
-        <!-- Aside End -->
-        <!-- Main content start -->
-        <div class="main-content">
-            <!-- Home section Start -->
-            <section class="home section" id="home">
-                <div class="container">
-                    <div class="row">
-                        <div class="home-info padd-15">
-                            <h3 class="hello">Hello, my name is <span class="name">Norman Developer</span></h3>
-                            <h3 class="my-profession">I' m a <span class="typing">Web designer</span></h3>
-                            <p>
-                                Am passionate about harnessing the power of technology to create innovative
-                                and impactful solutions. Am dedicated to delivering high quality software solutions
-                                that drive results and exceed client expectaions.
-                            </p>
-                            <a href="#contact" class="btn btn-primary text-light active section-title padd-15  hire-me">Hire Me</a>
-                        </div>
-                        <!-- <div class="home-img padd-15">
-                            <img src="image/12.jpg" alt="">
-                        </div> -->
-                    </div>
+
+        <!-- Navbar -->
+        <nav class="flex items-center justify-between px-6 md:px-12 py-5 bg-glass shadow-lg sticky top-0 z-40 transition-all duration-300"
+            :class="{'py-3': scrolled}">
+            <div class="flex items-center">
+                <div class="text-3xl font-bold gradient-text mr-2">N</div>
+                <h1 class="text-xl md:text-2xl font-bold text-white code-font">
+                    <span class="gradient-text">Norman</span>.dev
+                </h1>
+            </div>
+
+            <ul class="nav-links flex md:flex-row gap-8 text-lg font-medium" :class="{'active': mobileMenuOpen}">
+                <li v-for="(item, index) in navItems" :key="index"
+                    class="nav-item cursor-pointer transition duration-300"
+                    :class="{'active-nav text-cyan-400': activeSection === item.id}" @click="scrollToSection(item.id)">
+                    {{ item.name }}
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Progress bar -->
+        <div class="fixed top-0 left-0 w-full h-1 z-50">
+            <div class="progress-bar" :style="{width: scrollProgress + '%'}"></div>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="home"
+            class="min-h-screen relative flex flex-col justify-center items-center text-center px-6 py-20">
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+                <div id="particles-js"></div>
+            </div>
+
+            <div class="z-10 max-w-5xl mx-auto">
+                <div class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text">Hello, I am</div>
+
+                <h3 class="text-5xl md:text-7xl font-bold mb-8 gradient-text" id="name-text">
+                    Norman <span class="hidden sm:inline">Hategyekamukama</span>
+                </h3>
+
+                <div class="flex justify-center items-center mb-8">
+                    <div class="h-0.5 w-12 bg-cyan-400 mr-4"></div>
+                    <h2 class="text-2xl md:text-4xl font-semibold magic-text code-font" id="role-text">
+                        <span id="typing-text"></span><span class="typing-cursor"></span>
+                    </h2>
+                    <div class="h-0.5 w-12 bg-cyan-400 ml-4"></div>
                 </div>
-            </section>
-            <!-- Home section End -->
-            <!-- About section Start -->
-            <section class="about section" id="about">
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title padd-15">
-                           <h2 style="font-size: 25px;">About Me</h2>
+
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12" id="intro-text">
+                    I craft elegant code and seamless user experiences. Passionate about building
+                    innovative solutions that blend functionality with stunning design.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button @click="scrollToSection('projects')"
+                        class="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30">
+                        View My Work
+                    </button>
+                    <button @click="scrollToSection('contact')"
+                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30">
+                        Contact Me
+                    </button>
+                </div>
+
+                <div class="mt-16 flex justify-center space-x-6">
+                    <a href="#" class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
+                        <i class="fab fa-codepen"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down text-cyan-400 text-2xl animate-bounce"></i>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="min-h-screen py-20 px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-title text-center mb-16">
+                    <h3 class="text-lg text-cyan-400 code-font animate-in">GET TO KNOW ME</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">About Me</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="perspective-container animate-in">
+                        <div
+                            class="rotate-on-scroll bg-glass rounded-2xl p-3 border border-cyan-500/30 shadow-xl shadow-cyan-500/5">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden">
+                                <img src="/api/placeholder/600/600" alt="Norman Wilson"
+                                    class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="about-content padd-15">
-                            <div class="row">
-                                <div class="about-text padd-15">
-                                    <h3><span>Unlocking The Power Of Technology</span></h3>
-                                     <p>
-                                        Highly motivated and talented Software engineer/developer 
-                                        Offering strong knowledge and hands-on experience
-                                        in PHP, Laravel, Livewire, Alpine, MySQL, Oracle, HTML, CSS, and Bootstrap.
-                                           Committed to utilizing my skills and passion for software development to contribute
-                                            to the success technology.
-                                     </p>   
+
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 gradient-text animate-in">Software Developer & UI/UX
+                            Enthusiast</h3>
+                        <p class="text-gray-300 mb-6 animate-in">
+                            With over 5 years of experience in web development, I specialize in creating
+                            immersive digital experiences that are both functional and visually stunning.
+                            My journey began with a fascination for how code can transform ideas into reality.
+                        </p>
+                        <p class="text-gray-300 mb-8 animate-in">
+                            I'm passionate about leveraging cutting-edge technologies to solve complex problems
+                            and deliver seamless user experiences. When I'm not coding, you'll find me exploring
+                            new design trends, contributing to open-source projects, or mentoring aspiring developers.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="animate-in">
+                                <div class="flex items-center mb-1">
+                                    <i class="fas fa-envelope text-cyan-400 mr-2"></i>
+                                    <span class="font-semibold">Email:</span>
                                 </div>
+                                <p class="text-gray-300">hello@norman.dev</p>
                             </div>
-                            <div class="row">
-                                <div class="personal-info padd-15">
-                                    <div class="row">
-                                        <div class="info-item padd-15">
-                                            <p>Email : <span>normanmukama11@gmail.com</span></p>
-                                        </div>
-                                        <div class="info-item padd-15">
-                                            <p>Phone : <span>+256 751947693</span></p>
-                                        </div>
-                                        <div class="info-item padd-15">
-                                            <p>City : <span>Entebbe</span></p>
-                                        </div>
-                                        <div class="info-item padd-15">
-                                            <p>Freelance : <span>Available</span></p>
-                                        </div>
-                                        <div class="row">
-                                            <div class="buttons padd-15">
-                                                <a href="#" class="btn btn-primary">Download CV <i class="fa fa-download"></i></a>
-                                                <a href="#contact" class="btn hire-me ">Hire Me</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="animate-in">
+                                <div class="flex items-center mb-1">
+                                    <i class="fas fa-map-marker-alt text-cyan-400 mr-2"></i>
+                                    <span class="font-semibold">Location:</span>
                                 </div>
-                                <div class="skills padd-15">
-                                    <div class="row">
-                                        <div class="skill-item padd-15">
-                                            <h5>JS</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 78%;"></div>
-                                                <div class="skill-percent">50%</div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>PHP</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 80%;"></div>
-                                                <div class="skill-percent">80%</div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>HTML</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 98%;"></div>
-                                                <div class="skill-percent">98%</div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>CSS and Bootstrap</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 90%;"></div>
-                                                <div class="skill-percent">90%</div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>LiveWire</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 53%;"></div>
-                                                <div class="skill-percent">53%</div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>Alpine JS</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 49%;"></div>
-                                                <div class="skill-percent">49%</div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>Laravel</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 49%;"></div>
-                                                <div class="skill-percent">60</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="text-gray-300">San Francisco, CA</p>
                             </div>
-                            <div class="row">
-                                <div class="education padd-15">
-                                    <h3 class="title">Education</h3>
-                                    <div class="row">
-                                        <div class="timeline-box padd-15">
-                                            <div class="timeline shadow-dark">
-                                                <!------ timeline-item ---------->
-                                                <!-- <div class="timeline-item">
-                                                    <div class="circle-dot"></div>
-                                                    <h3 class="timeline-date">
-                                                        <i class="fa fa-calendar"></i> 2021 - 2023
-                                                    </h3>
-                                                    <h4 class="timeline-title">Diploma in Software engineering</h4>
-                                                    <p class="timeline-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Provident laboriosam perspiciatis harum, quidem delectus omnis fugit distinctio 
-                                                        sit exercitationem aperiam hic labore inventore velit obcaecati reiciendis cumque 
-                                                        dignissimos mollitia cum!
-                                                    </p>
-                                                </div> -->
-
-                                                 <!------ timeline-item ---------->
-                                                 <!-- <div class="timeline-item">
-                                                    <div class="circle-dot"></div>
-                                                        <h3 class="timeline-date">
-                                                            <i class="fa fa-calendar"></i> 2021 - 2023
-                                                        </h3>
-                                                        <h4 class="timeline-title">Diploma in Software engineering</h4>
-                                                        <p class="timeline-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                             Provident laboriosam perspiciatis harum, quidem delectus omnis fugit distinctio 
-                                                             sit exercitationem aperiam hic labore inventore velit obcaecati reiciendis cumque 
-                                                             dignissimos mollitia cum!</p>
-                                                    
-                                                </div> -->
-
-                                                 <!------ timeline-item ---------->
-                                                 <!-- <div class="timeline-item">
-                                                    <div class="circle-dot"></div>
-                                                        <h3 class="timeline-date">
-                                                            <i class="fa fa-calendar"></i> 2021 - 2023
-                                                        </h3>
-                                                        <h4 class="timeline-title">Diploma in Software engineering</h4>
-                                                        <p class="timeline-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                             Provident laboriosam perspiciatis harum, quidem delectus omnis fugit distinctio 
-                                                             sit exercitationem aperiam hic labore inventore velit obcaecati reiciendis cumque 
-                                                             dignissimos mollitia cum!</p>
-                                                    
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="animate-in">
+                                <div class="flex items-center mb-1">
+                                    <i class="fas fa-user-graduate text-cyan-400 mr-2"></i>
+                                    <span class="font-semibold">Degree:</span>
                                 </div>
-                                <div class="experience padd-15">
-                                    <h3 class="title">Experience</h3>
-                                    <div class="row">
-                                        <div class="timeline-box padd-15">
-                                            <div class="timeline shadow-dark">
-                                                <!------ timeline-item ---------->
-                                                <!-- <div class="timeline-item">
-                                                    <div class="circle-dot"></div>
-                                                        <h3 class="timeline-date">
-                                                            <i class="fa fa-calendar"></i> 2021 - 2023
-                                                        </h3>
-                                                        <h4 class="timeline-title">Diploma in Software engineering</h4>
-                                                        <p class="timeline-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                             Provident laboriosam perspiciatis harum, quidem delectus omnis fugit distinctio 
-                                                             sit exercitationem aperiam hic labore inventore velit obcaecati reiciendis cumque 
-                                                             dignissimos mollitia cum!</p>
-                                                    
-                                                </div> -->
-
-                                                 <!------ timeline-item ---------->
-                                                 <!-- <div class="timeline-item">
-                                                    <div class="circle-dot"></div>
-                                                        <h3 class="timeline-date">
-                                                            <i class="fa fa-calendar"></i> 2021 - 2023
-                                                        </h3>
-                                                        <h4 class="timeline-title">Diploma in Software engineering</h4>
-                                                        <p class="timeline-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                             Provident laboriosam perspiciatis harum, quidem delectus omnis fugit distinctio 
-                                                             sit exercitationem aperiam hic labore inventore velit obcaecati reiciendis cumque 
-                                                             dignissimos mollitia cum!</p>
-                                                    
-                                                </div> -->
-
-                                                 <!------ timeline-item ---------->
-                                                 <!-- <div class="timeline-item">
-                                                    <div class="circle-dot"></div>
-                                                        <h3 class="timeline-date">
-                                                            <i class="fa fa-calendar"></i> 2021 - 2023
-                                                        </h3>
-                                                        <h4 class="timeline-title">Diploma in Software engineering</h4>
-                                                        <p class="timeline-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                             Provident laboriosam perspiciatis harum, quidem delectus omnis fugit distinctio 
-                                                             sit exercitationem aperiam hic labore inventore velit obcaecati reiciendis cumque 
-                                                             dignissimos mollitia cum!</p>
-                                                    
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="text-gray-300">B.S. Computer Science</p>
                             </div>
+                            <div class="animate-in">
+                                <div class="flex items-center mb-1">
+                                    <i class="fas fa-briefcase text-cyan-400 mr-2"></i>
+                                    <span class="font-semibold">Experience:</span>
+                                </div>
+                                <p class="text-gray-300">5+ Years</p>
+                            </div>
+                        </div>
+
+                        <div class="animate-in">
+                            <button @click="downloadResume"
+                                class="flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-download mr-2"></i> Download Resume
+                            </button>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- About section End -->
-            <!-- service section start -->
-            <section class="service section" id="services">
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title padd-15">
-                            <h2 style="font-size: 25px;">Services</h2>
-                        </div>
+
+                <!-- Skills -->
+                <div class="mt-24">
+                    <div class="text-center mb-12">
+                        <h3 class="text-lg text-cyan-400 code-font animate-in">WHAT I KNOW</h3>
+                        <h2 class="text-3xl md:text-4xl font-bold gradient-text animate-in">My Skills & Tools</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
                     </div>
-                </div>
-                <div class="row">
-                    <!-- -----Services item  start ----------->
-                    <div class="service-item padd-15">
-                        <div class="service-item-inner">
-                            <div class="">
-                                <!-- <i class="fab fa-php"></i> -->
-                                <img style="width: 3rem; height: 3rem;" src="image/php.png" alt="">
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                        <div v-for="(skill, index) in skills" :key="index"
+                            class="skill-card bg-glass rounded-xl p-6 text-center transform transition-all duration-300 hover:translate-y-2 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
+                            <i :class="skill.icon + ' skill-icon mb-4 text-gray-300'"></i>
+                            <h4 class="text-xl font-semibold mb-2">{{ skill.name }}</h4>
+                            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-1">
+                                <div class="progress-bar h-2.5 rounded-full" :style="{width: skill.level + '%'}"></div>
                             </div>
-                            <h4 class="mt-2">Hypertext Preprocessor</h4>
-                            <p style="text-align: left;">I have got a deep understanding of core and advanced php plus it's frameworks ie laravel, codeigniter.</p>
+                            <p class="text-sm text-gray-400">{{ skill.level }}%</p>
                         </div>
-                    </div>
-                    <!-- -----Services item  end ----------->
-                    <!-- -----Services item  start ----------->
-                    <div class="service-item padd-15">
-                        <div class="service-item-inner">
-                            <div class="">
-                                <!-- <i class="fa fa-laptop-code"></i> -->
-                                <img style="width: 3rem; height: 3rem;" src="image/laravel.png" alt="">
-                            </div>
-                            <h4>Laravel</h4>
-                            <p style="text-align: left;">I have worked with laravel for a while with several real world projects which has given me deep undertanding of it.</p>
-                        </div>
-                    </div>
-                    <!-- -----Services item  end ----------->
-                    <!-- -----Services item  start ----------->
-                    <div class="service-item padd-15">
-                        <div class="service-item-inner">
-                            <div class="">
-                                <!-- <i class="fa fa-palette"></i> -->
-                                <img style="width: 3rem; height: 3rem;" src="image/ci.png" alt="">
-                            </div>
-                            <h4>Code Igniter</h4>
-                            <p style="text-align: left;">Working with code igniter has given me clear understandig of MVC archtecture ie modal, view and controller</p>
-                        </div>
-                    </div>
-                    <!-- -----Services item  end ----------->
-                    <!-- -----Services item  start ----------->
-                    <div class="service-item padd-15">
-                        <div class="service-item-inner">
-                            <div class="">
-                                <!-- <i class="fa fa-code"></i> -->
-                                <img style="width: 3rem; height: 3rem;" src="image/mysql.jpeg" alt="">
-                            </div>
-                            <h4>Databases</h4>
-                            <p style="text-align: left;">I have got extensive understanding of several databases which include  Mysqli databases and oracle databases.</p>
-                        </div>
-                    </div>
-                    <!-- -----Services item  end ----------->
-                    <!-- -----Services item  start ----------->
-                    <div class="service-item padd-15">
-                        <div class="service-item-inner">
-                            <div class="">
-                                <!-- <i class="fa fa-search"></i> -->
-                                <img style="width: 3rem; height: 3rem;" src="image/html.png" alt="">
-                            </div>
-                            <h4>HTML</h4>
-                            <p style="text-align: left;">Hypertext markup language is one of the bones of web and i have got a broad knowldge of it. </p>
-                        </div>
-                    </div>
-                    <!-- -----Services item  end ----------->
-                    <!-- -----Services item  start ----------->
-                    <div class="service-item padd-15">
-                        <div class="service-item-inner">
-                            <div class="">
-                                <!-- <i class="fa fa-bullhorn"></i> -->
-                                <img style="width: 3rem; height: 3rem;" src="image/css.png" alt="">
-                            </div>
-                            <h4>CSS</h4>
-                            <p style="text-align: left;">CSS is used to add designs ,reponsiveness and animations especially advanced one.</p>
-                        </div>
-                    </div>
-                    <!-- -----Services item  end ----------->
-                </div>
-            </section>
-            <!-- service section End -->
-            
-            <!-- contact section start -->
-            <div class="contact section" id="contact">
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title padd-15">
-                            <h2 style="font-size: 25px;">Contact Me</h2>
-                        </div>
-                    </div>
-                       
-                    <div class="row justify-content-evenly">
-                        <!-- contact-info-item-start -->
-                        <div class="contact-info-item padd-15">
-                            <div class="icon"><i class="fa fa-phone"></i></div>
-                            <h4 style="text-align: left;">Get In Touch</h4>
-                            <p style="text-align: left;">
-                                I would like to here from you. Whether you have a project in mind,
-                                a question or just want to say hello. Feel free to reach ou, am here to help.
-                            </p>
-                        </div>
-                        <!-- contact-info-item-end -->
-                         <!-- contact-info-item-start -->
-                         <div class="contact-info-item padd-15">
-                            <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
-                            <h4 style="text-align: left;">Let's Collaborate</h4>
-                            <p style="text-align: left;">I believe that great things happen when we collaborate. let's work together to 
-                                bring your ideas to life and create something amazing. Don't hesitate to get in touch.
-                            </p>
-                        </div>
-                       
-                       
-                        <!-- contact-info-item-end -->
-                         <!-- contact-info-item-start -->
-                         <div class="contact-info-item padd-15">
-                            <div class="icon"><i class="fa fa-globe-europe"></i></div>
-                            <h4 style="text-align: left;">Contact Information</h4>
-                            <p style="text-align: left;">Website: <a href="https://normanhategyekamukama.netlify.app">normanhategyekamukama</a></p>
-                            <p style="text-align: left;">Email: normanmukama11@gmail.com</p>
-                            <p style="text-align: left;">Contact: +256751947693 / +256787593926</p>
-                            
-                        </div>
-                        <!-- contact-info-item-end -->
-                    </div>
-                    <h4 class="contact-title padd-15">Contact Me</h4>
-                    <p class="text-center text-primary" style="font-style: italic;">Don't hesitate to contact me. I will be back to you shortly</p>
-                    <!----CONTACT FORM------>
-                    <div class="row">
-                        <form style="column-gap: 5rem;" class="contact-form padd-15 ">
-                            <div class="row">
-                                <div class="form-item col-6 padd-15">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="form-item col-6 padd-15">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-item col-12 padd-15">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Subject">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-item col-12 padd-15">
-                                    <div class="form-group">
-                                        <textarea name="" class="form-control" id="" placeholder="Message..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-item col-12 padd-15">
-                                   <button class="btn btn-primary" type="submit">Send Message</button>
-                                </div>
-                            </div>
-                            <p class="text-center text-primary " style="font-style: italic;">copyright©normanhategyekamukama</p>
-                        </form>
                     </div>
                 </div>
             </div>
-            <!-- contact section end -->
-            
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="min-h-screen py-20 px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-title text-center mb-16">
+                    <h3 class="text-lg text-cyan-400 code-font animate-in">MY WORK</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Featured Projects</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+                    <p class="text-gray-300 max-w-2xl mx-auto mt-6 animate-in">
+                        Explore some of my latest projects that showcase my skills and passion for creating
+                        innovative digital solutions.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div v-for="(project, index) in projects" :key="index"
+                        class="project-card relative bg-glass rounded-xl overflow-hidden transition-all duration-500 card-hover animate-in">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img :src="project.image" :alt="project.title"
+                                class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        </div>
+
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 gradient-text">{{ project.title }}</h3>
+
+                            <div class="flex flex-wrap my-3">
+                                <span v-for="(tag, tagIndex) in project.tags" :key="tagIndex" class="tag">
+                                    {{ tag }}
+                                </span>
+                            </div>
+
+                            <p class="text-gray-300 mb-6">{{ project.description }}</p>
+
+                            <div class="flex gap-4">
+                                <a :href="project.demoLink"
+                                    class="px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30">
+                                    <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                                </a>
+                                <a :href="project.codeLink"
+                                    class="px-5 py-2 rounded-full bg-transparent border border-cyan-500 text-white text-sm font-semibold transition-all duration-300 hover:bg-cyan-500/10">
+                                    <i class="fas fa-code mr-2"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 animate-in">
+                    <button
+                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30">
+                        View All Projects <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="min-h-screen py-20 px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-title text-center mb-16">
+                    <h3 class="text-lg text-cyan-400 code-font animate-in">MY JOURNEY</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Experience & Education</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+                </div>
+
+                <div class="timeline relative mt-20">
+                    <div class="timeline-line"></div>
+
+                    <div v-for="(item, index) in timeline" :key="index" class="timeline-item">
+                        <div class="timeline-content" :class="index % 2 === 0 ? 'right' : 'left'">
+                            <div class="timeline-dot"></div>
+                            <div
+                                class="bg-glass rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
+                                <div class="code-font text-sm text-cyan-400 mb-1">{{ item.period }}</div>
+                                <h3 class="text-xl font-semibold mb-2">{{ item.title }}</h3>
+                                <h4 class="text-gray-300 mb-3">{{ item.organization }}</h4>
+                                <p class="text-gray-400">{{ item.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-title text-center mb-16">
+                    <h3 class="text-lg text-cyan-400 code-font animate-in">WHAT PEOPLE SAY</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Testimonials</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+                </div>
+
+                <div class="testimonial-slider overflow-hidden relative">
+                    <div class="flex transition-transform duration-500 ease-in-out"
+                        :style="{ transform: `translateX(-${activeTestimonial * 100}%)` }">
+                        <div v-for="(testimonial, index) in testimonials" :key="index" class="min-w-full px-4">
+                            <div class="bg-glass rounded-xl p-8 text-center max-w-2xl mx-auto animate-in">
+                                <div
+                                    class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-6 border-4 border-cyan-500">
+                                    <img :src="testimonial.image" :alt="testimonial.name"
+                                        class="w-full h-full object-cover">
+                                </div>
+
+                                <div class="text-cyan-400 mb-6">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+
+                                <p class="text-gray-300 text-lg italic mb-6">{{ testimonial.text }}</p>
+
+                                <h4 class="text-xl font-semibold gradient-text">{{ testimonial.name }}</h4>
+                                <p class="text-gray-400 text-sm">{{ testimonial.position }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mt-8 space-x-2">
+                        <button v-for="(_, index) in testimonials" :key="index" @click="activeTestimonial = index"
+                            class="w-3 h-3 rounded-full transition-all duration-300"
+                            :class="activeTestimonial === index ? 'bg-cyan-400 scale-125' : 'bg-gray-600'"></button>
+                    </div>
+
+                    <button @click="prevTestimonial"
+                        class="absolute top-1/2 left-4 transform -translate-y-1/2 w-10 h-10 rounded-full bg-glass text-white flex items-center justify-center hover:bg-cyan-500/30 transition-all duration-300">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
+
+
+
+                    <button @click="nextTestimonial"
+                        class="absolute top-1/2 right-4 transform -translate-y-1/2 w-10 h-10 rounded-full bg-glass text-white flex items-center justify-center hover:bg-cyan-500/30 transition-all duration-300">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen py-20 px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-title text-center mb-16">
+                    <h3 class="text-lg text-cyan-400 code-font animate-in">GET IN TOUCH</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Contact Me</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+                    <p class="text-gray-300 max-w-2xl mx-auto mt-6 animate-in">
+                        Have a project in mind or just want to say hi? Feel free to reach out. I'm always open to
+                        discussing new projects, creative ideas, or opportunities to be part of your vision.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-5 gap-8">
+                    <div class="md:col-span-2">
+                        <div class="grid gap-6">
+                            <div
+                                class="bg-glass rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
+                                    <i class="fas fa-envelope text-cyan-400 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-semibold mb-2">Email</h4>
+                                <p class="text-gray-300">hello@norman.dev</p>
+                                <a href="mailto:hello@norman.dev"
+                                    class="text-cyan-400 inline-block mt-2 hover:underline">Send a message</a>
+                            </div>
+
+                            <div
+                                class="bg-glass rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
+                                    <i class="fas fa-map-marker-alt text-cyan-400 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-semibold mb-2">Location</h4>
+                                <p class="text-gray-300">San Francisco, California</p>
+                                <a href="#" class="text-cyan-400 inline-block mt-2 hover:underline">View on map</a>
+                            </div>
+
+                            <div
+                                class="bg-glass rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
+                                    <i class="fas fa-share-alt text-cyan-400 text-xl"></i>
+                                </div>
+                                <h4 class="text-xl font-semibold mb-2">Social Profiles</h4>
+                                <div class="flex space-x-4 mt-3">
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <div class="bg-glass rounded-xl p-8 animate-in">
+                            <h3 class="text-2xl font-semibold mb-6">Send Me A Message</h3>
+
+                            <form @submit.prevent="submitForm">
+                                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your
+                                            Name</label>
+                                        <input type="text" id="name" v-model="contactForm.name" placeholder="John Doe"
+                                            class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your
+                                            Email</label>
+                                        <input type="email" id="email" v-model="contactForm.email"
+                                            placeholder="john@example.com"
+                                            class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
+                                    </div>
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="subject"
+                                        class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                                    <input type="text" id="subject" v-model="contactForm.subject"
+                                        placeholder="Project Inquiry"
+                                        class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Your
+                                        Message</label>
+                                    <textarea id="message" v-model="contactForm.message" rows="5"
+                                        placeholder="Tell me about your project..."
+                                        class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300"></textarea>
+                                </div>
+
+                                <button type="submit"
+                                    class="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-[0.98]">
+                                    <i class="fas fa-paper-plane mr-2"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Preview Section -->
+        <section id="blog" class="py-20 px-6 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="section-title text-center mb-16">
+                    <h3 class="text-lg text-cyan-400 code-font animate-in">MY ARTICLES</h3>
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Latest Blog Posts</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div v-for="(post, index) in blogPosts" :key="index"
+                        class="bg-glass rounded-xl overflow-hidden transition-all duration-500 card-hover animate-in">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img :src="post.image" :alt="post.title"
+                                class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-cyan-500 text-white text-xs px-3 py-1 rounded-full">
+                                {{ post.category }}
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-400 mb-3">
+                                <i class="far fa-calendar-alt mr-2"></i> {{ post.date }}
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-3 gradient-text">{{ post.title }}</h3>
+                            <p class="text-gray-300 mb-6 line-clamp-3">{{ post.excerpt }}</p>
+
+                            <a href="#"
+                                class="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-all duration-300">
+                                Read More <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12 animate-in">
+                    <a href="#"
+                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30">
+                        View All Articles <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 px-6 relative bg-black/30 border-t border-gray-800">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-8 mb-12">
+                    <div>
+                        <div class="flex items-center mb-6">
+                            <div class="text-3xl font-bold gradient-text mr-2">N</div>
+                            <h1 class="text-xl font-bold text-white code-font">
+                                <span class="gradient-text">Norman</span>.dev
+                            </h1>
+                        </div>
+
+                        <p class="text-gray-400 mb-6">
+                            Creating cutting-edge web experiences with a focus on performance, aesthetics, and user
+                            experience.
+                        </p>
+
+                        <div class="flex space-x-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6 gradient-text">Quick Links</h4>
+                        <ul class="space-y-3">
+                            <li v-for="(item, index) in navItems" :key="index">
+                                <a href="#" @click.prevent="scrollToSection(item.id)"
+                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i> {{ item.name }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6 gradient-text">Services</h4>
+                        <ul class="space-y-3">
+                            <li v-for="(service, index) in ['Web Development', 'UI/UX Design', 'Mobile Apps', 'SEO Optimization']"
+                                :key="index">
+                                <a href="#" class="text-gray-400 hover:text-cyan-400 transition-all duration-300">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i> {{ service }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6 gradient-text">Contact Info</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-cyan-400 mt-1 mr-3"></i>
+                                <span class="text-gray-400">123 Developer St.<br>San Francisco, CA 94101</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-envelope text-cyan-400 mr-3"></i>
+                                <a href="mailto:hello@norman.dev"
+                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">hello@norman.dev</a>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-phone text-cyan-400 mr-3"></i>
+                                <a href="tel:+14151234567"
+                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">(415)
+                                    123-4567</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
+                    <p>&copy; {{ new Date().getFullYear() }} Norman.dev. All rights reserved.</p>
+                    <p class="mt-2 text-sm">Designed & Developed with <i class="fas fa-heart text-cyan-400"></i> and a
+                        lot of <i class="fas fa-mug-hot text-cyan-400"></i></p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Back to top button -->
+        <button @click="scrollToTop"
+            class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white flex items-center justify-center shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 z-50"
+            :class="{'opacity-100 translate-y-0': showBackToTop, 'opacity-0 translate-y-12': !showBackToTop}">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+
+        <!-- Toast notification -->
+        <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg bg-glass border border-cyan-500 text-white shadow-lg transition-all duration-500 z-50"
+            :class="{'opacity-100 translate-y-0': showToast, 'opacity-0 translate-y-12': !showToast}">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle text-cyan-400 mr-3 text-xl"></i>
+                <span>{{ toastMessage }}</span>
+            </div>
         </div>
-        <!-- Main content end -->
     </div>
-    <!-- main container end -->
-    <!-- style switcher starts here -->
-    <div class="style-switcher">
-        <div class="style-switcher-toggler s-icon">
-            <i class="fas fa-cog fa-spin"></i>
-        </div>
-        <div class="day-night s-icon">
-            <i class="fas "></i>
-        </div>
-        <h4>Theme colors</h4>
-        <div class="colors">
-            <span class="color-1" onclick="setActiveStyle('color-1')"></span>
-            <span class="color-2" onclick="setActiveStyle('color-2')"></span>
-            <span class="color-3" onclick="setActiveStyle('color-3')"></span>
-            <span class="color-4" onclick="setActiveStyle('color-4')"></span>
-            <span class="color-5" onclick="setActiveStyle('color-5')"></span>
-        </div>
-    </div>
-    <!-- style switcher ends here -->
-    <!-- JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js" 
-    integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ=="
-     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/script.js"></script>
-    <script src="js/style-switcher.js"></script>
-</body>
 
-<!-- Mirrored from demo.graygrids.com/themes/hostgrids/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Sep 2022 09:56:20 GMT -->
-<!-- ---close button -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="./ "></script>
-</body>
+    <!-- Vue + GSAP Script -->
+    <script>
+        const { createApp, ref, reactive, onMounted, watch, computed } = Vue;
 
-</html>
+        createApp({
+            setup() {
+                // State
+                const activeSection = ref('home');
+                const scrolled = ref(false);
+                const scrollProgress = ref(0);
+                const showBackToTop = ref(false);
+                const mobileMenuOpen = ref(false);
+                const activeTestimonial = ref(0);
+                const showToast = ref(false);
+                const toastMessage = ref('');
+
+                // Contact form state
+                const contactForm = reactive({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: ''
+                });
+
+                // Nav items
+                const navItems = [
+                    { id: 'home', name: 'Home' },
+                    { id: 'about', name: 'About' },
+                    { id: 'projects', name: 'Projects' },
+                    { id: 'experience', name: 'Experience' },
+                    { id: 'blog', name: 'Blog' },
+                    { id: 'contact', name: 'Contact' }
+                ];
+
+                // Skills data
+                const skills = [
+                    { name: 'HTML/CSS', icon: 'fab fa-html5', level: 95 },
+                    { name: 'JavaScript', icon: 'fab fa-js', level: 90 },
+                    { name: 'React', icon: 'fab fa-react', level: 85 },
+                    { name: 'Vue.js', icon: 'fab fa-vuejs', level: 80 },
+                    { name: 'Node.js', icon: 'fab fa-node-js', level: 75 },
+                    { name: 'Python', icon: 'fab fa-python', level: 70 },
+                    { name: 'UI/UX Design', icon: 'fas fa-palette', level: 85 },
+                    { name: 'Three.js', icon: 'fas fa-cube', level: 65 }
+                ];
+
+                // Project data
+                const projects = [
+                    {
+                        title: 'Immersive WebGL Experience',
+                        description: 'A cutting-edge 3D web application with interactive elements and stunning visual effects powered by Three.js and WebGL.',
+                        image: '/api/placeholder/600/340',
+                        tags: ['Three.js', 'WebGL', 'JavaScript', 'GSAP'],
+                        demoLink: '#',
+                        codeLink: '#'
+                    },
+                    {
+                        title: 'AI-Powered Task Manager',
+                        description: 'Smart task management application with machine learning capabilities to prioritize and categorize tasks efficiently.',
+                        image: '/api/placeholder/600/340',
+                        tags: ['Vue.js', 'Node.js', 'TensorFlow', 'CSS'],
+                        demoLink: '#',
+                        codeLink: '#'
+                    },
+                    {
+                        title: 'E-Commerce Dashboard',
+                        description: 'Comprehensive admin dashboard for e-commerce platforms with real-time analytics, inventory management, and user tracking.',
+                        image: '/api/placeholder/600/340',
+                        tags: ['React', 'Redux', 'Chart.js', 'Tailwind'],
+                        demoLink: '#',
+                        codeLink: '#'
+                    },
+                    {
+                        title: 'Crypto Portfolio Tracker',
+                        description: 'Real-time cryptocurrency portfolio tracker with price alerts, historical data visualization, and personalized insights.',
+                        image: '/api/placeholder/600/340',
+                        tags: ['JavaScript', 'D3.js', 'API', 'Firebase'],
+                        demoLink: '#',
+                        codeLink: '#'
+                    }
+                ];
+
+                // Timeline data
+                const timeline = [
+                    {
+                        period: '2023 - Present',
+                        title: 'Senior Frontend Developer',
+                        organization: 'TechVision Inc.',
+                        description: 'Leading the frontend development team in creating cutting-edge web applications with focus on performance and user experience.'
+                    },
+                    {
+                        period: '2020 - 2023',
+                        title: 'Frontend Developer',
+                        organization: 'Digital Solutions Agency',
+                        description: 'Developed responsive web applications and collaborated with designers to implement pixel-perfect UI/UX designs.'
+                    },
+                    {
+                        period: '2018 - 2020',
+                        title: 'Junior Web Developer',
+                        organization: 'WebCraft Studios',
+                        description: 'Built and maintained client websites, implemented responsive designs, and collaborated with the creative team.'
+                    },
+                    {
+                        period: '2014 - 2018',
+                        title: 'B.S. Computer Science',
+                        organization: 'Stanford University',
+                        description: 'Focused on web technologies, algorithms, and human-computer interaction. Graduated with honors.'
+                    }
+                ];
+
+                // Testimonial data
+                const testimonials = [
+                    {
+                        name: 'Sarah Johnson',
+                        position: 'Product Manager at TechCorp',
+                        image: '/api/placeholder/100/100',
+                        text: 'Norman is an exceptional developer who consistently delivers beyond expectations. His attention to detail and creative problem-solving skills make him stand out from the crowd.'
+                    },
+                    {
+                        name: 'David Chen',
+                        position: 'CEO at StartupX',
+                        image: '/api/placeholder/100/100',
+                        text: 'Working with Norman was a game-changer for our project. His technical expertise combined with his design sensibility resulted in a product that our users absolutely love.'
+                    },
+                    {
+                        name: 'Emily Rodriguez',
+                        position: 'Creative Director at DesignHub',
+                        image: '/api/placeholder/100/100',
+                        text: 'Norman has a rare ability to translate complex design concepts into flawless code. His collaborative approach and commitment to quality made our partnership incredibly successful.'
+                    }
+                ];
+
+                // Blog posts data
+                const blogPosts = [
+                    {
+                        title: 'Mastering CSS Grid: A Comprehensive Guide',
+                        excerpt: 'Learn how to create complex layouts with CSS Grid and take your web design skills to the next level. This guide covers everything from basics to advanced techniques.',
+                        image: '/api/placeholder/400/250',
+                        date: 'April 15, 2025',
+                        category: 'CSS'
+                    },
+                    {
+                        title: 'The Future of Web Development with AI',
+                        excerpt: 'Explore how artificial intelligence is transforming web development and what skills developers need to stay relevant in this rapidly evolving landscape.',
+                        image: '/api/placeholder/400/250',
+                        date: 'April 5, 2025',
+                        category: 'Tech Trends'
+                    },
+                    {
+                        title: 'Optimizing Performance in React Applications',
+                        excerpt: 'Discover practical techniques to improve performance in your React applications. From code splitting to memoization, learn how to create blazing-fast user experiences.',
+                        image: '/api/placeholder/400/250',
+                        date: 'March 28, 2025',
+                        category: 'React'
+                    }
+                ];
+
+                // Methods
+                const scrollToSection = (sectionId) => {
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                        mobileMenuOpen.value = false;
+                    }
+                };
+
+                const scrollToTop = () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+
+                const toggleMobileMenu = () => {
+                    mobileMenuOpen.value = !mobileMenuOpen.value;
+                };
+
+                const prevTestimonial = () => {
+                    activeTestimonial.value = activeTestimonial.value === 0
+                        ? testimonials.length - 1
+                        : activeTestimonial.value - 1;
+                };
+
+                const nextTestimonial = () => {
+                    activeTestimonial.value = (activeTestimonial.value + 1) % testimonials.length;
+                };
+
+                const downloadResume = () => {
+                    showToast.value = true;
+                    toastMessage.value = 'Resume downloaded successfully!';
+
+                    setTimeout(() => {
+                        showToast.value = false;
+                    }, 3000);
+                };
+
+                const submitForm = () => {
+                    // Form validation and submission logic would go here
+                    showToast.value = true;
+                    toastMessage.value = 'Message sent successfully!';
+
+                    // Reset form
+                    contactForm.name = '';
+                    contactForm.email = '';
+                    contactForm.subject = '';
+                    contactForm.message = '';
+
+                    setTimeout(() => {
+                        showToast.value = false;
+                    }, 3000);
+                };
+
+                // Initialize WebGL background
+                const initThreeJS = () => {
+                    const container = document.getElementById('webgl-container');
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                    const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                    container.appendChild(renderer.domElement);
+
+                    // Create particles
+                    const particlesGeometry = new THREE.BufferGeometry();
+                    const particleCount = 2000;
+
+                    const posArray = new Float32Array(particleCount * 3);
+                    for (let i = 0; i < particleCount * 3; i++) {
+                        posArray[i] = (Math.random() - 0.5) * 10;
+                    }
+
+                    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+                    const particleMaterial = new THREE.PointsMaterial({
+                        size: 0.02,
+                        transparent: true,
+                        blending: THREE.AdditiveBlending,
+                        color: 0x00f0ff
+                    });
+
+                    const particlesMesh = new THREE.Points(particlesGeometry, particleMaterial);
+                    scene.add(particlesMesh);
+
+                    camera.position.z = 3;
+
+                    // Mouse interaction
+                    let mouseX = 0;
+                    let mouseY = 0;
+
+                    document.addEventListener('mousemove', (event) => {
+                        mouseX = (event.clientX / window.innerWidth - 0.5) * 0.1;
+                        mouseY = (event.clientY / window.innerHeight - 0.5) * 0.1;
+                    });
+
+                    // Animation
+                    const animateParticles = () => {
+                        requestAnimationFrame(animateParticles);
+
+                        particlesMesh.rotation.y += 0.001;
+                        particlesMesh.rotation.x += 0.001;
+
+                        particlesMesh.rotation.x += mouseY * 0.05;
+                        particlesMesh.rotation.y += mouseX * 0.05;
+
+                        renderer.render(scene, camera);
+                    };
+
+                    animateParticles();
+
+                    // Handle resize
+                    window.addEventListener('resize', () => {
+                        camera.aspect = window.innerWidth / window.innerHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(window.innerWidth, window.innerHeight);
+                    });
+                };
+
+                // Typewriter effect
+                const initTypewriterEffect = () => {
+                    const roles = ['Full-Stack Developer', 'UI/UX Enthusiast', 'Problem Solver'];
+                    let roleIndex = 0;
+                    let charIndex = 0;
+                    let isDeleting = false;
+                    let typingSpeed = 100;
+
+                    const type = () => {
+                        const currentRole = roles[roleIndex];
+                        const typingElement = document.getElementById('typing-text');
+
+                        if (isDeleting) {
+                            typingElement.textContent = currentRole.substring(0, charIndex - 1);
+                            charIndex--;
+                            typingSpeed = 50;
+                        } else {
+                            typingElement.textContent = currentRole.substring(0, charIndex + 1);
+                            charIndex++;
+                            typingSpeed = 100;
+                        }
+
+                        if (!isDeleting && charIndex === currentRole.length) {
+                            isDeleting = true;
+                            typingSpeed = 1500; // Pause at end
+                        } else if (isDeleting && charIndex === 0) {
+                            isDeleting = false;
+                            roleIndex = (roleIndex + 1) % roles.length;
+                            typingSpeed = 500; // Pause before typing next role
+                        }
+
+                        setTimeout(type, typingSpeed);
+                    };
+
+                    type();
+                };
+
+                // Scroll reveal animation
+                const initScrollReveal = () => {
+                    const animateElements = document.querySelectorAll('.animate-in');
+
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+
+                    animateElements.forEach(element => {
+                        observer.observe(element);
+                    });
+                };
+
+                // Handle scroll events
+                const handleScroll = () => {
+                    const scrollPosition = window.scrollY;
+                    const windowHeight = window.innerHeight;
+                    const documentHeight = document.body.scrollHeight;
+
+                    // Update scroll progress
+                    scrollProgress.value = (scrollPosition / (documentHeight - windowHeight)) * 100;
+
+                    // Show/hide back to top button
+                    showBackToTop.value = scrollPosition > windowHeight;
+
+                    // Add shadow to navbar on scroll
+                    scrolled.value = scrollPosition > 50;
+
+                    // Update active section
+                    navItems.forEach(item => {
+                        const section = document.getElementById(item.id);
+                        if (section) {
+                            const sectionTop = section.offsetTop;
+                            const sectionHeight = section.offsetHeight;
+
+                            if (scrollPosition >= sectionTop - 100 && scrollPosition < sectionTop + sectionHeight - 100) {
+                                activeSection.value = item.id;
+                            }
+                        }
+                    });
+
+                    // Rotate elements on scroll
+                    const rotateElements = document.querySelectorAll('.rotate-on-scroll');
+                    rotateElements.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const elementCenter = elementTop + element.offsetHeight / 2;
+                        const windowCenter = windowHeight / 2;
+                        const rotateValue = ((elementCenter - windowCenter) / windowHeight) * 20;
+
+                        element.style.transform = `perspective(1000px) rotateY(${rotateValue}deg)`;
+                    });
+                };
+
+                //
+
+                // Continue from where we left off (after the handleScroll function)
+
+                // Lifecycle hooks
+                onMounted(() => {
+                    // Initialize scroll event listener
+                    window.addEventListener('scroll', handleScroll);
+                    handleScroll(); // Call once to set initial state
+
+                    // Initialize all animations and effects
+                    initTypewriterEffect();
+                    initScrollReveal();
+
+                    // Initialize Three.js background if the container exists
+                    if (document.getElementById('webgl-container')) {
+                        initThreeJS();
+                    }
+
+                    // Add dark mode detection
+                    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+                    document.documentElement.classList.toggle('dark-mode', prefersDarkMode.matches);
+
+                    prefersDarkMode.addEventListener('change', (e) => {
+                        document.documentElement.classList.toggle('dark-mode', e.matches);
+                    });
+                });
+
+                // Clean up event listeners when component is unmounted
+                const onUnmounted = () => {
+                    window.removeEventListener('scroll', handleScroll);
+                };
+
+                // Computed properties
+                const currentTestimonial = computed(() => testimonials[activeTestimonial.value]);
+
+                const filteredSkills = computed(() => {
+                    return skills.sort((a, b) => b.level - a.level);
+                });
+
+                // Return all reactive data and methods for the template
+                return {
+                    activeSection,
+                    scrolled,
+                    scrollProgress,
+                    showBackToTop,
+                    mobileMenuOpen,
+                    activeTestimonial,
+                    showToast,
+                    toastMessage,
+                    contactForm,
+                    navItems,
+                    skills: filteredSkills,
+                    projects,
+                    timeline,
+                    testimonials,
+                    currentTestimonial,
+                    blogPosts,
+                    scrollToSection,
+                    scrollToTop,
+                    toggleMobileMenu,
+                    prevTestimonial,
+                    nextTestimonial,
+                    downloadResume,
+                    submitForm
+                };
+            }
+        }).mount('#app');
+    </script>
