@@ -454,7 +454,7 @@
                     <div class="h-0.5 w-12 bg-cyan-400 ml-4"></div>
                 </div>
 
-                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12" id="intro-text">
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 italic" id="intro-text">
                     I craft elegant code and seamless user experiences. Passionate about building
                     innovative solutions that blend functionality with stunning design.
                 </p>
@@ -514,55 +514,17 @@
                     <div>
                         <h3 class="text-2xl font-bold mb-4 gradient-text animate-in">Software Developer & UI/UX
                             Enthusiast</h3>
-                        <p class="text-gray-300 mb-6 animate-in">
-                            😎 Senior software developer; I specialize in creating
+                        <p class="text-gray-400 mb-6 animate-in italic">
+                            😎 Software developer; I specialize in creating
                             immersive digital experiences that are both functional and visually stunning.
                             My journey began with a fascination for how code can transform ideas into reality.
                             I'm full time back-end and seasoned front-end developer.
                         </p>
-                        <p class="text-gray-300 mb-8 animate-in">
+                        <p class="text-gray-400 mb-8 animate-in italic">
                             I'm passionate about leveraging cutting-edge technologies to solve complex problems
                             and deliver seamless user experiences. When I'm not coding, you'll find me exploring
                             new design trends, contributing to open-source projects, or mentoring aspiring developers.
                         </p>
-
-                        <!-- <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="animate-in">
-                                <div class="flex items-center mb-1">
-                                    <i class="fas fa-envelope text-cyan-400 mr-2"></i>
-                                    <span class="font-semibold">Email:</span>
-                                </div>
-                                <p class="text-gray-300">normanmukama11 @gmail.com</p>
-                            </div>
-                            <div class="animate-in">
-                                <div class="flex items-center mb-1">
-                                    <i class="fas fa-map-marker-alt text-cyan-400 mr-2"></i>
-                                    <span class="font-semibold">Location:</span>
-                                </div>
-                                <p class="text-gray-300">Kampala, Uganda</p>
-                            </div>
-                            <div class="animate-in">
-                                <div class="flex items-center mb-1">
-                                    <i class="fas fa-user-graduate text-cyan-400 mr-2"></i>
-                                    <span class="font-semibold">Education:</span>
-                                </div>
-                                <p class="text-gray-300">Diploma in Software Engineering</p>
-                            </div>
-                            <div class="animate-in">
-                                <div class="flex items-center mb-1">
-                                    <i class="fas fa-briefcase text-cyan-400 mr-2"></i>
-                                    <span class="font-semibold">Experience:</span>
-                                </div>
-                                <p class="text-gray-300">3+ Years</p>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="animate-in">
-                            <button @click="downloadResume"
-                                class="flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105">
-                                <i class="fas fa-download mr-2"></i> Download Resume
-                            </button>
-                        </div> -->
                     </div>
                 </div>
 
@@ -574,15 +536,10 @@
                         <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                         <div v-for="(skill, index) in skills" :key="index"
-                            class="skill-card bg-glass rounded-xl p-6 text-center transform transition-all duration-300 hover:translate-y-2 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
-                            <i :class="skill.icon + ' skill-icon mb-4 text-gray-300'"></i>
-                            <h4 class="text-xl font-semibold mb-2">{{ skill.name }}</h4>
-                            <div class="w-full bg-gray-700 rounded-full h-2.5 mb-1">
-                                <div class="progress-bar h-2.5 rounded-full" :style="{width: skill.level + '%'}"></div>
-                            </div>
-                            <p class="text-sm text-gray-400">{{ skill.level }}%</p>
+                            class="skill-card bg-glass rounded-xl p-1 text-center transform transition-all duration-300 hover:translate-y-2 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
+                            <p class="font-sm mb-2 text-gray-400">{{ skill.name }}</p>
                         </div>
                     </div>
                 </div>
@@ -592,7 +549,7 @@
         <!-- Projects Section -->
         <section id="projects" class="min-h-screen py-20 px-6 relative">
             <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-16">
+                <div class="section-title text-center mb-6">
                     <h3 class="text-lg text-cyan-400 code-font animate-in">MY WORK</h3>
                     <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Featured Projects</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
@@ -642,94 +599,13 @@
                         View All Projects <i class="fas fa-arrow-right ml-2"></i>
                     </button>
                 </div>
+                <div class="max-w-2xl mx-auto mt-4">
+                    <h6 class="text-gray-400 text-center mt-4 animate-in italic">
+                        Links to some of my work can be found on <a href="https://github.com/normanmukama" class="text-cyan-400 hover:underline">github</a> and details can be provided upon request via a scheduled demo call.
+                    </h6>
+                </div>
             </div>
         </section>
-
-        <!-- Experience Section -->
-        <!-- <section id="experience" class="min-h-screen py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-16">
-                    <h3 class="text-lg text-cyan-400 code-font animate-in">MY JOURNEY</h3>
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Experience & Education</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                </div>
-
-                <div class="timeline relative mt-20">
-                    <div class="timeline-line"></div>
-
-                    <div v-for="(item, index) in timeline" :key="index" class="timeline-item">
-                        <div class="timeline-content" :class="index % 2 === 0 ? 'right' : 'left'">
-                            <div class="timeline-dot"></div>
-                            <div
-                                class="bg-glass rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
-                                <div class="code-font text-sm text-cyan-400 mb-1">{{ item.period }}</div>
-                                <h3 class="text-xl font-semibold mb-2">{{ item.title }}</h3>
-                                <h4 class="text-gray-300 mb-3">{{ item.organization }}</h4>
-                                <p class="text-gray-400">{{ item.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- Testimonials Section -->
-        <!-- <section id="testimonials" class="py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-16">
-                    <h3 class="text-lg text-cyan-400 code-font animate-in">WHAT PEOPLE SAY</h3>
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Testimonials</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                </div>
-
-                <div class="testimonial-slider overflow-hidden relative">
-                    <div class="flex transition-transform duration-500 ease-in-out"
-                        :style="{ transform: `translateX(-${activeTestimonial * 100}%)` }">
-                        <div v-for="(testimonial, index) in testimonials" :key="index" class="min-w-full px-4">
-                            <div class="bg-glass rounded-xl p-8 text-center max-w-2xl mx-auto animate-in">
-                                <div
-                                    class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-6 border-4 border-cyan-500">
-                                    <img :src="testimonial.image" :alt="testimonial.name"
-                                        class="w-full h-full object-cover">
-                                </div>
-
-                                <div class="text-cyan-400 mb-6">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-
-                                <p class="text-gray-300 text-lg italic mb-6">{{ testimonial.text }}</p>
-
-                                <h4 class="text-xl font-semibold gradient-text">{{ testimonial.name }}</h4>
-                                <p class="text-gray-400 text-sm">{{ testimonial.position }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-center mt-8 space-x-2">
-                        <button v-for="(_, index) in testimonials" :key="index" @click="activeTestimonial = index"
-                            class="w-3 h-3 rounded-full transition-all duration-300"
-                            :class="activeTestimonial === index ? 'bg-cyan-400 scale-125' : 'bg-gray-600'"></button>
-                    </div>
-
-                    <button @click="prevTestimonial"
-                        class="absolute top-1/2 left-4 transform -translate-y-1/2 w-10 h-10 rounded-full bg-glass text-white flex items-center justify-center hover:bg-cyan-500/30 transition-all duration-300">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-
-
-
-
-                    <button @click="nextTestimonial"
-                        class="absolute top-1/2 right-4 transform -translate-y-1/2 w-10 h-10 rounded-full bg-glass text-white flex items-center justify-center hover:bg-cyan-500/30 transition-all duration-300">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </section> -->
 
         <!-- Contact Section -->
         <section id="contact" class="min-h-screen py-20 px-6 relative">
@@ -738,7 +614,7 @@
                     <h3 class="text-lg text-cyan-400 code-font animate-in">GET IN TOUCH</h3>
                     <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Contact Me</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                    <p class="text-gray-300 max-w-2xl mx-auto mt-6 animate-in">
+                    <p class="text-gray-400 max-w-2xl mx-auto mt-6 animate-in italic">
                         Have a project in mind or just want to say hi? Feel free to reach out. I'm always open to
                         discussing new projects, creative ideas, or opportunities to be part of your vision.
                     </p>
@@ -1095,7 +971,7 @@
                 const projects = [
                     {
                         title: 'Short Message Service Platform',
-                        description: 'A cutting-edge 3D web application with interactive elements and stunning visual effects powered by Three.js and WebGL.',
+                        description: 'A messaging web application with interactive elements and real-time ability to send and receive thousands of SMS messages.',
                         image: '/image/sms.png',
                         tags: ['Laravel','Livewire', 'Filament', 'Tailwind', 'Postgres'],
                         demoLink: '#',
