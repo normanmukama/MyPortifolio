@@ -3,8 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Norman.dev | Software Developer</title>
+    <title>Norman.dev | Full-Stack Developer | Laravel & Vue.js Expert</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Norman Hategyekamukama - Full-Stack Developer specializing in Laravel, Vue.js, Filament, and modern web technologies. Building scalable applications with excellent UX.">
+    <meta name="keywords" content="Laravel Developer, Vue.js, Full-Stack Developer, Filament, Livewire, Elastic Stack, Web Development, Uganda Developer">
+    <meta name="author" content="Norman Hategyekamukama">
+    <meta property="og:title" content="Norman.dev | Full-Stack Developer">
+    <meta property="og:description" content="Building scalable web applications with Laravel, Vue.js, and modern technologies">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://norman.dev">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#00f0ff">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vue.js CDN -->
@@ -188,6 +197,46 @@
             opacity: 1;
         }
 
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .project-card:hover::after {
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Performance optimizations */
+        img {
+            content-visibility: auto;
+        }
+
+        .animate-in {
+            will-change: opacity, transform;
+        }
+
         .timeline-line {
             position: absolute;
             top: 0;
@@ -325,13 +374,39 @@
             transition: all 0.3s ease;
         }
 
-        .skill-icon:hover {
-            transform: scale(1.2);
-            color: var(--primary);
+        .skill-card:hover .skill-icon {
+            transform: scale(1.15) rotateY(360deg);
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        .bg-glass-light {
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .menu-toggle {
             display: none;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle div {
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active div:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        .menu-toggle.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active div:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        @media (max-width: 1024px) {
+            .text-5xl { font-size: 2.5rem; }
+            .text-7xl { font-size: 3.5rem; }
         }
 
         @media (max-width: 768px) {
@@ -343,18 +418,25 @@
                 position: fixed;
                 top: 70px;
                 right: -100%;
-                width: 70%;
+                width: 80%;
+                max-width: 300px;
                 height: calc(100vh - 70px);
-                background: rgba(26, 26, 46, 0.95);
-                backdrop-filter: blur(10px);
-                transition: right 0.5s ease;
+                background: rgba(26, 26, 46, 0.98);
+                backdrop-filter: blur(15px);
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 flex-direction: column;
                 padding: 2rem;
                 z-index: 999;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
             }
 
             .nav-links.active {
                 right: 0;
+            }
+
+            .nav-item {
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
 
             .timeline-line {
@@ -374,6 +456,44 @@
             .timeline-content.right .timeline-dot,
             .timeline-content.left .timeline-dot {
                 left: -40px;
+            }
+
+            .text-5xl { font-size: 2rem; }
+            .text-7xl { font-size: 2.5rem; }
+            .text-4xl { font-size: 1.75rem; }
+            .text-2xl { font-size: 1.25rem; }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .hero-buttons button {
+                width: 100%;
+            }
+
+            section {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-5xl { font-size: 1.75rem; }
+            .text-7xl { font-size: 2rem; }
+            .text-4xl { font-size: 1.5rem; }
+            .text-3xl { font-size: 1.25rem; }
+            .text-2xl { font-size: 1.1rem; }
+            .text-xl { font-size: 1rem; }
+            
+            .px-8 { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+            
+            .grid { gap: 1rem; }
+            
+            section {
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
         }
 
@@ -402,11 +522,18 @@
         <canvas id="webgl-container"></canvas>
 
         <!-- Mobile Menu Toggle -->
-        <div class="menu-toggle fixed top-6 right-8 z-50 cursor-pointer md:hidden" @click="toggleMobileMenu">
-            <div class="w-8 h-1 bg-white mb-1" :class="{'rotate-45 translate-y-2': mobileMenuOpen}"></div>
-            <div class="w-8 h-1 bg-white mb-1" :class="{'opacity-0': mobileMenuOpen}"></div>
-            <div class="w-8 h-1 bg-white" :class="{'-rotate-45 -translate-y-2': mobileMenuOpen}"></div>
+        <div class="menu-toggle fixed top-6 right-6 z-50 cursor-pointer md:hidden p-2" 
+             :class="{'active': mobileMenuOpen}" 
+             @click="toggleMobileMenu">
+            <div class="w-7 h-0.5 bg-white mb-1.5 rounded-full"></div>
+            <div class="w-7 h-0.5 bg-white mb-1.5 rounded-full"></div>
+            <div class="w-7 h-0.5 bg-white rounded-full"></div>
         </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div v-show="mobileMenuOpen" 
+             @click="toggleMobileMenu" 
+             class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"></div>
 
         <!-- Navbar -->
         <nav class="flex items-center justify-between px-6 md:px-12 py-5 bg-glass shadow-lg sticky top-0 z-40 transition-all duration-300"
@@ -454,19 +581,19 @@
                     <div class="h-0.5 w-12 bg-cyan-400 ml-4"></div>
                 </div>
 
-                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 italic" id="intro-text">
-                    I craft elegant code and seamless user experiences. Passionate about building
-                    innovative solutions that blend functionality with stunning design.
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 italic leading-relaxed" id="intro-text">
+                    Building scalable, high-performance web applications with cutting-edge technologies.
+                    Specializing in Laravel, Vue.js, and modern full-stack development. Let's create something amazing together! 🚀
                 </p>
 
-                <div class="flex flex-wrap justify-center gap-4">
+                <div class="hero-buttons flex flex-wrap justify-center gap-4">
                     <button @click="scrollToSection('projects')"
-                        class="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30">
-                        View My Work
+                        class="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95">
+                        <i class="fas fa-briefcase mr-2"></i>View My Work
                     </button>
                     <button @click="scrollToSection('contact')"
-                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30">
-                        Contact Me
+                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95">
+                        <i class="fas fa-envelope mr-2"></i>Contact Me
                     </button>
                 </div>
 
@@ -512,19 +639,42 @@
                     </div>
 
                     <div>
-                        <h3 class="text-2xl font-bold mb-4 gradient-text animate-in">Software Developer & UI/UX
-                            Enthusiast</h3>
-                        <p class="text-gray-400 mb-6 animate-in italic">
-                            😎 Software developer; I specialize in creating
-                            immersive digital experiences that are both functional and visually stunning.
-                            My journey began with a fascination for how code can transform ideas into reality.
-                            I'm full time back-end and seasoned front-end developer.
+                        <h3 class="text-2xl font-bold mb-4 gradient-text animate-in">Full-Stack Developer & Problem Solver</h3>
+                        <p class="text-gray-400 mb-6 animate-in italic leading-relaxed">
+                            💼 Full-stack software developer specializing in Laravel, Vue.js, and modern web technologies.
+                            I create scalable, high-performance applications with seamless user experiences. My expertise
+                            spans from backend architecture with Laravel and Filament to dynamic frontends with Vue.js and Livewire.
                         </p>
-                        <p class="text-gray-400 mb-8 animate-in italic">
-                            I'm passionate about leveraging cutting-edge technologies to solve complex problems
-                            and deliver seamless user experiences. When I'm not coding, you'll find me exploring
-                            new design trends, contributing to open-source projects, or mentoring aspiring developers.
+                        <p class="text-gray-400 mb-6 animate-in italic leading-relaxed">
+                            🚀 Passionate about building robust solutions using the Elastic Stack (ELK) for data analytics,
+                            implementing real-time features with WebSockets, and crafting pixel-perfect UIs with Tailwind CSS.
+                            I thrive on turning complex requirements into elegant, maintainable code.
                         </p>
+                        <p class="text-gray-400 mb-8 animate-in italic leading-relaxed">
+                            🎯 When I'm not coding, I'm exploring emerging technologies, contributing to open-source projects,
+                            writing technical articles, and mentoring aspiring developers. I believe in continuous learning
+                            and sharing knowledge with the community.
+                        </p>
+                        
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
+                                <h4 class="text-3xl font-bold gradient-text">5+</h4>
+                                <p class="text-sm text-gray-400 mt-1">Years Experience</p>
+                            </div>
+                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
+                                <h4 class="text-3xl font-bold gradient-text">50+</h4>
+                                <p class="text-sm text-gray-400 mt-1">Projects Completed</p>
+                            </div>
+                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
+                                <h4 class="text-3xl font-bold gradient-text">28+</h4>
+                                <p class="text-sm text-gray-400 mt-1">Technologies</p>
+                            </div>
+                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
+                                <h4 class="text-3xl font-bold gradient-text">24/7</h4>
+                                <p class="text-sm text-gray-400 mt-1">Available</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -536,10 +686,16 @@
                         <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                         <div v-for="(skill, index) in skills" :key="index"
-                            class="skill-card bg-glass rounded-xl p-1 text-center transform transition-all duration-300 hover:translate-y-2 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
-                            <p class="font-sm mb-2 text-gray-400">{{ skill.name }}</p>
+                            class="skill-card bg-glass rounded-xl p-4 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-cyan-500/30 hover:bg-glass-light animate-in cursor-pointer group">
+                            <i :class="skill.icon" class="skill-icon text-3xl mb-3 text-cyan-400 group-hover:text-cyan-300 transition-colors"></i>
+                            <p class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{{ skill.name }}</p>
+                            <div class="mt-3 w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full transition-all duration-1000"
+                                     :style="{width: skill.level + '%'}"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">{{ skill.level }}%</p>
                         </div>
                     </div>
                 </div>
@@ -559,12 +715,13 @@
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="grid md:grid-cols-2 gap-8">
                     <div v-for="(project, index) in projects" :key="index"
-                        class="project-card relative bg-glass rounded-xl overflow-hidden transition-all duration-500 card-hover animate-in">
+                        class="project-card relative bg-glass rounded-xl overflow-hidden transition-all duration-500 card-hover animate-in border border-gray-800 hover:border-cyan-500/50">
                         <div class="relative aspect-video overflow-hidden">
                             <img :src="project.image" :alt="project.title"
-                                class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                                class="w-full h-full object-cover transition-all duration-700 hover:scale-110"
+                                loading="lazy">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         </div>
 
@@ -580,12 +737,12 @@
                             <p class="text-gray-300 mb-6">{{ project.description }}</p>
 
                             <div class="flex gap-4">
-                                <a :href="project.demoLink"
-                                    class="px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30">
+                                <a :href="project.demoLink" target="_blank" rel="noopener noreferrer"
+                                    class="px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105">
                                     <i class="fas fa-external-link-alt mr-2"></i> Live Demo
                                 </a>
-                                <a :href="project.codeLink"
-                                    class="px-5 py-2 rounded-full bg-transparent border border-cyan-500 text-white text-sm font-semibold transition-all duration-300 hover:bg-cyan-500/10">
+                                <a :href="project.codeLink" target="_blank" rel="noopener noreferrer"
+                                    class="px-5 py-2 rounded-full bg-transparent border border-cyan-500 text-white text-sm font-semibold transition-all duration-300 hover:bg-cyan-500/10 hover:scale-105">
                                     <i class="fas fa-code mr-2"></i> View Code
                                 </a>
                             </div>
@@ -680,7 +837,8 @@
                             <h3 class="text-2xl font-semibold mb-6">Send Me A Message</h3>
 
                             <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                                @submit.prevent="submitForm">
+                                action="/success" netlify-honeypot="bot-field"
+                                @submit="submitForm">
 
                                 <!-- Hidden input for Netlify -->
                                 <input type="hidden" name="form-name" value="contact" />
@@ -955,51 +1113,70 @@
                     { id: 'contact', name: 'Contact' }
                 ];
 
-                // Skills data
+                // Skills data - Updated with latest technologies
                 const skills = [
-                    { name: 'HTML/CSS', icon: 'fab fa-html5', level: 95 },
-                    { name: 'JavaScript', icon: 'fab fa-js', level: 50 },
-                    { name: 'Laravel', icon: 'fab fa-laravel', level: 85 },
-                    { name: 'Vue.js', icon: 'fab fa-vuejs', level: 80 },
-                    { name: 'Filament', icon: 'fab fa-database', level: 90 },
-                    { name: 'Elastic stack', icon: 'fab fa-search', level: 70 },
-                    { name: 'Livewire', icon: 'fas fa-bolt', level: 85 },
-                    { name: 'Alpine.js', icon: 'fas fa-cube', level: 60 }
+                    { name: 'HTML5/CSS3', icon: 'fab fa-html5', level: 95 },
+                    { name: 'JavaScript (ES6+)', icon: 'fab fa-js', level: 85 },
+                    { name: 'TypeScript', icon: 'fas fa-code', level: 75 },
+                    { name: 'Laravel', icon: 'fab fa-laravel', level: 90 },
+                    { name: 'Vue.js 3', icon: 'fab fa-vuejs', level: 85 },
+                    // { name: 'React.js', icon: 'fab fa-react', level: 80 },
+                    { name: 'Filament', icon: 'fas fa-database', level: 92 },
+                    { name: 'Livewire', icon: 'fas fa-bolt', level: 88 },
+                    { name: 'Alpine.js', icon: 'fas fa-cube', level: 80 },
+                    { name: 'Tailwind CSS', icon: 'fas fa-wind', level: 93 },
+                    { name: 'Elastic Stack (ELK)', icon: 'fas fa-search', level: 82 },
+                    // { name: 'Node.js', icon: 'fab fa-node-js', level: 78 },
+                    { name: 'PostgreSQL', icon: 'fas fa-database', level: 85 },
+                    { name: 'MySQL', icon: 'fas fa-database', level: 88 },
+                    // { name: 'MongoDB', icon: 'fas fa-leaf', level: 75 },
+                    { name: 'Redis', icon: 'fas fa-memory', level: 80 },
+                    { name: 'Docker', icon: 'fab fa-docker', level: 80 },
+                    { name: 'Git & GitHub', icon: 'fab fa-github', level: 90 },
+                    { name: 'RESTful APIs', icon: 'fas fa-plug', level: 90 },
+                    // { name: 'GraphQL', icon: 'fas fa-project-diagram', level: 70 },
+                    // { name: 'WebSocket', icon: 'fas fa-exchange-alt', level: 75 },
+                    // { name: 'Webpack/Vite', icon: 'fas fa-box', level: 78 },
+                    // { name: 'GSAP Animations', icon: 'fas fa-magic', level: 85 },
+                    { name: 'Responsive Design', icon: 'fas fa-mobile-alt', level: 95 },
+                    { name: 'UI/UX Design', icon: 'fas fa-pencil-ruler', level: 88 },
+                    { name: 'CI/CD', icon: 'fas fa-sync', level: 80 },
+                    
                 ];
 
                 // Project data
                 const projects = [
                     {
                         title: 'Short Message Service Platform',
-                        description: 'A messaging web application with interactive elements and real-time ability to send and receive thousands of SMS messages.',
+                        description: 'Enterprise-grade SMS platform handling thousands of messages with real-time delivery tracking, analytics dashboard, and automated campaign management. Built with Laravel, Livewire, and Filament.',
                         image: '/image/sms.png',
-                        tags: ['Laravel','Livewire', 'Filament', 'Tailwind', 'Postgres'],
+                        tags: ['Laravel', 'Livewire', 'Filament', 'Tailwind', 'PostgreSQL', 'Redis'],
                         demoLink: '#',
-                        codeLink: '#'
+                        codeLink: 'https://github.com/normanmukama'
                     },
                     {
-                        title: 'AI-Powered Task Manager',
-                        description: 'Smart task management application with machine learning capabilities to prioritize and categorize tasks efficiently.',
-                        image: '/api/placeholder/600/340',
-                        tags: ['Vue.js', 'Node.js', 'TensorFlow', 'CSS'],
-                        demoLink: '#',
-                        codeLink: '#'
-                    },
-                    {
-                        title: 'E-Commerce Dashboard',
-                        description: 'Comprehensive admin dashboard for e-commerce platforms with real-time analytics, inventory management, and user tracking.',
+                        title: 'E-Commerce Analytics Dashboard',
+                        description: 'Real-time analytics platform using Elastic Stack for data visualization, inventory tracking, and sales forecasting with predictive insights.',
                         image: '/image/newday.jpeg',
-                        tags: ['React', 'Redux', 'Chart.js', 'Tailwind'],
-                        demoLink: 'https://norman-dev.hashnode.dev/what-makes-a-developer-senior',
-                        codeLink: '#'
+                        tags: ['Vue.js', 'Elasticsearch', 'Kibana', 'Logstash', 'Laravel API'],
+                        demoLink: '#',
+                        codeLink: 'https://github.com/normanmukama'
                     },
                     {
-                        title: 'Crypto Portfolio Tracker',
-                        description: 'Real-time cryptocurrency portfolio tracker with price alerts, historical data visualization, and personalized insights.',
+                        title: 'Collaborative Project Management Tool',
+                        description: 'Agile project management platform with real-time collaboration, task tracking, and team performance analytics. Features include Kanban boards and Gantt charts.',
                         image: '/api/placeholder/600/340',
-                        tags: ['JavaScript', 'D3.js', 'API', 'Firebase'],
+                        tags: ['Laravel', 'Vue 3', 'WebSocket', 'MySQL', 'Docker'],
                         demoLink: '#',
-                        codeLink: '#'
+                        codeLink: 'https://github.com/normanmukama'
+                    },
+                    {
+                        title: 'AI-Powered Content Management System',
+                        description: 'Modern CMS with AI-driven content recommendations, SEO optimization, and multi-language support. Built using headless architecture.',
+                        image: '/api/placeholder/600/340',
+                        tags: ['Laravel', 'Filament', 'Alpine.js', 'GraphQL', 'PostgreSQL'],
+                        demoLink: '#',
+                        codeLink: 'https://github.com/normanmukama'
                     }
                 ];
 
@@ -1115,6 +1292,8 @@
                 };
 
                 const submitForm = async (e) => {
+                    e.preventDefault();
+                    
                     try {
                         // Get form element
                         const form = e.target;
@@ -1123,26 +1302,33 @@
                         const formData = new FormData(form);
 
                         // Send the form to Netlify
-                        await fetch("/", {
+                        const response = await fetch("/", {
                             method: "POST",
                             headers: { "Content-Type": "application/x-www-form-urlencoded" },
                             body: new URLSearchParams(formData).toString()
                         });
 
-                        // Show success message
-                        showToast.value = true;
-                        toastMessage.value = 'Message sent successfully!';
+                        if (response.ok) {
+                            // Show success message
+                            showToast.value = true;
+                            toastMessage.value = 'Message sent successfully! I\'ll get back to you soon.';
 
-                        // Reset form
-                        contactForm.name = '';
-                        contactForm.email = '';
-                        contactForm.subject = '';
-                        contactForm.message = '';
+                            // Reset form
+                            contactForm.name = '';
+                            contactForm.email = '';
+                            contactForm.subject = '';
+                            contactForm.message = '';
+                            
+                            // Reset actual form inputs
+                            form.reset();
 
-                        // Hide toast after 3 seconds
-                        setTimeout(() => {
-                            showToast.value = false;
-                        }, 3000);
+                            // Hide toast after 3 seconds
+                            setTimeout(() => {
+                                showToast.value = false;
+                            }, 3000);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
 
                     } catch (error) {
                         // Show error message
