@@ -617,6 +617,16 @@
             </div>
         </section>
 
+        <!-- Hidden form for Netlify detection (do not remove) -->
+        <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+            <input type="hidden" name="form-name" value="contact" />
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <input type="text" name="subject" />
+            <textarea name="message"></textarea>
+            <input type="text" name="bot-field" />
+        </form>
+
         <!-- About Section -->
         <section id="about" class="min-h-screen py-20 px-6 relative">
             <div class="max-w-5xl mx-auto">
@@ -836,12 +846,16 @@
                         <div class="bg-glass rounded-xl p-8 animate-in">
                             <h3 class="text-2xl font-semibold mb-6">Send Me A Message</h3>
 
-                            <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                                action="/success" netlify-honeypot="bot-field"
-                                @submit="submitForm">
+                            <form name="contact" method="POST" data-netlify="true" 
+                                netlify-honeypot="bot-field"
+                                action="/success.html"
+                                @submit.prevent="submitForm">
 
                                 <!-- Hidden input for Netlify -->
                                 <input type="hidden" name="form-name" value="contact" />
+                                
+                                <!-- Custom email subject for Netlify -->
+                                <input type="hidden" name="subject" value="New Portfolio Contact from ${name} - ${subject}" />
 
                                 <!-- Honeypot field to prevent spam -->
                                 <div hidden>
@@ -853,14 +867,14 @@
                                         <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your
                                             Name</label>
                                         <input type="text" id="name" name="name" v-model="contactForm.name"
-                                            placeholder="John Doe"
+                                            placeholder="John Doe" required
                                             class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
                                     </div>
                                     <div>
                                         <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your
                                             Email</label>
                                         <input type="email" id="email" name="email" v-model="contactForm.email"
-                                            placeholder="john@example.com"
+                                            placeholder="john@example.com" required
                                             class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
                                     </div>
                                 </div>
@@ -869,7 +883,7 @@
                                     <label for="subject"
                                         class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
                                     <input type="text" id="subject" name="subject" v-model="contactForm.subject"
-                                        placeholder="Project Inquiry"
+                                        placeholder="Project Inquiry" required
                                         class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
                                 </div>
 
@@ -877,7 +891,7 @@
                                     <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Your
                                         Message</label>
                                     <textarea id="message" name="message" v-model="contactForm.message" rows="5"
-                                        placeholder="Tell me about your project..."
+                                        placeholder="Tell me about your project..." required
                                         class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300"></textarea>
                                 </div>
 
@@ -1295,50 +1309,49 @@
                     e.preventDefault();
                     
                     try {
-                        // Get form element
                         const form = e.target;
-
-                        // Create FormData object from the form
                         const formData = new FormData(form);
-
-                        // Send the form to Netlify
-                        const response = await fetch("/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        
+                        // Log for debugging
+                        console.log('Submitting form...');
+                        
+                        // Encode form data for Netlify
+                        const response = await fetch('/', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                             body: new URLSearchParams(formData).toString()
                         });
 
-                        if (response.ok) {
+                        console.log('Response status:', response.status);
+
+                        if (response.ok || response.status === 200) {
                             // Show success message
                             showToast.value = true;
-                            toastMessage.value = 'Message sent successfully! I\'ll get back to you soon.';
+                            toastMessage.value = 'Message sent successfully! I\'ll get back to you soon. ✅';
 
                             // Reset form
                             contactForm.name = '';
                             contactForm.email = '';
                             contactForm.subject = '';
                             contactForm.message = '';
-                            
-                            // Reset actual form inputs
                             form.reset();
 
-                            // Hide toast after 3 seconds
+                            // Hide toast after 4 seconds
                             setTimeout(() => {
                                 showToast.value = false;
-                            }, 3000);
+                            }, 4000);
                         } else {
-                            throw new Error('Form submission failed');
+                            throw new Error(`Form submission failed with status: ${response.status}`);
                         }
 
                     } catch (error) {
-                        // Show error message
                         console.error('Form submission error:', error);
                         showToast.value = true;
-                        toastMessage.value = 'Error sending message. Please try again.';
+                        toastMessage.value = 'Error sending message. Please try again or email me directly at normanmukama11@gmail.com';
 
                         setTimeout(() => {
                             showToast.value = false;
-                        }, 3000);
+                        }, 5000);
                     }
                 };
 
