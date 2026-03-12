@@ -54,10 +54,6 @@
             font-family: 'Space Mono', monospace;
         }
 
-        .magic-text {
-            text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--primary);
-        }
-
         .gradient-text {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -65,61 +61,43 @@
             color: transparent;
         }
 
-        .typing-cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background-color: var(--primary);
-            margin-left: 2px;
-            animation: blink 1s infinite;
+        .hero-avatar-shell {
+            position: relative;
+            width: min(360px, 80vw);
+            aspect-ratio: 1 / 1;
+            border-radius: 9999px;
+            padding: 8px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            background: radial-gradient(circle at 30% 20%, rgba(0, 240, 255, 0.1), transparent 60%);
         }
 
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
+        .hero-avatar-shell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 9999px;
+            border: 2px solid rgba(255, 255, 255, 0.08);
         }
 
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .card-hover {
+        .hero-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            background: rgba(0, 240, 255, 0.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c7d2fe;
             transition: all 0.3s ease;
         }
 
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 30px rgba(0, 240, 255, 0.2);
-        }
-
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+        .hero-social-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            border-color: rgba(0, 240, 255, 0.7);
+            box-shadow: 0 10px 22px rgba(0, 240, 255, 0.15);
         }
 
         .progress-bar {
@@ -127,33 +105,6 @@
             border-radius: 4px;
             background: linear-gradient(to right, var(--primary), var(--secondary));
             transition: width 1s ease-in-out;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scrollBounce 2s infinite;
-        }
-
-        @keyframes scrollBounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0) translateX(-50%);
-            }
-
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
         }
 
         .nav-item {
@@ -179,50 +130,6 @@
             width: 100%;
         }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom right, rgba(0, 240, 255, 0.1), rgba(110, 72, 170, 0.1));
-            border-radius: 16px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        .project-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 240, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-        }
-
-        .project-card:hover::after {
-            animation: shimmer 1.5s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
@@ -233,73 +140,10 @@
             content-visibility: auto;
         }
 
-        .animate-in {
-            will-change: opacity, transform;
-        }
-
-        .timeline-line {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 4px;
-            background-color: var(--primary);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 60px;
-        }
-
-        .timeline-content {
-            position: relative;
-            width: 45%;
-        }
-
-        .timeline-content.left {
-            margin-left: auto;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        .timeline-content.right .timeline-dot {
-            left: -60px;
-        }
-
-        .timeline-content.left .timeline-dot {
-            right: -60px;
-        }
-
-        .glow-on-hover {
-            transition: all 0.3s ease;
-        }
-
-        .glow-on-hover:hover {
-            text-shadow: 0 0 8px var(--primary);
-        }
-
         .bg-glass {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .perspective-container {
-            perspective: 1000px;
-        }
-
-        .rotate-on-scroll {
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
         }
 
         #webgl-container {
@@ -311,53 +155,6 @@
             z-index: -1;
         }
 
-        .tag {
-            display: inline-block;
-            padding: 5px 12px;
-            background: rgba(0, 240, 255, 0.1);
-            border-radius: 20px;
-            font-size: 12px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            background: rgba(0, 240, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .typewriter-text {
-            overflow: hidden;
-            border-right: 2px solid var(--primary);
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from {
-                width: 0
-            }
-
-            to {
-                width: 100%
-            }
-        }
-
-        @keyframes blink-caret {
-
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: var(--primary)
-            }
-        }
-
         .animate-in {
             opacity: 0;
             transform: translateY(30px);
@@ -367,20 +164,6 @@
         .animate-in.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-card:hover .skill-icon {
-            transform: scale(1.15) rotateY(360deg);
-            filter: drop-shadow(0 0 8px var(--primary));
-        }
-
-        .bg-glass-light {
-            background: rgba(255, 255, 255, 0.08);
         }
 
         .menu-toggle {
@@ -439,39 +222,11 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
 
-            .timeline-line {
-                left: 20px;
-            }
-
-            .timeline-content {
-                width: 85%;
-                margin-left: auto;
-            }
-
-            .timeline-content.left,
-            .timeline-content.right {
-                margin-left: auto;
-            }
-
-            .timeline-content.right .timeline-dot,
-            .timeline-content.left .timeline-dot {
-                left: -40px;
-            }
-
             .text-5xl { font-size: 2rem; }
             .text-7xl { font-size: 2.5rem; }
             .text-4xl { font-size: 1.75rem; }
             .text-2xl { font-size: 1.25rem; }
             
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .hero-buttons button {
-                width: 100%;
-            }
-
             section {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
@@ -495,6 +250,15 @@
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
+        }
+
+        /* Line clamp utility */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* Custom scrollbar */
@@ -561,60 +325,50 @@
 
         <!-- Hero Section -->
         <section id="home"
-            class="min-h-screen relative flex flex-col justify-center items-center text-center px-6 py-20">
+            class="min-h-[76vh] relative flex items-center px-6 py-5">
             <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
                 <div id="particles-js"></div>
             </div>
 
-            <div class="z-10 max-w-5xl mx-auto">
-                <div class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text">Hello, I am</div>
+            <div class="z-10 max-w-6xl mx-auto w-full">
+                <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 xl:gap-32 items-center">
+                    <div class="text-center lg:text-left lg:pr-6">
+                        <p class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text">Welcome, I'm</p>
 
-                <h3 class="text-5xl md:text-7xl font-bold mb-8 gradient-text" id="name-text">
-                    Norman <span class="hidden sm:inline">Hategyekamukama</span>
-                </h3>
+                        <h6 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white" id="name-text">
+                            Norman 
+                        </h6>
 
-                <div class="flex justify-center items-center mb-8">
-                    <div class="h-0.5 w-12 bg-cyan-400 mr-4"></div>
-                    <h2 class="text-2xl md:text-4xl font-semibold magic-text code-font" id="role-text">
-                        <span id="typing-text"></span><span class="typing-cursor"></span>
-                    </h2>
-                    <div class="h-0.5 w-12 bg-cyan-400 ml-4"></div>
-                </div>
+                        <p class="text-2xl md:text-3xl font-semibold mb-8 gradient-text code-font" id="role-text">
+                            Senior Full-Stack Developer
+                        </p>
 
-                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 italic leading-relaxed" id="intro-text">
-                    Building scalable, high-performance web applications with cutting-edge technologies.
-                    Specializing in Laravel, Vue.js, and modern full-stack development. Let's create something amazing together! 🚀
-                </p>
+                        <p class="text-lg md:text-xl text-gray-400 max-w-2xl lg:mx-0 mx-auto mb-12 italic leading-relaxed" id="intro-text">
+                            I help startups and teams turn ideas into scalable products using Laravel,
+                            Vue.js, and modern backend architecture with performance-first UX.
+                        </p>
+                    </div>
 
-                <div class="hero-buttons flex flex-wrap justify-center gap-4">
-                    <button @click="scrollToSection('projects')"
-                        class="px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95">
-                        <i class="fas fa-briefcase mr-2"></i>View My Work
-                    </button>
-                    <button @click="scrollToSection('contact')"
-                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30 active:scale-95">
-                        <i class="fas fa-envelope mr-2"></i>Contact Me
-                    </button>
-                </div>
+                    <div class="flex flex-col items-center lg:ml-6">
+                        <div class="hero-avatar-shell">
+                            <img src="image/norman.jpeg" alt="Norman Hategyekamukama profile photo" loading="lazy">
+                        </div>
 
-                <div class="mt-16 flex justify-center space-x-6">
-                    <a href="https://github.com/normanmukama"
-                        class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://norman-dev.hashnode.dev/"
-                        class="text-2xl text-gray-400 hover:text-cyan-400 transition-all duration-300">
-                        <i class="fab fa-codepen"></i>
-                    </a>
+                        <div class="mt-6 flex items-center gap-3">
+                            <a href="https://github.com/normanmukama" class="hero-social-link" aria-label="GitHub profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="hero-social-link" aria-label="LinkedIn profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://norman-dev.hashnode.dev/" class="hero-social-link" aria-label="Blog profile">
+                                <i class="fas fa-pen-nib"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="scroll-indicator">
-                <i class="fas fa-chevron-down text-cyan-400 text-2xl animate-bounce"></i>
-            </div>
         </section>
 
         <!-- Hidden form for Netlify detection (do not remove) -->
@@ -627,327 +381,136 @@
             <input type="text" name="bot-field" />
         </form>
 
-        <!-- About Section -->
-        <section id="about" class="min-h-screen py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-16">
-                    <h3 class="text-lg text-cyan-400 code-font animate-in">GET TO KNOW ME</h3>
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">About Me</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="perspective-container animate-in">
-                        <div
-                            class="rotate-on-scroll bg-glass rounded-2xl p-3 border border-cyan-500/30 shadow-xl shadow-cyan-500/5">
-                            <div class="relative w-full aspect-square rounded-xl overflow-hidden">
-                                <img src="/image/profile2.jpg" alt="Norman Hategyekamukama"
-                                    class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 gradient-text animate-in">Full-Stack Developer & Problem Solver</h3>
-                        <p class="text-gray-400 mb-6 animate-in italic leading-relaxed">
-                            💼 Full-stack software developer specializing in Laravel, Vue.js, and modern web technologies.
-                            I create scalable, high-performance applications with seamless user experiences. My expertise
-                            spans from backend architecture with Laravel and Filament to dynamic frontends with Vue.js and Livewire.
-                        </p>
-                        <p class="text-gray-400 mb-6 animate-in italic leading-relaxed">
-                            🚀 Passionate about building robust solutions using the Elastic Stack (ELK) for data analytics,
-                            implementing real-time features with WebSockets, and crafting pixel-perfect UIs with Tailwind CSS.
-                            I thrive on turning complex requirements into elegant, maintainable code.
-                        </p>
-                        <p class="text-gray-400 mb-8 animate-in italic leading-relaxed">
-                            🎯 When I'm not coding, I'm exploring emerging technologies, contributing to open-source projects,
-                            writing technical articles, and mentoring aspiring developers. I believe in continuous learning
-                            and sharing knowledge with the community.
-                        </p>
-                        
-                        <!-- Quick Stats -->
-                        <div class="grid grid-cols-2 gap-4 mt-8">
-                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
-                                <h4 class="text-3xl font-bold gradient-text">5+</h4>
-                                <p class="text-sm text-gray-400 mt-1">Years Experience</p>
-                            </div>
-                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
-                                <h4 class="text-3xl font-bold gradient-text">50+</h4>
-                                <p class="text-sm text-gray-400 mt-1">Projects Completed</p>
-                            </div>
-                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
-                                <h4 class="text-3xl font-bold gradient-text">28+</h4>
-                                <p class="text-sm text-gray-400 mt-1">Technologies</p>
-                            </div>
-                            <div class="bg-glass p-4 rounded-lg text-center hover:bg-glass-light transition-all duration-300">
-                                <h4 class="text-3xl font-bold gradient-text">24/7</h4>
-                                <p class="text-sm text-gray-400 mt-1">Available</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skills -->
-                <div class="mt-24">
-                    <div class="text-center mb-12">
-                        <h3 class="text-lg text-cyan-400 code-font animate-in">WHAT I KNOW</h3>
-                        <h2 class="text-3xl md:text-4xl font-bold gradient-text animate-in">My Skills & Tools</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                        <div v-for="(skill, index) in skills" :key="index"
-                            class="skill-card bg-glass rounded-xl p-4 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-cyan-500/30 hover:bg-glass-light animate-in cursor-pointer group">
-                            <i :class="skill.icon" class="skill-icon text-3xl mb-3 text-cyan-400 group-hover:text-cyan-300 transition-colors"></i>
-                            <p class="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{{ skill.name }}</p>
-                            <div class="mt-3 w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full transition-all duration-1000"
-                                     :style="{width: skill.level + '%'}"></div>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">{{ skill.level }}%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Projects Section -->
-        <section id="projects" class="min-h-screen py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-6">
-                    <h3 class="text-lg text-cyan-400 code-font animate-in">MY WORK</h3>
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Featured Projects</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                    <p class="text-gray-300 max-w-2xl mx-auto mt-6 animate-in">
-                        Explore some of my latest projects that showcase my skills and passion for creating
-                        innovative digital solutions.
-                    </p>
+        <section id="projects" class="pt-8 pb-20 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section heading -->
+                <div class="mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">02.</span>
+                        My Projects
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
                 </div>
 
-                    <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project cards grid -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     <div v-for="(project, index) in projects" :key="index"
-                        class="project-card relative bg-glass rounded-xl overflow-hidden transition-all duration-500 card-hover animate-in border border-gray-800 hover:border-cyan-500/50">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img :src="project.image" :alt="project.title"
-                                class="w-full h-full object-cover transition-all duration-700 hover:scale-110"
-                                loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        class="proj-card flex flex-col justify-between rounded-2xl p-6 border border-cyan-500/30 bg-[#0d1224] hover:border-cyan-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10">
+                        <!-- top row: folder icon + links -->
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                                <i class="fas fa-folder text-white/70 text-lg"></i>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-400">
+                                <a :href="project.codeLink" target="_blank" rel="noopener noreferrer"
+                                   class="hover:text-cyan-400 transition-colors" aria-label="GitHub">
+                                    <i class="fab fa-github text-xl"></i>
+                                </a>
+                                <a v-if="project.demoLink !== '#'" :href="project.demoLink" target="_blank" rel="noopener noreferrer"
+                                   class="hover:text-cyan-400 transition-colors" aria-label="Live demo">
+                                    <i class="fas fa-external-link-alt text-lg"></i>
+                                </a>
+                            </div>
                         </div>
 
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2 gradient-text">{{ project.title }}</h3>
+                        <!-- title + description -->
+                        <div class="flex-1">
+                            <h3 class="text-white font-semibold text-lg mb-2">{{ project.title }}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3">{{ project.description }}</p>
+                        </div>
 
-                            <div class="flex flex-wrap my-3">
-                                <span v-for="(tag, tagIndex) in project.tags" :key="tagIndex" class="tag">
-                                    {{ tag }}
+                        <!-- bottom row: stars/forks + language -->
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                            <div class="flex items-center gap-4 text-gray-400 text-sm">
+                                <span class="flex items-center gap-1">
+                                    <i class="far fa-star"></i> {{ project.stars }}
+                                </span>
+                                <span class="flex items-center gap-1">
+                                    <i class="fas fa-code-branch"></i> {{ project.forks }}
                                 </span>
                             </div>
-
-                            <p class="text-gray-300 mb-6">{{ project.description }}</p>
-
-                            <div class="flex gap-4">
-                                <a :href="project.demoLink" target="_blank" rel="noopener noreferrer"
-                                    class="px-5 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105">
-                                    <i class="fas fa-external-link-alt mr-2"></i> Live Demo
-                                </a>
-                                <a :href="project.codeLink" target="_blank" rel="noopener noreferrer"
-                                    class="px-5 py-2 rounded-full bg-transparent border border-cyan-500 text-white text-sm font-semibold transition-all duration-300 hover:bg-cyan-500/10 hover:scale-105">
-                                    <i class="fas fa-code mr-2"></i> View Code
-                                </a>
-                            </div>
+                            <span class="text-xs text-gray-500 code-font">{{ project.language }}</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-center mt-12 animate-in">
-                    <button
-                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30">
-                        View All Projects <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
-                <div class="max-w-2xl mx-auto mt-4">
-                    <h6 class="text-gray-400 text-center mt-4 animate-in italic">
-                        Links to some of my work can be found on <a href="https://github.com/normanmukama" class="text-cyan-400 hover:underline">github</a> and details can be provided upon request via a scheduled demo call.
-                    </h6>
+                <!-- Show More -->
+                <div class="text-center mt-12">
+                    <a href="https://github.com/normanmukama" target="_blank" rel="noopener noreferrer"
+                        class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
+                        Show More
+                    </a>
                 </div>
             </div>
         </section>
         
         <!-- Contact Section -->
-        <section id="contact" class="min-h-screen py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-16">
-                    <h3 class="text-lg text-cyan-400 code-font animate-in">GET IN TOUCH</h3>
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Contact Me</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
-                    <p class="text-gray-400 max-w-2xl mx-auto mt-6 animate-in italic">
-                        Have a project in mind or just want to say hi? Feel free to reach out. I'm always open to
-                        discussing new projects, creative ideas, or opportunities to be part of your vision.
-                    </p>
+        <section id="contact">
+                <div class="section-title text-center mb-3">
+                    <h4 class="text-lg text-cyan-400 code-font animate-in">GET IN TOUCH</h4>
+                    <h6 class="font-bold gradient-text animate-in">Let's Connect for the further discussion</h6>
                 </div>
-
-                <div class="grid md:grid-cols-5 gap-8">
-                    <div class="md:col-span-2">
-                        <div class="grid gap-6">
-                            <div
-                                class="bg-glass rounded-xl p-3 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
-                                    <i class="fas fa-envelope text-cyan-400 text-xl"></i>
-                                </div>
-                                <h4 class="text-xl font-semibold mb-2">Email</h4>
-                                <p class="text-gray-300">normanmukama11@gmail.com</p>
-                                <a href="mailto:normanmukama11@gmail.com"
-                                    class="text-cyan-400 inline-block mt-2 hover:underline">Send a message</a>
-                            </div>
-
-                            <div
-                                class="bg-glass rounded-xl p-3 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
-                                    <i class="fas fa-map-marker-alt text-cyan-400 text-xl"></i>
-                                </div>
-                                <h4 class="text-xl font-semibold mb-1">Location</h4>
-                                <p class="text-gray-300">Kampala, Uganda</p>
-                                <a href="#" class="text-cyan-400 inline-block mt-2 hover:underline">View on map</a>
-                            </div>
-
-                            <div
-                                class="bg-glass rounded-xl p-3 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 animate-in">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
-                                    <i class="fas fa-share-alt text-cyan-400 text-xl"></i>
-                                </div>
-                                <h4 class="text-xl font-semibold mb-1">Social Profiles</h4>
-                                <div class="flex space-x-4 mt-3">
-                                    <a href="https://github.com/normanmukama"
-                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="#"
-                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                    <a href="#"
-                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a href="#"
-                                        class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="md:col-span-3">
-                        <div class="bg-glass rounded-xl p-8 animate-in">
-                            <h3 class="text-2xl font-semibold mb-6">Send Me A Message</h3>
-
-                            <form name="contact" method="POST" data-netlify="true" 
-                                netlify-honeypot="bot-field"
-                                action="/success.html"
-                                @submit.prevent="submitForm">
-
-                                <!-- Hidden input for Netlify -->
-                                <input type="hidden" name="form-name" value="contact" />
-                                
-                                <!-- Custom email subject for Netlify -->
-                                <input type="hidden" name="subject" value="New Portfolio Contact from ${name} - ${subject}" />
-
-                                <!-- Honeypot field to prevent spam -->
-                                <div hidden>
-                                    <input name="bot-field" />
-                                </div>
-
-                            <form name="contact" method="POST" @submit="submitForm">
-
-                                <div class="grid md:grid-cols-2 gap-6 mb-6">
-                                    <div>
-                                        <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your
-                                            Name</label>
-                                        <input type="text" id="name" name="name" v-model="contactForm.name"
-                                            placeholder="John Doe" required
-                                            class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
-                                    </div>
-                                    <div>
-                                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your
-                                            Email</label>
-                                        <input type="email" id="email" name="email" v-model="contactForm.email"
-                                            placeholder="john@example.com" required
-                                            class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
-                                    </div>
-                                </div>
-
-                                <div class="mb-6">
-                                    <label for="subject"
-                                        class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
-                                    <input type="text" id="subject" name="subject" v-model="contactForm.subject"
-                                        placeholder="Project Inquiry" required
-                                        class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300">
-                                </div>
-
-                                <div class="mb-6">
-                                    <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Your
-                                        Message</label>
-                                    <textarea id="message" name="message" v-model="contactForm.message" rows="5"
-                                        placeholder="Tell me about your project..." required
-                                        class="w-full bg-gray-800/60 border border-gray-700 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 transition-all duration-300"></textarea>
-                                </div>
-
-                                <button type="submit"
-                                    class="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-[0.98]">
-                                    <i class="fas fa-paper-plane mr-2"></i> Send Message
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="rounded-xl animate-in text-center">
+                <a href="mailto:normanmukama11@gmail.com" class="text-cyan-400 inline-block mt-2 hover:underline">
+                    <button type="submit"
+                        class="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-[0.98]">
+                        <i class="fas fa-paper-plane mr-2"></i> Send Message
+                    </button>
+                </a>
             </div>
         </section>
 
         <!-- Blog Preview Section -->
         <section id="blog" class="py-20 px-6 relative">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-title text-center mb-16">
-                    <h3 class="text-lg text-cyan-400 code-font animate-in">MY ARTICLES</h3>
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text animate-in">Latest Blog Posts</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-purple-600 mx-auto mt-4"></div>
+            <div class="max-w-6xl mx-auto">
+                <!-- Section heading -->
+                <div class="mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">01.</span>
+                        Latest Blogs
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div v-for="(post, index) in blogPosts" :key="index"
-                        class="bg-glass rounded-xl overflow-hidden transition-all duration-500 card-hover animate-in">
-                        <div class="relative aspect-video overflow-hidden">
-                            <img :src="post.image" :alt="post.title"
-                                class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
-                            <div class="absolute top-4 left-4 bg-cyan-500 text-white text-xs px-3 py-1 rounded-full">
-                                {{ post.category }}
+                <!-- Blog list -->
+                <div class="flex flex-col gap-10">
+                    <a v-for="(post, index) in blogPosts" :key="index"
+                        :href="post.link" target="_blank" rel="noopener noreferrer"
+                        class="grid md:grid-cols-2 gap-8 items-center group cursor-pointer">
+
+                        <!-- Left: text -->
+                        <div>
+                            <p class="text-sm text-gray-500 mb-3">{{ post.date }}</p>
+                            <h3 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">{{ post.title }}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-5">{{ post.excerpt }}</p>
+                            <div class="flex items-center gap-5 text-gray-500 text-sm">
+                                <span class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                                    <i class="far fa-heart"></i> {{ post.likes }} likes
+                                </span>
+                                <span class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+                                    <i class="far fa-comment-dots"></i> {{ post.comments }} comments
+                                </span>
                             </div>
                         </div>
 
-                        <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-400 mb-3">
-                                <i class="far fa-calendar-alt mr-2"></i> {{ post.date }}
+                        <!-- Right: cover image -->
+                        <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video flex items-center justify-center group-hover:border-cyan-500/40 transition-all duration-300">
+                            <img v-if="post.image" :src="post.image" :alt="post.title"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div v-else class="flex flex-col items-center justify-center text-gray-600 p-8 text-center">
+                                <i class="fas fa-newspaper text-4xl mb-3"></i>
+                                <span class="text-sm">{{ post.title }}</span>
                             </div>
-
-                            <h3 class="text-xl font-bold mb-3 gradient-text">{{ post.title }}</h3>
-                            <p class="text-gray-300 mb-6 line-clamp-3">{{ post.excerpt }}</p>
-
-                            <a href="https://norman-dev.hashnode.dev/what-makes-a-developer-senior"
-                                class="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-all duration-300">
-                                Read More <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
-                <div class="text-center mt-12 animate-in">
-                    <a href="https://norman-dev.hashnode.dev/what-makes-a-developer-senior"
-                        class="px-8 py-3 rounded-full bg-transparent border-2 border-cyan-500 text-white text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/30">
-                        View All Articles <i class="fas fa-arrow-right ml-2"></i>
+                <!-- Show More -->
+                <div class="text-center mt-14">
+                    <a href="https://norman-dev.hashnode.dev/" target="_blank" rel="noopener noreferrer"
+                        class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
+                        Show More
                     </a>
                 </div>
             </div>
@@ -956,92 +519,7 @@
         <!-- Footer -->
         <footer class="py-12 px-6 relative bg-black/30 border-t border-gray-800">
             <div class="max-w-5xl mx-auto">
-                <div class="grid md:grid-cols-4 gap-8 mb-12">
-                    <div>
-                        <div class="flex items-center mb-6">
-                            <div class="text-3xl font-bold gradient-text mr-2">N</div>
-                            <h1 class="text-xl font-bold text-white code-font">
-                                <span class="gradient-text">Norman</span>.dev
-                            </h1>
-                        </div>
-
-                        <p class="text-gray-400 mb-6">
-                            Creating cutting-edge web experiences with a focus on performance, aesthetics, and user
-                            experience.
-                        </p>
-
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/normanmukama"
-                                class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#"
-                                class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://norman-dev.hashnode.dev/"
-                                class="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                                <i class="fab fa-codepen"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h4 class="text-lg font-semibold mb-6 gradient-text">Quick Links</h4>
-                        <ul class="space-y-3">
-                            <li v-for="(item, index) in navItems" :key="index">
-                                <a href="#" @click.prevent="scrollToSection(item.id)"
-                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">
-                                    <i class="fas fa-chevron-right text-xs mr-2"></i> {{ item.name }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 class="text-lg font-semibold mb-6 gradient-text">Services</h4>
-                        <ul class="space-y-3">
-                            <li v-for="(service, index) in ['Web Development', 'UI/UX Design', 'Database Design', 'SEO Optimization']"
-                                :key="index">
-                                <a href="#" class="text-gray-400 hover:text-cyan-400 transition-all duration-300">
-                                    <i class="fas fa-chevron-right text-xs mr-2"></i> {{ service }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 class="text-lg font-semibold mb-6 gradient-text">Contact Info</h4>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <i class="fas fa-map-marker-alt text-cyan-400 mt-1 mr-3"></i>
-                                <span class="text-gray-400">Kampala , Uganda</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-envelope text-cyan-400 mr-3"></i>
-                                <a href="mailto:normanmukama11@gmail.com"
-                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">normanmukama11@gmail.com</a>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-phone text-cyan-400 mr-3"></i>
-                                <a href="tel:+14151234567"
-                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">(+256)
-                                    786644438</a>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fab fa-whatsapp text-cyan-400 mr-3"></i>
-                                <a href="https://wa.me/256751947693" target="_blank" rel="noopener noreferrer"
-                                    class="text-gray-400 hover:text-cyan-400 transition-all duration-300">
-                                    (+256) 751947693
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-
                 <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
-                    <p>&copy; {{ new Date().getFullYear() }} Norman.dev. All rights reserved.</p>
                     <p class="mt-2 text-sm">Designed & Developed with <i class="fas fa-heart text-cyan-400"></i> and a
                         lot of <i class="fas fa-mug-hot text-cyan-400"></i></p>
                 </div>
@@ -1067,7 +545,7 @@
 
     <!-- Vue + GSAP Script -->
     <script>
-        const { createApp, ref, reactive, onMounted, watch, computed } = Vue;
+        const { createApp, ref, onMounted } = Vue;
         // Add this in a common JS file or inside a Vue component's mounted() hook
         // Choose codes, not characters, so layout ⌨️ differences don’t matter
         // --- config ----------------------------------------------------
@@ -1095,10 +573,6 @@
                 index = key === secret[0] ? 1 : 0;
             }
         });
-
-
-
-
         createApp({
             setup() {
                 // State
@@ -1107,167 +581,102 @@
                 const scrollProgress = ref(0);
                 const showBackToTop = ref(false);
                 const mobileMenuOpen = ref(false);
-                const activeTestimonial = ref(0);
                 const showToast = ref(false);
                 const toastMessage = ref('');
-
-                // Contact form state
-                const contactForm = reactive({
-                    name: '',
-                    email: '',
-                    subject: '',
-                    message: ''
-                });
 
                 // Nav items
                 const navItems = [
                     { id: 'home', name: 'Home' },
-                    { id: 'about', name: 'About' },
                     { id: 'projects', name: 'Projects' },
-                    <!-- { id: 'experience', name: 'Experience' }, -->
                     { id: 'blog', name: 'Blog' },
                     { id: 'contact', name: 'Contact' }
                 ];
-
-                // Skills data - Updated with latest technologies
-                const skills = [
-                    { name: 'HTML5/CSS3', icon: 'fab fa-html5', level: 95 },
-                    { name: 'JavaScript (ES6+)', icon: 'fab fa-js', level: 85 },
-                    { name: 'TypeScript', icon: 'fas fa-code', level: 75 },
-                    { name: 'Laravel', icon: 'fab fa-laravel', level: 90 },
-                    { name: 'Vue.js 3', icon: 'fab fa-vuejs', level: 85 },
-                    // { name: 'React.js', icon: 'fab fa-react', level: 80 },
-                    { name: 'Filament', icon: 'fas fa-database', level: 92 },
-                    { name: 'Livewire', icon: 'fas fa-bolt', level: 88 },
-                    { name: 'Alpine.js', icon: 'fas fa-cube', level: 80 },
-                    { name: 'Tailwind CSS', icon: 'fas fa-wind', level: 93 },
-                    { name: 'Elastic Stack (ELK)', icon: 'fas fa-search', level: 82 },
-                    // { name: 'Node.js', icon: 'fab fa-node-js', level: 78 },
-                    { name: 'PostgreSQL', icon: 'fas fa-database', level: 85 },
-                    { name: 'MySQL', icon: 'fas fa-database', level: 88 },
-                    // { name: 'MongoDB', icon: 'fas fa-leaf', level: 75 },
-                    { name: 'Redis', icon: 'fas fa-memory', level: 80 },
-                    { name: 'Docker', icon: 'fab fa-docker', level: 80 },
-                    { name: 'Git & GitHub', icon: 'fab fa-github', level: 90 },
-                    { name: 'RESTful APIs', icon: 'fas fa-plug', level: 90 },
-                    // { name: 'GraphQL', icon: 'fas fa-project-diagram', level: 70 },
-                    // { name: 'WebSocket', icon: 'fas fa-exchange-alt', level: 75 },
-                    // { name: 'Webpack/Vite', icon: 'fas fa-box', level: 78 },
-                    // { name: 'GSAP Animations', icon: 'fas fa-magic', level: 85 },
-                    { name: 'Responsive Design', icon: 'fas fa-mobile-alt', level: 95 },
-                    { name: 'UI/UX Design', icon: 'fas fa-pencil-ruler', level: 88 },
-                    { name: 'CI/CD', icon: 'fas fa-sync', level: 80 },
-                    
-                ];
-
                 // Project data
                 const projects = [
                     {
-                        title: 'Short Message Service Platform',
-                        description: 'Enterprise-grade SMS platform handling thousands of messages with real-time delivery tracking, analytics dashboard, and automated campaign management. Built with Laravel, Livewire, and Filament.',
-                        image: '/image/sms.png',
-                        tags: ['Laravel', 'Livewire', 'Filament', 'Tailwind', 'PostgreSQL', 'Redis'],
+                        title: 'SMS Platform',
+                        description: 'Enterprise-grade SMS platform handling thousands of messages with real-time delivery tracking, analytics dashboard, and automated campaign management.',
+                        stars: 4,
+                        forks: 2,
+                        language: 'Laravel',
                         demoLink: '#',
                         codeLink: 'https://github.com/normanmukama'
                     },
                     {
-                        title: 'E-Commerce Analytics Dashboard',
+                        title: 'E-Commerce Analytics',
                         description: 'Real-time analytics platform using Elastic Stack for data visualization, inventory tracking, and sales forecasting with predictive insights.',
-                        image: '/image/newday.jpeg',
-                        tags: ['Vue.js', 'Elasticsearch', 'Kibana', 'Logstash', 'Laravel API'],
+                        stars: 3,
+                        forks: 1,
+                        language: 'Vue.js',
                         demoLink: '#',
                         codeLink: 'https://github.com/normanmukama'
                     },
                     {
-                        title: 'Collaborative Project Management Tool',
-                        description: 'Agile project management platform with real-time collaboration, task tracking, and team performance analytics. Features include Kanban boards and Gantt charts.',
-                        image: '/api/placeholder/600/340',
-                        tags: ['Laravel', 'Vue 3', 'WebSocket', 'MySQL', 'Docker'],
+                        title: 'Project Management Tool',
+                        description: 'Agile project management platform with real-time collaboration, Kanban boards, Gantt charts, and team performance analytics.',
+                        stars: 2,
+                        forks: 1,
+                        language: 'Laravel',
                         demoLink: '#',
                         codeLink: 'https://github.com/normanmukama'
                     },
                     {
-                        title: 'AI-Powered Content Management System',
-                        description: 'Modern CMS with AI-driven content recommendations, SEO optimization, and multi-language support. Built using headless architecture.',
-                        image: '/api/placeholder/600/340',
-                        tags: ['Laravel', 'Filament', 'Alpine.js', 'GraphQL', 'PostgreSQL'],
+                        title: 'AI-Powered CMS',
+                        description: 'Modern headless CMS with AI-driven content recommendations, multi-language support, and SEO optimization built on Laravel + Filament.',
+                        stars: 5,
+                        forks: 2,
+                        language: 'PHP',
                         demoLink: '#',
                         codeLink: 'https://github.com/normanmukama'
-                    }
-                ];
-
-                // Timeline data
-                const timeline = [
-                    {
-                        period: '2023 - Present',
-                        title: 'Senior Frontend Developer',
-                        organization: 'TechVision Inc.',
-                        description: 'Leading the frontend development team in creating cutting-edge web applications with focus on performance and user experience.'
                     },
                     {
-                        period: '2020 - 2023',
-                        title: 'Frontend Developer',
-                        organization: 'Digital Solutions Agency',
-                        description: 'Developed responsive web applications and collaborated with designers to implement pixel-perfect UI/UX designs.'
+                        title: 'Freelancing Uganda',
+                        description: 'Freelance marketplace UI connecting Ugandan talent with clients. Built with Vue.js and Tailwind CSS with a clean, accessible interface.',
+                        stars: 1,
+                        forks: 1,
+                        language: 'JavaScript',
+                        demoLink: '#',
+                        codeLink: 'https://github.com/normanmukama'
                     },
                     {
-                        period: '2018 - 2020',
-                        title: 'Junior Web Developer',
-                        organization: 'WebCraft Studios',
-                        description: 'Built and maintained client websites, implemented responsive designs, and collaborated with the creative team.'
-                    },
-                    {
-                        period: '2014 - 2018',
-                        title: 'B.S. Computer Science',
-                        organization: 'Sai Pali Institute of Technology',
-                        description: 'Focused on web technologies, algorithms, and human-computer interaction. Graduated with honors.'
-                    }
-                ];
-
-                // Testimonial data
-                const testimonials = [
-                    {
-                        name: 'Sarah Johnson',
-                        position: 'Product Manager at TechCorp',
-                        image: '/image/profile2.jpg',
-                        text: 'Norman is an exceptional developer who consistently delivers beyond expectations. His attention to detail and creative problem-solving skills make him stand out from the crowd.'
-                    },
-                    {
-                        name: 'David Chen',
-                        position: 'CEO at StartupX',
-                        image: '/image/profile2.jpg',
-                        text: 'Working with Norman was a game-changer for our project. His technical expertise combined with his design sensibility resulted in a product that our users absolutely love.'
-                    },
-                    {
-                        name: 'Emily Rodriguez',
-                        position: 'Creative Director at DesignHub',
-                        image: '/image/profile2.jpg',
-                        text: 'Norman has a rare ability to translate complex design concepts into flawless code. His collaborative approach and commitment to quality made our partnership incredibly successful.'
+                        title: 'ELK Data Pipeline',
+                        description: 'Data ingestion and visualization pipeline using Elasticsearch, Logstash, and Kibana for real-time log monitoring and alerting.',
+                        stars: 3,
+                        forks: 1,
+                        language: 'Elasticsearch',
+                        demoLink: '#',
+                        codeLink: 'https://github.com/normanmukama'
                     }
                 ];
 
                 // Blog posts data
                 const blogPosts = [
                     {
-                        title: 'Mastering CSS Grid: A Comprehensive Guide',
-                        excerpt: 'Learn how to create complex layouts with CSS Grid and take your web design skills to the next level. This guide covers everything from basics to advanced techniques.',
-                        image: '/api/placeholder/400/250',
-                        date: 'April 15, 2025',
-                        category: 'CSS'
+                        title: 'What Makes A Developer Senior?',
+                        excerpt: 'Hello devs — a senior developer is not just about years of experience or the number of languages you know. It is about mindset, ownership, and the ability to navigate ambiguity with confidence.',
+                        image: null,
+                        date: '12, March, 2025',
+                        likes: 4,
+                        comments: 2,
+                        link: 'https://norman-dev.hashnode.dev/what-makes-a-developer-senior'
                     },
                     {
-                        title: 'The Future of Web Development with AI',
-                        excerpt: 'Explore how artificial intelligence is transforming web development and what skills developers need to stay relevant in this rapidly evolving landscape.',
-                        image: '/api/placeholder/400/250',
-                        date: 'April 5, 2025',
-                        category: 'Tech Trends'
+                        title: 'Laravel Filament: Building Admin Panels Faster Than Ever',
+                        excerpt: 'Filament v3 supercharges Laravel development. In this post I walk through how I use it to ship production-ready admin dashboards in hours, not days.',
+                        image: null,
+                        date: '05, February, 2025',
+                        likes: 6,
+                        comments: 3,
+                        link: 'https://norman-dev.hashnode.dev/'
                     },
                     {
-                        title: 'Optimizing Performance in React Applications',
-                        excerpt: 'Discover practical techniques to improve performance in your React applications. From code splitting to memoization, learn how to create blazing-fast user experiences.',
-                        image: '/api/placeholder/400/250',
-                        date: 'March 28, 2025',
-                        category: 'React'
+                        title: 'Elastic Stack for Developers: A Practical Introduction',
+                        excerpt: 'A practical guide to setting up Elasticsearch, Logstash, and Kibana for application log monitoring, real-time search, and data analytics in your Laravel projects.',
+                        image: null,
+                        date: '18, January, 2025',
+                        likes: 3,
+                        comments: 1,
+                        link: 'https://norman-dev.hashnode.dev/'
                     }
                 ];
 
@@ -1286,84 +695,6 @@
 
                 const toggleMobileMenu = () => {
                     mobileMenuOpen.value = !mobileMenuOpen.value;
-                };
-
-                const prevTestimonial = () => {
-                    activeTestimonial.value = activeTestimonial.value === 0
-                        ? testimonials.length - 1
-                        : activeTestimonial.value - 1;
-                };
-
-                const nextTestimonial = () => {
-                    activeTestimonial.value = (activeTestimonial.value + 1) % testimonials.length;
-                };
-
-                const downloadResume = () => {
-                    showToast.value = true;
-                    toastMessage.value = 'Resume downloaded successfully!';
-
-                    setTimeout(() => {
-                        showToast.value = false;
-                    }, 3000);
-                };
-
-                const submitForm = async (e) => {
-                    e.preventDefault();
-                    
-                    try {
-                        const form = e.target;
-                        const formData = new FormData(form);
-                        
-                        // Log for debugging
-                        console.log('Submitting form...');
-                        
-                        // Encode form data for Netlify
-                        const response = await fetch('/', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-
-                        // Send the form to Netlify
-                        const response = await fetch("/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: new URLSearchParams(formData).toString()
-                        });
-
-                        console.log('Response status:', response.status);
-
-                        if (response.ok || response.status === 200) {
-                            // Show success message
-                            showToast.value = true;
-                            toastMessage.value = 'Message sent successfully! I\'ll get back to you soon. ✅';
-                        if (response.ok) {
-                            // Show success message
-                            showToast.value = true;
-                            toastMessage.value = 'Message sent successfully!';
-
-                            // Reset form
-                            contactForm.name = '';
-                            contactForm.email = '';
-                            contactForm.subject = '';
-                            contactForm.message = '';
-                            form.reset();
-
-                            // Hide toast after 4 seconds
-                            setTimeout(() => {
-                                showToast.value = false;
-                            }, 4000);
-                        } else {
-                            throw new Error(`Form submission failed with status: ${response.status}`);
-                        }
-
-                    } catch (error) {
-                        console.error('Form submission error:', error);
-                        showToast.value = true;
-                        toastMessage.value = 'Error sending message. Please try again or email me directly at normanmukama11@gmail.com';
-
-                        setTimeout(() => {
-                            showToast.value = false;
-                        }, 5000);
-                    }
                 };
 
                 // Initialize WebGL background
@@ -1432,43 +763,6 @@
                     });
                 };
 
-                // Typewriter effect
-                const initTypewriterEffect = () => {
-                    const roles = ['Laravel + Vue Developer', 'UI/UX Enthusiast', 'Problem Solver', 'Elasticsearch, Logstash And Kibana', 'CSS, Tailwind And Bootstrap', 'Filament And Bagisto'];
-                    let roleIndex = 0;
-                    let charIndex = 0;
-                    let isDeleting = false;
-                    let typingSpeed = 100;
-
-                    const type = () => {
-                        const currentRole = roles[roleIndex];
-                        const typingElement = document.getElementById('typing-text');
-
-                        if (isDeleting) {
-                            typingElement.textContent = currentRole.substring(0, charIndex - 1);
-                            charIndex--;
-                            typingSpeed = 50;
-                        } else {
-                            typingElement.textContent = currentRole.substring(0, charIndex + 1);
-                            charIndex++;
-                            typingSpeed = 100;
-                        }
-
-                        if (!isDeleting && charIndex === currentRole.length) {
-                            isDeleting = true;
-                            typingSpeed = 1500; // Pause at end
-                        } else if (isDeleting && charIndex === 0) {
-                            isDeleting = false;
-                            roleIndex = (roleIndex + 1) % roles.length;
-                            typingSpeed = 500; // Pause before typing next role
-                        }
-
-                        setTimeout(type, typingSpeed);
-                    };
-
-                    type();
-                };
-
                 // Scroll reveal animation
                 const initScrollReveal = () => {
                     const animateElements = document.querySelectorAll('.animate-in');
@@ -1514,21 +808,7 @@
                         }
                     });
 
-                    // Rotate elements on scroll
-                    const rotateElements = document.querySelectorAll('.rotate-on-scroll');
-                    rotateElements.forEach(element => {
-                        const elementTop = element.getBoundingClientRect().top;
-                        const elementCenter = elementTop + element.offsetHeight / 2;
-                        const windowCenter = windowHeight / 2;
-                        const rotateValue = ((elementCenter - windowCenter) / windowHeight) * 20;
-
-                        element.style.transform = `perspective(1000px) rotateY(${rotateValue}deg)`;
-                    });
                 };
-
-                //
-
-                // Continue from where we left off (after the handleScroll function)
 
                 // Lifecycle hooks
                 onMounted(() => {
@@ -1537,7 +817,6 @@
                     handleScroll(); // Call once to set initial state
 
                     // Initialize all animations and effects
-                    initTypewriterEffect();
                     initScrollReveal();
 
                     // Initialize Three.js background if the container exists
@@ -1554,18 +833,6 @@
                     });
                 });
 
-                // Clean up event listeners when component is unmounted
-                const onUnmounted = () => {
-                    window.removeEventListener('scroll', handleScroll);
-                };
-
-                // Computed properties
-                const currentTestimonial = computed(() => testimonials[activeTestimonial.value]);
-
-                const filteredSkills = computed(() => {
-                    return skills.sort((a, b) => b.level - a.level);
-                });
-
                 // Return all reactive data and methods for the template
                 return {
                     activeSection,
@@ -1573,24 +840,14 @@
                     scrollProgress,
                     showBackToTop,
                     mobileMenuOpen,
-                    activeTestimonial,
                     showToast,
                     toastMessage,
-                    contactForm,
                     navItems,
-                    skills: filteredSkills,
                     projects,
-                    timeline,
-                    testimonials,
-                    currentTestimonial,
                     blogPosts,
                     scrollToSection,
                     scrollToTop,
-                    toggleMobileMenu,
-                    prevTestimonial,
-                    nextTestimonial,
-                    downloadResume,
-                    submitForm
+                    toggleMobileMenu
                 };
             }
         }).mount('#app');
