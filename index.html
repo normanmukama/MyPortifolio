@@ -304,14 +304,14 @@
             :class="{'py-3': scrolled}">
             <div class="flex items-center">
                 <div class="text-3xl font-bold gradient-text mr-2">N</div>
-                <h1 class="text-xl md:text-2xl font-bold text-white code-font">
+                <h1 class="text-xl md:text-2xl font-bold text-white">
                     <span class="gradient-text">Norman</span>.dev
                 </h1>
             </div>
 
-            <ul class="nav-links flex md:flex-row gap-8 text-lg font-medium" :class="{'active': mobileMenuOpen}">
+            <ul class="nav-links flex md:flex-row gap-8 text-lg font-medium code-font text-gray-200" :class="{'active': mobileMenuOpen}">
                 <li v-for="(item, index) in navItems" :key="index"
-                    class="nav-item cursor-pointer transition duration-300"
+                    class="nav-item cursor-pointer transition code-font duration-300"
                     :class="{'active-nav text-cyan-400': activeSection === item.id}" @click="scrollToSection(item.id)">
                     {{ item.name }}
                 </li>
@@ -325,14 +325,14 @@
 
         <!-- Hero Section -->
         <section id="home"
-            class="min-h-[76vh] relative flex items-center px-6 py-5">
+            class="min-h-[76vh] relative flex items-center px-6 py-12 md:py-5">
             <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
                 <div id="particles-js"></div>
             </div>
 
             <div class="z-10 max-w-6xl mx-auto w-full">
-                <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 xl:gap-32 items-center">
-                    <div class="text-center lg:text-left lg:pr-6">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-24 xl:gap-32 items-center">
+                    <div class="text-center lg:text-left lg:pr-6 order-2 lg:order-1">
                         <p class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text">Welcome, I'm</p>
 
                         <h6 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white" id="name-text">
@@ -349,7 +349,7 @@
                         </p>
                     </div>
 
-                    <div class="flex flex-col items-center lg:ml-6">
+                    <div class="flex flex-col items-center lg:ml-6 order-1 lg:order-2">
                         <div class="hero-avatar-shell">
                             <img src="image/norman.jpeg" alt="Norman Hategyekamukama profile photo" loading="lazy">
                         </div>
@@ -382,12 +382,12 @@
         </form>
 
         <!-- Projects Section -->
-        <section id="projects" class="pt-8 pb-20 px-6 relative">
+        <section id="projects" class="pt-6 pb-12 px-6 relative">
             <div class="max-w-6xl mx-auto">
                 <!-- Section heading -->
-                <div class="mb-12">
+                <div class="mb-7">
                     <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-                        <span class="text-cyan-400 code-font text-2xl font-normal">02.</span>
+                        <span class="text-cyan-400 code-font text-2xl font-normal">01.</span>
                         My Projects
                     </h2>
                     <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
@@ -436,7 +436,7 @@
                 </div>
 
                 <!-- Show More -->
-                <div class="text-center mt-12">
+                <div class="text-center mt-8">
                     <a href="https://github.com/normanmukama" target="_blank" rel="noopener noreferrer"
                         class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
                         Show More
@@ -446,35 +446,45 @@
         </section>
         
         <!-- Contact Section -->
-        <section id="contact">
-                <div class="section-title text-center mb-3">
-                    <h4 class="text-lg text-cyan-400 code-font animate-in">GET IN TOUCH</h4>
-                    <h6 class="font-bold gradient-text animate-in">Let's Connect for the further discussion</h6>
+        <section id="contact" class="py-12 px-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section heading -->
+                <div class="mb-7">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">02.</span>
+                        Contact
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
                 </div>
-            <div class="rounded-xl animate-in text-center">
-                <a href="mailto:normanmukama11@gmail.com" class="text-cyan-400 inline-block mt-2 hover:underline">
-                    <button type="submit"
-                        class="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-[0.98]">
-                        <i class="fas fa-paper-plane mr-2"></i> Send Message
-                    </button>
-                </a>
+
+                <div class="max-w-lg mx-auto bg-glass rounded-2xl p-8 text-center">
+                    <p class="text-cyan-400 mb-2 code-font text-sm text-cyan-400 animate-in">GET IN TOUCH</p>
+                    <p class="text-xl md:text-xl font-bold text-white mb-6">Let's Connect for a further discussion</p>
+                    <a href="mailto:normanmukama11@gmail.com" class="block animate-in">
+                        <button type="button"
+                            class="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-[0.98]">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </a>
+                    <!-- <p class="mt-4 text-gray-500 text-sm">normanmukama11@gmail.com</p> -->
+                </div>
             </div>
         </section>
 
         <!-- Blog Preview Section -->
-        <section id="blog" class="py-20 px-6 relative">
+        <section id="blog" class="py-12 px-6 relative">
             <div class="max-w-6xl mx-auto">
                 <!-- Section heading -->
-                <div class="mb-12">
+                <div class="mb-7">
                     <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-                        <span class="text-cyan-400 code-font text-2xl font-normal">01.</span>
+                        <span class="text-cyan-400 code-font text-2xl font-normal">03.</span>
                         Latest Blogs
                     </h2>
                     <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
                 </div>
 
                 <!-- Blog list -->
-                <div class="flex flex-col gap-10">
+                <div class="flex flex-col gap-6">
                     <a v-for="(post, index) in blogPosts" :key="index"
                         :href="post.link" target="_blank" rel="noopener noreferrer"
                         class="grid md:grid-cols-2 gap-8 items-center group cursor-pointer">
@@ -507,7 +517,7 @@
                 </div>
 
                 <!-- Show More -->
-                <div class="text-center mt-14">
+                <div class="text-center mt-8">
                     <a href="https://norman-dev.hashnode.dev/" target="_blank" rel="noopener noreferrer"
                         class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
                         Show More
@@ -517,7 +527,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="py-12 px-6 relative bg-black/30 border-t border-gray-800">
+        <footer class="py-8 px-6 relative bg-black/30 border-t border-gray-800">
             <div class="max-w-5xl mx-auto">
                 <div class="pt-8 border-t border-gray-800 text-center text-gray-500">
                     <p class="mt-2 text-sm">Designed & Developed with <i class="fas fa-heart text-cyan-400"></i> and a
