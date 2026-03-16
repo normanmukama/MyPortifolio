@@ -226,7 +226,7 @@
             .text-7xl { font-size: 2.5rem; }
             .text-4xl { font-size: 1.75rem; }
             .text-2xl { font-size: 1.25rem; }
-            
+
             section {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
@@ -240,12 +240,12 @@
             .text-3xl { font-size: 1.25rem; }
             .text-2xl { font-size: 1.1rem; }
             .text-xl { font-size: 1rem; }
-            
+
             .px-8 { padding-left: 1.5rem; padding-right: 1.5rem; }
             .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
-            
+
             .grid { gap: 1rem; }
-            
+
             section {
                 padding-left: 1rem;
                 padding-right: 1rem;
@@ -286,17 +286,17 @@
         <canvas id="webgl-container"></canvas>
 
         <!-- Mobile Menu Toggle -->
-        <div class="menu-toggle fixed top-6 right-6 z-50 cursor-pointer md:hidden p-2" 
-             :class="{'active': mobileMenuOpen}" 
+        <div class="menu-toggle fixed top-6 right-6 z-50 cursor-pointer md:hidden p-2"
+             :class="{'active': mobileMenuOpen}"
              @click="toggleMobileMenu">
             <div class="w-7 h-0.5 bg-white mb-1.5 rounded-full"></div>
             <div class="w-7 h-0.5 bg-white mb-1.5 rounded-full"></div>
             <div class="w-7 h-0.5 bg-white rounded-full"></div>
         </div>
-        
+
         <!-- Mobile Menu Overlay -->
-        <div v-show="mobileMenuOpen" 
-             @click="toggleMobileMenu" 
+        <div v-show="mobileMenuOpen"
+             @click="toggleMobileMenu"
              class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"></div>
 
         <!-- Navbar -->
@@ -336,22 +336,18 @@
                         <p class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text">Welcome, I'm</p>
 
                         <h6 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white" id="name-text">
-                            Norman 
+                            Norman
                         </h6>
-
-                        <p class="text-2xl md:text-3xl font-semibold mb-8 gradient-text code-font" id="role-text">
-                            Senior Full-Stack Developer
-                        </p>
-
-                        <p class="text-lg md:text-xl text-gray-400 max-w-2xl lg:mx-0 mx-auto mb-12 italic leading-relaxed" id="intro-text">
-                            I help startups and teams turn ideas into scalable products using Laravel,
-                            Vue.js, and modern backend architecture with performance-first UX.
+                        <p class="text-lg md:text-xl text-gray-400 max-w-2xl lg:mx-0 mx-auto mb-12 leading-relaxed text-sm" id="intro-text">
+                            😎 Full-Stack Web Developer experienced in building scalable applications using Laravel, PHP, and Go for backend services.
+                            Vue.js, Typescript, Tailwind CSS, and Livewire for modern frontend interfaces. Skilled in API development, database design, and
+                            building responsive user interfaces.
                         </p>
                     </div>
 
                     <div class="flex flex-col items-center lg:ml-6 order-1 lg:order-2">
                         <div class="hero-avatar-shell">
-                            <img src="image/norman.jpeg" alt="Norman Hategyekamukama profile photo" loading="lazy">
+                            <img src="image/norman1.jpg" alt="Norman Hategyekamukama profile photo" loading="lazy">
                         </div>
 
                         <div class="mt-6 flex items-center gap-3">
@@ -444,7 +440,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Contact Section -->
         <section id="contact" class="py-12 px-6">
             <div class="max-w-6xl mx-auto">
