@@ -192,7 +192,7 @@
             .text-7xl { font-size: 3.5rem; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .menu-toggle {
                 display: block;
             }
@@ -230,6 +230,25 @@
             section {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            .nav-links {
+                position: static;
+                right: auto;
+                width: auto;
+                max-width: none;
+                height: auto;
+                background: transparent;
+                backdrop-filter: none;
+                padding: 0;
+                box-shadow: none;
+                flex-direction: row;
             }
         }
 
@@ -286,7 +305,7 @@
         <canvas id="webgl-container"></canvas>
 
         <!-- Mobile Menu Toggle -->
-        <div class="menu-toggle fixed top-6 right-6 z-50 cursor-pointer md:hidden p-2"
+        <div class="menu-toggle fixed top-6 right-6 z-50 cursor-pointer p-2"
              :class="{'active': mobileMenuOpen}"
              @click="toggleMobileMenu">
             <div class="w-7 h-0.5 bg-white mb-1.5 rounded-full"></div>
@@ -295,9 +314,9 @@
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div v-show="mobileMenuOpen"
+           <div v-show="mobileMenuOpen"
              @click="toggleMobileMenu"
-             class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"></div>
+               class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
 
         <!-- Navbar -->
         <nav class="flex items-center justify-between px-6 md:px-12 py-5 bg-glass shadow-lg sticky top-0 z-40 transition-all duration-300"
@@ -551,7 +570,7 @@
 
     <!-- Vue + GSAP Script -->
     <script>
-        const { createApp, ref, onMounted } = Vue;
+        const { createApp, ref, onMounted, watch } = Vue;
         // Add this in a common JS file or inside a Vue component's mounted() hook
         // Choose codes, not characters, so layout ⌨️ differences don’t matter
         // --- config ----------------------------------------------------
@@ -703,6 +722,12 @@
                     mobileMenuOpen.value = !mobileMenuOpen.value;
                 };
 
+                const handleResize = () => {
+                    if (window.innerWidth > 1024) {
+                        mobileMenuOpen.value = false;
+                    }
+                };
+
                 // Initialize WebGL background
                 const initThreeJS = () => {
                     const container = document.getElementById('webgl-container');
@@ -820,6 +845,7 @@
                 onMounted(() => {
                     // Initialize scroll event listener
                     window.addEventListener('scroll', handleScroll);
+                    window.addEventListener('resize', handleResize);
                     handleScroll(); // Call once to set initial state
 
                     // Initialize all animations and effects
@@ -837,6 +863,10 @@
                     prefersDarkMode.addEventListener('change', (e) => {
                         document.documentElement.classList.toggle('dark-mode', e.matches);
                     });
+                });
+
+                watch(mobileMenuOpen, (isOpen) => {
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
                 });
 
                 // Return all reactive data and methods for the template
