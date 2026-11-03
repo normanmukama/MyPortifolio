@@ -23,11 +23,10 @@ A **Software Developer** with over two years of experience on **enterprise appli
 
  1. [Education Management Information System](https://emis.go.ug/): Uganda's national education information platform (Laravel, PostgreSQL)
  2. [Parliament Messaging System](https://parliament.smsone.co.ug/): messaging platform for Uganda's Parliament, with role-based access (Vue.js)
- 3. [Commuza](https://commuza.com/): condominium management platform, with Keycloak identity and access management
- 4. [Postkazi Job Portal](https://www.postkazi.com/): connects employers with job seekers, with Chart.js dashboards
- 5. [WeCare24 Medical Services](https://wecare24medical.co.uk/): home visits and telemedicine, with appointment scheduling and secure messaging
- 6. [GIX Agency](https://gixagency.com/): agency website with responsive client-facing pages
- 7. [Preacher Holdings](https://preacherholdings.com/): company website built at GIX Agency
+ 3. [Postkazi Job Portal](https://www.postkazi.com/): connects employers with job seekers, with Chart.js dashboards
+ 4. [WeCare24 Medical Services](https://wecare24medical.co.uk/): home visits and telemedicine, with appointment scheduling and secure messaging
+ 5. [GIX Agency](https://gixagency.com/): agency website with responsive client-facing pages
+ 6. [Preacher Holdings](https://preacherholdings.com/): company website built at GIX Agency
 
 ### More on my GitHub
 
