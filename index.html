@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Norman.dev | Full-Stack Developer | Laravel & Vue.js Expert</title>
+    <title>Norman.dev | Software Developer | Backend &amp; Full-Stack</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Norman Hategyekamukama - Full-Stack Developer specializing in Laravel, Vue.js, Filament, and modern web technologies. Building scalable applications with excellent UX.">
-    <meta name="keywords" content="Laravel Developer, Vue.js, Full-Stack Developer, Filament, Livewire, Elastic Stack, Web Development, Uganda Developer">
+    <meta name="description" content="Norman Hategyekamukama - Software Developer in Kampala, Uganda with over two years of experience on enterprise and government systems, using PHP, Laravel, Vue.js and PostgreSQL.">
+    <meta name="keywords" content="Software Developer, Backend Developer, Full-Stack Developer, Laravel, Vue.js, PostgreSQL, Microservices, Keycloak, Uganda Developer">
     <meta name="author" content="Norman Hategyekamukama">
-    <meta property="og:title" content="Norman.dev | Full-Stack Developer">
-    <meta property="og:description" content="Building scalable web applications with Laravel, Vue.js, and modern technologies">
+    <meta property="og:title" content="Norman.dev | Software Developer">
+    <meta property="og:description" content="Backend and full-stack development for enterprise and government systems, using Laravel, Vue.js and PostgreSQL.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://norman.dev">
+    <meta property="og:url" content="https://norman-dev.netlify.app/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#00f0ff">
     <!-- Tailwind CSS CDN -->
@@ -61,23 +61,198 @@
             color: transparent;
         }
 
+        /* Hero: stage holds the portrait, its orbit and its effects */
+        .hero-avatar-stage {
+            position: relative;
+            isolation: isolate;
+            width: min(360px, 68vw);
+            aspect-ratio: 1 / 1;
+        }
+
         .hero-avatar-shell {
             position: relative;
-            width: min(360px, 80vw);
-            aspect-ratio: 1 / 1;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
             border-radius: 9999px;
             padding: 8px;
             border: 3px solid var(--primary);
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
-            background: radial-gradient(circle at 30% 20%, rgba(0, 240, 255, 0.1), transparent 60%);
+            background: radial-gradient(circle at 30% 20%, rgba(0, 240, 255, 0.1), transparent 60%), var(--dark);
+            cursor: pointer;
+            will-change: transform;
+        }
+
+        /* A bright arc that travels around your cyan ring */
+        .hero-avatar-shell::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: inherit;
+            padding: 3px;
+            background: conic-gradient(from 0deg, transparent 0 62%, var(--secondary) 76%, #ffffff 99%, transparent 100%);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+            animation: hero-spin 4.5s linear infinite;
+            pointer-events: none;
+        }
+
+        /* Soft halo that breathes behind the portrait */
+        .hero-avatar-shell::after {
+            content: '';
+            position: absolute;
+            inset: -14%;
+            z-index: -1;
+            border-radius: inherit;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.34) 40%, rgba(110, 72, 170, 0.22) 58%, transparent 71%);
+            animation: hero-breathe 4.2s ease-in-out infinite;
+            pointer-events: none;
         }
 
         .hero-avatar-shell img {
+            position: relative;
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 9999px;
             border: 2px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-avatar-fx {
+            position: absolute;
+            inset: 8px;
+            border-radius: 9999px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        #hero-glare {
+            opacity: 0;
+            mix-blend-mode: screen;
+            background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.34), rgba(0, 240, 255, 0.12) 28%, transparent 56%);
+        }
+
+        #hero-scan {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 100%;
+            opacity: 0;
+            background: linear-gradient(to bottom, transparent 40%, rgba(0, 240, 255, 0.12) 47%, rgba(190, 252, 255, 0.72) 50%, transparent 51%);
+        }
+
+        #hero-shock {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: 9999px;
+            border: 2px solid var(--primary);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .hero-track {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .hero-track--back { z-index: 1; }
+        .hero-track--front { z-index: 4; }
+
+        .hero-chip {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 11px;
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 240, 255, 0.42);
+            background: rgba(13, 18, 36, 0.88);
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.35), 0 0 14px rgba(0, 240, 255, 0.14);
+            color: #d7fbff;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            line-height: 1.3;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .hero-chip::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent);
+            mask-image: linear-gradient(to bottom, #000 86%, transparent);
+        }
+
+        /* White name with a cyan and violet light that sweeps across it */
+        #name-text {
+            display: inline-block;
+            background: linear-gradient(105deg, #ffffff 0 41%, var(--primary) 47%, #b79bff 53%, #ffffff 59% 100%) 0% 0% / 300% 100% no-repeat;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 22px rgba(0, 240, 255, 0.2));
+        }
+
+        #pre-caret {
+            display: inline-block;
+            width: 0.55em;
+            height: 2px;
+            margin-left: 4px;
+            vertical-align: -0.1em;
+            background: var(--primary);
+            box-shadow: 0 0 8px var(--primary);
+            opacity: 0;
+        }
+
+        .hero-word { display: inline-block; }
+
+        .hero-kw {
+            color: #d7fbff;
+            background: linear-gradient(rgba(0, 240, 255, 0.55), rgba(0, 240, 255, 0.55)) left 100% / 100% 1px no-repeat;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+        }
+
+        @keyframes hero-spin { to { transform: rotate(360deg); } }
+
+        @keyframes hero-breathe {
+            0%, 100% { opacity: 0.5; transform: scale(0.97); }
+            50% { opacity: 1; transform: scale(1.04); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-avatar-shell::before,
+            .hero-avatar-shell::after { animation: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        @media (max-width: 640px) {
+            .hero-chip { font-size: 10px; padding: 4px 9px; }
         }
 
         .hero-social-link {
@@ -90,7 +265,7 @@
             align-items: center;
             justify-content: center;
             color: #c7d2fe;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .hero-social-link:hover {
@@ -144,15 +319,6 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #webgl-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
 
         .animate-in {
@@ -280,6 +446,175 @@
             overflow: hidden;
         }
 
+        /* Blog cards: same dark card and cyan border as the rest of the site */
+        .blog-card {
+            position: relative;
+            isolation: isolate;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            background: #0d1224;
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        /* Soft light that follows the cursor across the card */
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: 0;
+            background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 240, 255, 0.13), rgba(110, 72, 170, 0.1) 45%, transparent 72%);
+            transition: opacity 0.35s ease;
+        }
+
+        a.blog-card:hover,
+        a.blog-card:focus-visible {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35), 0 0 34px rgba(0, 240, 255, 0.12);
+        }
+
+        a.blog-card:hover::before,
+        a.blog-card:focus-visible::before {
+            opacity: 1;
+        }
+
+        a.blog-card:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+        }
+
+        .blog-cover {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 2 / 1;
+            background: #0d1224;
+        }
+
+        @media (min-width: 768px) {
+            .blog-cover {
+                aspect-ratio: 5 / 2;
+            }
+        }
+
+        /* On desktop the featured photo is a smaller inset image beside the text */
+        @media (min-width: 1024px) {
+            .blog-cover--featured {
+                aspect-ratio: 4 / 3;
+                align-self: center;
+                margin: 24px 24px 24px 0;
+                border-radius: 0.75rem;
+            }
+        }
+
+        .blog-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.1, 1);
+        }
+
+        a.blog-card:hover .blog-cover img {
+            transform: scale(1.05);
+        }
+
+        /* Tints each photo with the site colours and fades it into the card */
+        .blog-cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, transparent 68%, #0d1224),
+                linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(110, 72, 170, 0.26));
+            pointer-events: none;
+        }
+
+        .blog-credit {
+            position: absolute;
+            right: 10px;
+            bottom: 8px;
+            z-index: 1;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .blog-badge {
+            z-index: 1;
+        }
+
+        .blog-card--soon .blog-cover img {
+            opacity: 0.6;
+        }
+
+        .blog-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 4px 11px;
+            border-radius: 9999px;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            background: rgba(13, 18, 36, 0.9);
+            color: #d7fbff;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .blog-card--soon .blog-badge {
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .blog-chip {
+            padding: 3px 10px;
+            border-radius: 9999px;
+            background: rgba(0, 240, 255, 0.1);
+            color: #a5f3fc;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .blog-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #22d3ee;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .blog-read i {
+            transition: transform 0.3s ease;
+        }
+
+        a.blog-card:hover .blog-read i {
+            transform: translateX(5px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blog-card,
+            .blog-cover img,
+            .blog-read i,
+            .animate-in {
+                transition: none;
+            }
+
+            a.blog-card:hover,
+            a.blog-card:hover .blog-cover img,
+            a.blog-card:hover .blog-read i {
+                transform: none;
+            }
+        }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
@@ -302,8 +637,6 @@
 
 <body>
     <div id="app">
-        <canvas id="webgl-container"></canvas>
-
         <!-- Mobile Menu Toggle -->
         <div class="menu-toggle fixed top-6 right-6 z-50 cursor-pointer p-2"
              :class="{'active': mobileMenuOpen}"
@@ -343,33 +676,48 @@
         </div>
 
         <!-- Hero Section -->
-        <section id="home"
-            class="min-h-[76vh] relative flex items-center px-6 py-12 md:py-5">
-            <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-                <div id="particles-js"></div>
-            </div>
+        <section id="home" v-once
+            class="min-h-[76vh] relative flex items-center px-6 py-12 md:py-5 overflow-hidden">
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-            <div class="z-10 max-w-6xl mx-auto w-full">
+            <div class="relative z-10 max-w-6xl mx-auto w-full">
                 <div class="grid lg:grid-cols-2 gap-10 lg:gap-24 xl:gap-32 items-center">
                     <div class="text-center lg:text-left lg:pr-6 order-2 lg:order-1">
-                        <p class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text">Welcome, I'm</p>
+                        <p class="mb-6 text-lg md:text-xl text-cyan-400 code-font" id="pre-text"><span id="pre-typed">Welcome, I'm</span><span id="pre-caret" aria-hidden="true"></span></p>
 
                         <h6 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white" id="name-text">
                             Norman
                         </h6>
                         <p class="text-lg md:text-xl text-gray-400 max-w-2xl lg:mx-0 mx-auto mb-12 leading-relaxed text-sm" id="intro-text">
-                            😎 Full-Stack Web Developer experienced in building scalable applications using Laravel, PHP, and Go for backend services.
-                            Vue.js, Typescript, Tailwind CSS, and Livewire for modern frontend interfaces. Skilled in API development, database design, and
-                            building responsive user interfaces.
+                            😎 Software Developer with over two years of experience on <span class="hero-kw">enterprise applications</span> and <span class="hero-kw">government information systems</span>.
+                            I work across the backend with <span class="hero-kw">PHP and Laravel</span>, the frontend with <span class="hero-kw">Vue.js</span>, and databases with <span class="hero-kw">PostgreSQL</span> and <span class="hero-kw">MySQL</span>,
+                            building REST APIs, microservices, authentication, and event-driven workflows.
                         </p>
                     </div>
 
                     <div class="flex flex-col items-center lg:ml-6 order-1 lg:order-2">
-                        <div class="hero-avatar-shell">
-                            <img src="image/norman1.jpg" alt="Norman Hategyekamukama profile photo" loading="lazy">
+                        <div class="hero-avatar-stage" id="hero-stage">
+                            <svg class="hero-track hero-track--back" viewBox="-100 -100 200 200" aria-hidden="true">
+                                <ellipse cx="0" cy="0" rx="120" ry="43.2" transform="rotate(-18)" fill="none" stroke="#00f0ff" stroke-opacity="0.26" stroke-width="1" vector-effect="non-scaling-stroke"/>
+                            </svg>
+                            <div id="hero-shock"></div>
+                            <div class="hero-avatar-shell" id="hero-shell">
+                                <img src="image/norman1.jpg" alt="Norman Hategyekamukama profile photo">
+                                <div class="hero-avatar-fx" id="hero-glare"></div>
+                                <div class="hero-avatar-fx"><div id="hero-scan"></div></div>
+                            </div>
+                            <svg class="hero-track hero-track--front" viewBox="-100 -100 200 200" aria-hidden="true">
+                                <path d="M -120 0 A 120 43.2 0 0 0 120 0" transform="rotate(-18)" fill="none" stroke="#00f0ff" stroke-opacity="0.26" stroke-width="1" vector-effect="non-scaling-stroke"/>
+                            </svg>
+                            <span class="hero-chip" aria-hidden="true">Laravel</span>
+                            <span class="hero-chip" aria-hidden="true">Vue.js</span>
+                            <span class="hero-chip" aria-hidden="true">PostgreSQL</span>
+                            <span class="hero-chip" aria-hidden="true">Keycloak</span>
+                            <span class="hero-chip" aria-hidden="true">Kafka</span>
+                            <span class="hero-chip" aria-hidden="true">Docker</span>
                         </div>
 
-                        <div class="mt-6 flex items-center gap-3">
+                        <div class="mt-6 flex items-center gap-3 relative z-30">
                             <a href="https://github.com/normanmukama" class="hero-social-link" aria-label="GitHub profile">
                                 <i class="fab fa-github"></i>
                             </a>
@@ -418,11 +766,11 @@
                                 <i class="fas fa-folder text-white/70 text-lg"></i>
                             </div>
                             <div class="flex items-center gap-3 text-gray-400">
-                                <a :href="project.codeLink" target="_blank" rel="noopener noreferrer"
+                                <a v-if="project.codeLink" :href="project.codeLink" target="_blank" rel="noopener noreferrer"
                                    class="hover:text-cyan-400 transition-colors" aria-label="GitHub">
                                     <i class="fab fa-github text-xl"></i>
                                 </a>
-                                <a v-if="project.demoLink !== '#'" :href="project.demoLink" target="_blank" rel="noopener noreferrer"
+                                <a v-if="project.demoLink" :href="project.demoLink" target="_blank" rel="noopener noreferrer"
                                    class="hover:text-cyan-400 transition-colors" aria-label="Live demo">
                                     <i class="fas fa-external-link-alt text-lg"></i>
                                 </a>
@@ -432,20 +780,12 @@
                         <!-- title + description -->
                         <div class="flex-1">
                             <h3 class="text-white font-semibold text-lg mb-2">{{ project.title }}</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3">{{ project.description }}</p>
+                            <p class="text-gray-400 text-sm leading-relaxed">{{ project.description }}</p>
                         </div>
 
-                        <!-- bottom row: stars/forks + language -->
-                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                            <div class="flex items-center gap-4 text-gray-400 text-sm">
-                                <span class="flex items-center gap-1">
-                                    <i class="far fa-star"></i> {{ project.stars }}
-                                </span>
-                                <span class="flex items-center gap-1">
-                                    <i class="fas fa-code-branch"></i> {{ project.forks }}
-                                </span>
-                            </div>
-                            <span class="text-xs text-gray-500 code-font">{{ project.language }}</span>
+                        <!-- bottom row: technologies -->
+                        <div v-if="project.tech.length" class="flex flex-wrap gap-2 mt-6 pt-4 border-t border-white/5">
+                            <span v-for="item in project.tech" :key="item" class="text-xs text-cyan-300/80 code-font">{{ item }}</span>
                         </div>
                     </div>
                 </div>
@@ -460,13 +800,177 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
+        <section id="experience" class="py-12 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-7">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">02.</span>
+                        Experience
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
+                </div>
+
+                <div class="flex flex-col gap-5">
+                    <div v-for="job in experience" :key="job.company" class="rounded-2xl p-6 border border-cyan-500/30 bg-[#0d1224] hover:border-cyan-400 transition-all duration-300">
+                        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-4">
+                            <h3 class="text-white font-semibold text-lg">{{ job.role }} <span class="text-cyan-400">@ {{ job.company }}</span></h3>
+                            <span v-if="job.location" class="text-xs text-gray-500 code-font">{{ job.location }}</span>
+                        </div>
+                        <ul class="space-y-2">
+                            <li v-for="point in job.points" :key="point" class="flex gap-3 text-gray-400 text-sm leading-relaxed">
+                                <i class="fas fa-angle-right text-cyan-400 mt-1"></i>
+                                <span>{{ point }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-12 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-7">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">03.</span>
+                        Technical Skills
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div v-for="group in skills" :key="group.title" class="rounded-2xl p-6 border border-cyan-500/30 bg-[#0d1224] hover:border-cyan-400 transition-all duration-300 lg:last:col-span-3 sm:last:col-span-2 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+                                <i :class="group.icon" class="text-white/70"></i>
+                            </div>
+                            <h3 class="text-white font-semibold">{{ group.title }}</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span v-for="skill in group.items" :key="skill"
+                                class="px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-200 text-xs code-font">{{ skill }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-12 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="mb-7">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">04.</span>
+                        Education
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div v-for="item in education" :key="item.title" class="rounded-2xl p-6 border border-cyan-500/30 bg-[#0d1224] hover:border-cyan-400 transition-all duration-300">
+                        <p class="text-xs text-cyan-400 code-font mb-3">{{ item.period }}</p>
+                        <h3 class="text-white font-semibold text-lg mb-1">{{ item.title }}</h3>
+                        <p class="text-gray-300 text-sm mb-2">{{ item.school }}</p>
+                        <p class="text-gray-400 text-sm">{{ item.note }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Preview Section -->
+        <section id="blog" class="py-12 px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section heading -->
+                <div class="mb-7">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
+                        <span class="text-cyan-400 code-font text-2xl font-normal">05.</span>
+                        Latest Blogs
+                    </h2>
+                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
+                    <p class="mt-4 text-gray-400 text-sm md:text-base max-w-2xl">Practical notes on writing better software and growing as a developer.</p>
+                </div>
+
+                <!-- Featured article -->
+                <a :href="featuredPost.link" target="_blank" rel="noopener noreferrer" @pointermove="trackCardGlow"
+                    class="blog-card animate-in mb-5">
+                    <div class="grid lg:grid-cols-[3fr_2fr] h-full">
+                        <div class="blog-cover blog-cover--featured lg:order-2">
+                            <img :src="featuredPost.image" :alt="featuredPost.imageAlt" width="1200" height="675" loading="lazy">
+                            <span class="blog-badge">Featured</span>
+                            <span class="blog-credit">Photo: {{ featuredPost.credit }} / Unsplash</span>
+                        </div>
+                        <div class="flex flex-col p-6 md:p-8 lg:order-1">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span v-for="tag in featuredPost.tags" :key="tag" class="blog-chip">{{ tag }}</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight mb-3">{{ featuredPost.title }}</h3>
+                            <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-5">{{ featuredPost.excerpt }}</p>
+
+                            <p class="text-xs text-gray-500 code-font mb-3">Inside this article</p>
+                            <ul class="grid sm:grid-cols-2 gap-x-4 gap-y-2 mb-6">
+                                <li v-for="topic in featuredPost.topics" :key="topic" class="flex gap-2 text-gray-300 text-sm">
+                                    <i class="fas fa-angle-right text-cyan-400 mt-1"></i>
+                                    <span>{{ topic }}</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-auto pt-5 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <img src="image/norman1.jpg" alt="" width="40" height="40" loading="lazy" class="w-10 h-10 rounded-full object-cover border border-cyan-500/50">
+                                    <div class="text-xs leading-relaxed">
+                                        <p class="text-gray-200 font-medium">Norman Hategyekamukama</p>
+                                        <p class="text-gray-500">{{ featuredPost.date }} &middot; {{ featuredPost.readTime }}</p>
+                                    </div>
+                                </div>
+                                <span class="blog-read">Read article <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- More articles -->
+                <div class="grid md:grid-cols-2 gap-5">
+                    <component :is="post.link ? 'a' : 'article'" v-for="post in otherPosts" :key="post.title"
+                        :href="post.link || undefined" :target="post.link ? '_blank' : undefined" :rel="post.link ? 'noopener noreferrer' : undefined"
+                        @pointermove="trackCardGlow"
+                        class="blog-card animate-in" :class="{ 'blog-card--soon': !post.link }">
+                        <div class="blog-cover">
+                            <img :src="post.image" :alt="post.imageAlt" width="1200" height="675" loading="lazy">
+                            <span v-if="!post.link" class="blog-badge">Coming soon</span>
+                            <span class="blog-credit">Photo: {{ post.credit }} / Unsplash</span>
+                        </div>
+                        <div class="flex flex-col flex-1 p-6">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span v-for="tag in post.tags" :key="tag" class="blog-chip">{{ tag }}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white leading-snug mb-3">{{ post.title }}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">{{ post.excerpt }}</p>
+                            <div class="mt-auto pt-4 border-t border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
+                                <span class="text-gray-500">{{ post.link ? post.date + ' \u00b7 ' + post.readTime : 'In progress' }}</span>
+                                <span v-if="post.link" class="blog-read">Read article <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </component>
+                </div>
+
+                <!-- Show More -->
+                <div class="text-center mt-8">
+                    <a href="https://norman-dev.hashnode.dev/" target="_blank" rel="noopener noreferrer"
+                        class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
+                        View All Articles
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="py-12 px-6">
             <div class="max-w-6xl mx-auto">
                 <!-- Section heading -->
                 <div class="mb-7">
                     <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-                        <span class="text-cyan-400 code-font text-2xl font-normal">02.</span>
+                        <span class="text-cyan-400 code-font text-2xl font-normal">06.</span>
                         Contact
                     </h2>
                     <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
@@ -482,61 +986,6 @@
                         </button>
                     </a>
                     <!-- <p class="mt-4 text-gray-500 text-sm">normanmukama11@gmail.com</p> -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog Preview Section -->
-        <section id="blog" class="py-12 px-6 relative">
-            <div class="max-w-6xl mx-auto">
-                <!-- Section heading -->
-                <div class="mb-7">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-                        <span class="text-cyan-400 code-font text-2xl font-normal">03.</span>
-                        Latest Blogs
-                    </h2>
-                    <div class="mt-3 h-px w-full max-w-xs bg-gradient-to-r from-cyan-500 to-transparent"></div>
-                </div>
-
-                <!-- Blog list -->
-                <div class="flex flex-col gap-6">
-                    <a v-for="(post, index) in blogPosts" :key="index"
-                        :href="post.link" target="_blank" rel="noopener noreferrer"
-                        class="grid md:grid-cols-2 gap-8 items-center group cursor-pointer">
-
-                        <!-- Left: text -->
-                        <div>
-                            <p class="text-sm text-gray-500 mb-3">{{ post.date }}</p>
-                            <h3 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors leading-snug">{{ post.title }}</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed line-clamp-3 mb-5">{{ post.excerpt }}</p>
-                            <div class="flex items-center gap-5 text-gray-500 text-sm">
-                                <span class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-                                    <i class="far fa-heart"></i> {{ post.likes }} likes
-                                </span>
-                                <span class="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-                                    <i class="far fa-comment-dots"></i> {{ post.comments }} comments
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Right: cover image -->
-                        <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5 aspect-video flex items-center justify-center group-hover:border-cyan-500/40 transition-all duration-300">
-                            <img v-if="post.image" :src="post.image" :alt="post.title"
-                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                            <div v-else class="flex flex-col items-center justify-center text-gray-600 p-8 text-center">
-                                <i class="fas fa-newspaper text-4xl mb-3"></i>
-                                <span class="text-sm">{{ post.title }}</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Show More -->
-                <div class="text-center mt-8">
-                    <a href="https://norman-dev.hashnode.dev/" target="_blank" rel="noopener noreferrer"
-                        class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
-                        Show More
-                    </a>
                 </div>
             </div>
         </section>
@@ -613,97 +1062,160 @@
                 const navItems = [
                     { id: 'home', name: 'Home' },
                     { id: 'projects', name: 'Projects' },
+                    { id: 'experience', name: 'Experience' },
+                    { id: 'skills', name: 'Skills' },
+                    { id: 'education', name: 'Education' },
                     { id: 'blog', name: 'Blog' },
                     { id: 'contact', name: 'Contact' }
                 ];
                 // Project data
                 const projects = [
                     {
-                        title: 'Nationwide EMIS Platform',
-                        description: 'A nationwide education management system for Uganda’s Ministry of Education. Built with Laravel, Vue.js, and Livewire, it streamlines school administration, student records, and reporting across the country.',
-                        stars: 4,
-                        // forks: 2,
-                        language: '#',
-                        demoLink: 'https://emis.go.ug/',
-                        // codeLink: 'https://emis.go.ug/'
+                        title: 'Education Management Information System',
+                        description: 'Uganda’s national education information platform. Contributed to application and administrative workflows, Laravel services, and PostgreSQL data models supporting school records.',
+                        tech: ['Laravel', 'PostgreSQL'],
+                        demoLink: 'https://emis.go.ug/'
                     },
                     {
-                        title: 'Job Board Platform',
-                        description: 'A job board platform connecting employers with job seekers. Built with Laravel and Vue.js, featuring advanced search, resume uploads, and employer dashboards.',
-                        stars: 3,
-                        // forks: 1,
-                        language: 'Laravel + Vue.js',
-                        demoLink: 'https://www.postkazi.com/',
-                        // codeLink: 'https://www.postkazi.com/'
+                        title: 'Parliament Messaging System',
+                        description: 'A messaging platform for Uganda’s Parliament. Developed Vue.js interface features and worked on role-based permissions, access controls, and secure messaging.',
+                        tech: ['Vue.js', 'RBAC'],
+                        demoLink: 'https://parliament.smsone.co.ug/'
+                    },
+                    {
+                        title: 'GIX Agency',
+                        description: 'The website for GIX Agency, with client-facing pages built with attention to responsive layouts and usability.',
+                        tech: [],
+                        demoLink: 'https://gixagency.com/'
+                    },
+                    {
+                        title: 'Postkazi Job Portal',
+                        description: 'A job portal connecting employers with job seekers. Designed database structures, developed responsive interfaces, and integrated Chart.js dashboards.',
+                        tech: ['Chart.js'],
+                        demoLink: 'https://www.postkazi.com/'
                     },
                     {
                         title: 'WeCare24 Medical Services',
                         description: 'A medical services platform connecting patients with healthcare providers for home visits and telemedicine. It features appointment scheduling, provider profiles, and secure messaging.',
-                        stars: 2,
-                        // forks: 1,
-                        language: '#',
-                        demoLink: 'https://wecare24medical.co.uk/',
-                        // codeLink: 'https://github.com/normanmukama'
+                        tech: [],
+                        demoLink: 'https://wecare24medical.co.uk/'
                     },
-                    // {
-                    //     title: 'AI-Powered CMS',
-                    //     description: 'Modern headless CMS with AI-driven content recommendations, multi-language support, and SEO optimization built on Laravel + Filament.',
-                    //     stars: 5,
-                    //     forks: 2,
-                    //     language: 'PHP',
-                    //     demoLink: '#',
-                    //     codeLink: 'https://github.com/normanmukama'
-                    // },
-                    // {
-                    //     title: 'Freelancing Uganda',
-                    //     description: 'Freelance marketplace UI connecting Ugandan talent with clients. Built with Vue.js and Tailwind CSS with a clean, accessible interface.',
-                    //     stars: 1,
-                    //     forks: 1,
-                    //     language: 'JavaScript',
-                    //     demoLink: '#',
-                    //     codeLink: 'https://github.com/normanmukama'
-                    // },
-                    // {
-                    //     title: 'ELK Data Pipeline',
-                    //     description: 'Data ingestion and visualization pipeline using Elasticsearch, Logstash, and Kibana for real-time log monitoring and alerting.',
-                    //     stars: 3,
-                    //     forks: 1,
-                    //     language: 'Elasticsearch',
-                    //     demoLink: '#',
-                    //     codeLink: 'https://github.com/normanmukama'
-                    // }
+                    {
+                        title: 'Preacher Holdings',
+                        description: 'A client-facing company website developed at GIX Agency, with attention to responsive layouts and usability.',
+                        tech: [],
+                        demoLink: 'https://preacherholdings.com/'
+                    }
+                ];
+
+                // Experience data
+                const experience = [
+                    {
+                        role: 'Software Developer',
+                        company: 'SMSONE Company',
+                        location: 'Kampala',
+                        points: [
+                            'Contributed to enterprise and government software applications using Laravel, Vue.js, and PostgreSQL.',
+                            'Developed backend services, business logic, and REST APIs for administrative and operational workflows.',
+                            'Worked on microservices following domain-driven design principles, including communication between services.',
+                            'Integrated Keycloak for centralized authentication, single sign-on, and role-based access control for Commuza, a condominium management platform.',
+                            'Used OpenSearch for application logging, monitoring, and investigation of system issues.',
+                            'Collaborated with other developers on testing, code reviews, troubleshooting, and application maintenance.'
+                        ]
+                    },
+                    {
+                        role: 'Web Developer',
+                        company: 'GIX Agency',
+                        location: '',
+                        points: [
+                            'Developed websites for Preacher Holdings and GIX Agency.',
+                            'Implemented client-facing website pages with attention to responsive layouts and usability.'
+                        ]
+                    },
+                    {
+                        role: 'Software Developer',
+                        company: 'OSP',
+                        location: 'Wandegeya, Kampala',
+                        points: [
+                            'Developed features for a school management system covering student and staff administration, library inventory, and payroll coordination.',
+                            'Contributed to the Postkazi job portal by designing database structures, developing responsive interfaces, and integrating Chart.js dashboards.',
+                            'Built user interfaces with Vue.js and Tailwind CSS, and developed WordPress websites for organizations and businesses.'
+                        ]
+                    }
+                ];
+
+                // Skills data
+                const skills = [
+                    { title: 'Languages', icon: 'fas fa-code', items: ['PHP', 'JavaScript', 'TypeScript', 'Java', 'SQL'] },
+                    { title: 'Backend', icon: 'fas fa-server', items: ['Laravel', 'CodeIgniter', 'Spring Boot', 'REST APIs'] },
+                    { title: 'Frontend', icon: 'fas fa-laptop-code', items: ['Vue.js 3', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap', 'Alpine.js'] },
+                    { title: 'Databases & Caching', icon: 'fas fa-database', items: ['PostgreSQL', 'MySQL', 'Redis'] },
+                    { title: 'Architecture & Messaging', icon: 'fas fa-diagram-project', items: ['Microservices', 'Domain-Driven Design', 'Event-driven systems', 'RabbitMQ', 'Kafka'] },
+                    { title: 'Security & Identity', icon: 'fas fa-shield-halved', items: ['Keycloak', 'Role-based access control', 'OAuth/OpenID Connect concepts'] },
+                    { title: 'Search & Operations', icon: 'fas fa-magnifying-glass-chart', items: ['OpenSearch', 'Elasticsearch', 'Kibana', 'Docker', 'Linux', 'Git', 'GitHub', 'CI/CD'] }
+                ];
+
+                // Education data
+                const education = [
+                    {
+                        title: 'Bachelor of Science in Software Engineering',
+                        school: 'Victoria University, Kampala',
+                        period: '2026 – Present',
+                        note: 'Currently pursuing undergraduate studies in software engineering (Weekend program).'
+                    },
+                    {
+                        title: 'Diploma in Software Engineering',
+                        school: 'Sai Pali Institute of Technology, Entebbe',
+                        period: '2021 – 2024',
+                        note: 'Class I: CGPA 4.7.'
+                    }
                 ];
 
                 // Blog posts data
                 const blogPosts = [
                     {
+                        title: 'How Super Senior Developers Write Secure, Clean, and Maintainable Code in Laravel',
+                        excerpt: 'Laravel is one of the cleanest PHP frameworks out there, but even Laravel projects can turn into unmaintainable jungles if we aren’t careful.',
+                        image: 'image/blog/laravel-php-code.jpg',
+                        imageAlt: 'PHP code on a laptop screen in a dark workspace',
+                        credit: 'Michael Baccin',
+                        tags: ['Laravel', 'PHP', 'Clean Code'],
+                        topics: ['Starting with architecture', 'Never trusting user input', 'Naming things clearly', 'Eloquent and query optimization', 'Writing professional tests', 'Building for the next developer'],
+                        date: '27 Apr 2025',
+                        readTime: '4 min read',
+                        link: 'https://smart-code.hashnode.dev/smart-code'
+                    },
+                    {
                         title: 'What Makes A Developer Senior?',
-                        excerpt: 'Hello devs — a senior developer is not just about years of experience or the number of languages you know. It is about mindset, ownership, and the ability to navigate ambiguity with confidence.',
-                        image: null,
-                        date: '12, March, 2025',
-                        likes: 4,
-                        comments: 2,
+                        excerpt: 'The title “Senior Developer” is often thought to be a matter of years. In reality, time served is only part of the equation, and arguably not even the most important part.',
+                        image: 'image/blog/developers-pairing.jpg',
+                        imageAlt: 'Two developers working on code at their monitors in an office',
+                        credit: 'Compagnons',
+                        tags: ['Career', 'Growth'],
+                        date: '23 Apr 2025',
+                        readTime: '2 min read',
                         link: 'https://norman-dev.hashnode.dev/what-makes-a-developer-senior'
                     },
                     {
                         title: 'Understanding TypeScript Generics: Write Flexible, Reusable Code',
                         excerpt: 'When working with TypeScript, one of the most powerful features you’ll encounter is generics. If you\'ve ever found yourself duplicating code just to handle different data types, generics are the solution you’ve been looking for.',
-                        image: null,
-                        date: '05, February, 2025',
-                        likes: 6,
-                        comments: 3,
-                        link: '#'
-                    },
-                    {
-                        title: 'How to write secure, clean and maintainable code in Laravel',
-                        excerpt: 'Laravel is one of the cleanest PHP frameworks out there, but even Laravel projects can turn into unmaintainable jungles if we aren’t careful.',
-                        image: null,
-                        date: '18, January, 2025',
-                        likes: 3,
-                        comments: 1,
-                        link: 'https://smart-code.hashnode.dev/smart-code/'
+                        image: 'image/blog/code-editor.jpg',
+                        imageAlt: 'Colourful code in a dark code editor',
+                        credit: 'Joan Gamell',
+                        tags: ['TypeScript', 'Generics'],
+                        link: ''
                     }
                 ];
+                const featuredPost = blogPosts[0];
+                const otherPosts = blogPosts.slice(1);
+
+                // Moves the blog card highlight to follow the cursor
+                const trackCardGlow = (event) => {
+                    const card = event.currentTarget;
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+                    card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+                };
 
                 // Methods
                 const scrollToSection = (sectionId) => {
@@ -728,69 +1240,527 @@
                     }
                 };
 
-                // Initialize WebGL background
-                const initThreeJS = () => {
-                    const container = document.getElementById('webgl-container');
-                    const scene = new THREE.Scene();
-                    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                    const renderer = new THREE.WebGLRenderer({ alpha: true });
+                // Hero experience: "Norman" forms from particles, which then sweep into a
+                // galaxy around the portrait while the CV skills launch into orbit.
+                // With reduced motion, or if a library or WebGL is missing, the hero stays
+                // fully readable because nothing is hidden until this code takes over.
+                const initHeroExperience = () => {
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                    if (typeof gsap === 'undefined') return;
+                    gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
-                    renderer.setSize(window.innerWidth, window.innerHeight);
-                    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-                    container.appendChild(renderer.domElement);
+                    const hero = document.getElementById('home');
+                    const canvas = document.getElementById('hero-canvas');
+                    const preTyped = document.getElementById('pre-typed');
+                    const preText = document.getElementById('pre-text');
+                    const caret = document.getElementById('pre-caret');
+                    const nameEl = document.getElementById('name-text');
+                    const intro = document.getElementById('intro-text');
+                    const stage = document.getElementById('hero-stage');
+                    const shell = document.getElementById('hero-shell');
+                    const portrait = shell.querySelector('img');
+                    const glare = document.getElementById('hero-glare');
+                    const scan = document.getElementById('hero-scan');
+                    const shockRing = document.getElementById('hero-shock');
+                    const tracks = Array.from(document.querySelectorAll('.hero-track'));
+                    const chipEls = Array.from(document.querySelectorAll('.hero-chip'));
+                    const socials = Array.from(document.querySelectorAll('.hero-social-link'));
+                    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-                    // Create particles
-                    const particlesGeometry = new THREE.BufferGeometry();
-                    const particleCount = 2000;
+                    const TILT = 0.36;
+                    const DISC_ANGLE = -18 * Math.PI / 180;
+                    const COS_D = Math.cos(DISC_ANGLE);
+                    const SIN_D = Math.sin(DISC_ANGLE);
+                    const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+                    const state = { gather: 0, orbit: 0, alpha: 0, spin: 1, chip: 0 };
 
-                    const posArray = new Float32Array(particleCount * 3);
-                    for (let i = 0; i < particleCount * 3; i++) {
-                        posArray[i] = (Math.random() - 0.5) * 10;
-                    }
+                    // Split the intro into words without changing how it reads.
+                    const splitWords = (node) => {
+                        Array.from(node.childNodes).forEach((child) => {
+                            if (child.nodeType === Node.ELEMENT_NODE) return splitWords(child);
+                            if (child.nodeType !== Node.TEXT_NODE || !child.textContent.trim()) return;
+                            const fragment = document.createDocumentFragment();
+                            child.textContent.split(/(\s+)/).forEach((part) => {
+                                if (!part) return;
+                                if (/^\s+$/.test(part)) return fragment.appendChild(document.createTextNode(' '));
+                                const word = document.createElement('span');
+                                word.className = 'hero-word';
+                                word.textContent = part;
+                                fragment.appendChild(word);
+                            });
+                            child.replaceWith(fragment);
+                        });
+                    };
+                    splitWords(intro);
+                    const words = intro.querySelectorAll('.hero-word');
+                    const keywords = intro.querySelectorAll('.hero-kw');
 
-                    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                    // Particle system (optional: the text and portrait still animate without WebGL)
+                    let renderer = null, scene, camera, geometry, material;
+                    let W = 0, H = 0, N = 0, K = 0, cx0 = 0, cy0 = 0, avatarR = 0, R0 = 0, R1 = 0, orbitRx = 0;
+                    let p = null, targets = [];
+                    let posAttr, colAttr, sizeAttr, alphaAttr;
+                    const pointer = { x: -9999, y: -9999, active: false };
 
-                    const particleMaterial = new THREE.PointsMaterial({
-                        size: 0.02,
-                        transparent: true,
-                        blending: THREE.AdditiveBlending,
-                        color: 0x00f0ff
-                    });
+                    const measure = () => {
+                        const heroRect = hero.getBoundingClientRect();
+                        const stageRect = stage.getBoundingClientRect();
+                        W = heroRect.width;
+                        H = heroRect.height;
+                        const stageY = gsap.getProperty(stage, 'y') || 0;
+                        const scale = gsap.getProperty(stage, 'scale') || 1;
+                        avatarR = stageRect.width / scale / 2;
+                        cx0 = stageRect.left + stageRect.width / 2 - heroRect.left;
+                        cy0 = stageRect.top + stageRect.height / 2 - heroRect.top - stageY;
+                        R0 = avatarR * 1.1;
+                        R1 = avatarR * (W < 1024 ? 2 : 2.8);
+                        orbitRx = Math.min(avatarR * 1.2, window.innerWidth / 2 - 48);
+                        const trackScale = orbitRx / (avatarR * 1.2);
+                        tracks.forEach((track) => { track.style.transform = `scale(${trackScale})`; });
+                    };
 
-                    const particlesMesh = new THREE.Points(particlesGeometry, particleMaterial);
-                    scene.add(particlesMesh);
+                    const sampleName = () => {
+                        const styles = getComputedStyle(nameEl);
+                        const fontSize = parseFloat(styles.fontSize);
+                        const range = document.createRange();
+                        range.selectNodeContents(nameEl);
+                        const rect = range.getBoundingClientRect();
+                        const probe = document.createElement('span');
+                        probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+                        nameEl.appendChild(probe);
+                        const baseline = probe.getBoundingClientRect().bottom;
+                        probe.remove();
 
-                    camera.position.z = 3;
+                        const heroRect = hero.getBoundingClientRect();
+                        const offscreen = document.createElement('canvas');
+                        offscreen.width = Math.ceil(rect.width * 2) + 8;
+                        offscreen.height = Math.ceil(rect.height * 2) + 8;
+                        const ctx = offscreen.getContext('2d', { willReadFrequently: true });
+                        ctx.font = `${styles.fontWeight} ${fontSize * 2}px ${styles.fontFamily}`;
+                        ctx.textBaseline = 'alphabetic';
+                        ctx.fillStyle = '#fff';
+                        ctx.fillText(nameEl.textContent.trim(), 0, (baseline - rect.top) * 2);
+                        const pixels = ctx.getImageData(0, 0, offscreen.width, offscreen.height).data;
 
-                    // Mouse interaction
-                    let mouseX = 0;
-                    let mouseY = 0;
+                        const step = Math.max(3, Math.round(fontSize / 18));
+                        const found = [];
+                        for (let y = 0; y < offscreen.height; y += step) {
+                            for (let x = 0; x < offscreen.width; x += step) {
+                                if (pixels[(y * offscreen.width + x) * 4 + 3] > 128) {
+                                    found.push(rect.left - heroRect.left + x / 2, rect.top - heroRect.top + y / 2);
+                                }
+                            }
+                        }
+                        targets = found;
+                    };
 
-                    document.addEventListener('mousemove', (event) => {
-                        mouseX = (event.clientX / window.innerWidth - 0.5) * 0.1;
-                        mouseY = (event.clientY / window.innerHeight - 0.5) * 0.1;
-                    });
+                    const assignTargets = () => {
+                        const count = targets.length / 2;
+                        if (!count) { K = 0; return; }
+                        K = Math.min(Math.floor(N * 0.6), count * 3);
+                        const order = Array.from({ length: count }, (_, i) => i);
+                        for (let i = count - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [order[i], order[j]] = [order[j], order[i]];
+                        }
+                        for (let i = 0; i < K; i++) {
+                            const t = order[i % count];
+                            p.tx[i] = targets[t * 2] + (Math.random() - 0.5) * 1.2;
+                            p.ty[i] = targets[t * 2 + 1] + (Math.random() - 0.5) * 1.2;
+                        }
+                    };
 
-                    // Animation
-                    const animateParticles = () => {
-                        requestAnimationFrame(animateParticles);
+                    const initParticles = () => {
+                        renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'high-performance' });
+                        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                        renderer.setPixelRatio(dpr);
+                        scene = new THREE.Scene();
+                        camera = new THREE.OrthographicCamera(0, 1, 0, 1, -1, 1);
 
-                        particlesMesh.rotation.y += 0.001;
-                        particlesMesh.rotation.x += 0.001;
+                        N = Math.round(Math.min(5200, Math.max(1600, (hero.offsetWidth * hero.offsetHeight) / 170)));
+                        p = {
+                            sx: new Float32Array(N), sy: new Float32Array(N), sv: new Float32Array(N),
+                            u: new Float32Array(N), a: new Float32Array(N), w: new Float32Array(N),
+                            ph: new Float32Array(N), tx: new Float32Array(N), ty: new Float32Array(N),
+                            ox: new Float32Array(N), oy: new Float32Array(N), vx: new Float32Array(N), vy: new Float32Array(N),
+                            delay: new Float32Array(N), base: new Float32Array(N), star: new Uint8Array(N)
+                        };
+                        const positions = new Float32Array(N * 3);
+                        const colors = new Float32Array(N * 3);
+                        const sizes = new Float32Array(N);
+                        const alphas = new Float32Array(N);
+                        for (let i = 0; i < N; i++) {
+                            p.sx[i] = Math.random();
+                            p.sy[i] = Math.random();
+                            p.sv[i] = 2 + Math.random() * 7;
+                            p.u[i] = Math.pow(Math.random(), 1.7);
+                            p.a[i] = Math.random() * Math.PI * 2;
+                            p.w[i] = (0.32 + Math.random() * 0.12) / Math.pow(1 + p.u[i] * 1.8, 1.5);
+                            p.ph[i] = Math.random() * Math.PI * 2;
+                            p.delay[i] = Math.random();
+                            p.base[i] = 1.1 + Math.random() * 1.9;
+                            p.star[i] = Math.random() < 0.22 ? 1 : 0;
+                        }
+                        geometry = new THREE.BufferGeometry();
+                        posAttr = new THREE.BufferAttribute(positions, 3).setUsage(THREE.DynamicDrawUsage);
+                        colAttr = new THREE.BufferAttribute(colors, 3).setUsage(THREE.DynamicDrawUsage);
+                        sizeAttr = new THREE.BufferAttribute(sizes, 1).setUsage(THREE.DynamicDrawUsage);
+                        alphaAttr = new THREE.BufferAttribute(alphas, 1).setUsage(THREE.DynamicDrawUsage);
+                        geometry.setAttribute('position', posAttr);
+                        geometry.setAttribute('aColor', colAttr);
+                        geometry.setAttribute('aSize', sizeAttr);
+                        geometry.setAttribute('aAlpha', alphaAttr);
+                        material = new THREE.ShaderMaterial({
+                            transparent: true,
+                            depthTest: false,
+                            depthWrite: false,
+                            blending: THREE.AdditiveBlending,
+                            uniforms: { uPixelRatio: { value: dpr } },
+                            vertexShader: `
+                                attribute vec3 aColor;
+                                attribute float aSize;
+                                attribute float aAlpha;
+                                uniform float uPixelRatio;
+                                varying vec3 vColor;
+                                varying float vAlpha;
+                                void main() {
+                                    vColor = aColor;
+                                    vAlpha = aAlpha;
+                                    gl_PointSize = aSize * uPixelRatio;
+                                    gl_Position = projectionMatrix * vec4(position, 1.0);
+                                }`,
+                            fragmentShader: `
+                                varying vec3 vColor;
+                                varying float vAlpha;
+                                void main() {
+                                    float d = length(gl_PointCoord - 0.5);
+                                    float glow = smoothstep(0.5, 0.05, d);
+                                    gl_FragColor = vec4(vColor, glow * vAlpha);
+                                }`
+                        });
+                        const points = new THREE.Points(geometry, material);
+                        points.frustumCulled = false;
+                        scene.add(points);
+                    };
 
-                        particlesMesh.rotation.x += mouseY * 0.05;
-                        particlesMesh.rotation.y += mouseX * 0.05;
+                    const resizeRenderer = () => {
+                        if (!renderer) return;
+                        renderer.setSize(W, H, false);
+                        camera.right = W;
+                        camera.bottom = H;
+                        camera.updateProjectionMatrix();
+                    };
 
+                    const impulse = (x, y, force, radius) => {
+                        if (!renderer) return;
+                        for (let i = 0; i < N; i++) {
+                            const dx = lastX[i] - x;
+                            const dy = lastY[i] - y;
+                            const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                            if (dist < radius) {
+                                const f = force * (1 - dist / radius);
+                                p.vx[i] += dx / dist * f;
+                                p.vy[i] += dy / dist * f;
+                            }
+                        }
+                    };
+
+                    let lastX = new Float32Array(0), lastY = new Float32Array(0);
+
+                    const drawParticles = (dt, time) => {
+                        const step = dt * 60;
+                        const { gather, orbit, alpha: master } = state;
+                        const cx = cx0 + (gsap.getProperty(stage, 'x') || 0);
+                        const cy = cy0 + (gsap.getProperty(stage, 'y') || 0);
+                        const positions = posAttr.array, colors = colAttr.array, sizes = sizeAttr.array, alphas = alphaAttr.array;
+                        const repelRadius = gather > 0.5 ? 64 : 120;
+                        const repel2 = repelRadius * repelRadius;
+                        const k = Math.pow(0.86, step);
+
+                        for (let i = 0; i < N; i++) {
+                            p.a[i] += p.w[i] * state.spin * dt;
+                            const u = p.u[i];
+                            const isStar = p.star[i] === 1;
+
+                            p.sy[i] -= (p.sv[i] / H) * dt;
+                            if (p.sy[i] < 0) p.sy[i] += 1;
+                            const starX = p.sx[i] * W + Math.sin(time * 0.2 + p.ph[i]) * 8;
+                            const starY = p.sy[i] * H;
+
+                            const ca = Math.cos(p.a[i]), sa = Math.sin(p.a[i]);
+                            const rr = R0 + (R1 - R0) * u;
+                            const ex = rr * ca;
+                            const ey = rr * sa * TILT + Math.sin(p.a[i] * 2 + p.ph[i]) * (4 + 16 * u);
+                            const discX = cx + ex * COS_D - ey * SIN_D;
+                            const discY = cy + ex * SIN_D + ey * COS_D;
+
+                            const o = isStar ? 0 : orbit;
+                            let x = starX + (discX - starX) * o;
+                            let y = starY + (discY - starY) * o;
+
+                            let e = 0;
+                            if (i < K) {
+                                const t = clamp01(gather * 1.6 - p.delay[i] * 0.6);
+                                e = t * t * (3 - 2 * t);
+                                if (e > 0) {
+                                    const dx = p.tx[i] - x, dy = p.ty[i] - y;
+                                    const arc = Math.sin(e * Math.PI) * 0.16 * (p.delay[i] - 0.5) * 2;
+                                    x += dx * e - dy * arc;
+                                    y += dy * e + dx * arc;
+                                }
+                            }
+
+                            if (pointer.active) {
+                                const dx = x + p.ox[i] - pointer.x;
+                                const dy = y + p.oy[i] - pointer.y;
+                                const d2 = dx * dx + dy * dy;
+                                if (d2 < repel2 && d2 > 0.01) {
+                                    const dist = Math.sqrt(d2);
+                                    const f = (1 - dist / repelRadius);
+                                    p.vx[i] += dx / dist * f * f * 2.6 * step;
+                                    p.vy[i] += dy / dist * f * f * 2.6 * step;
+                                }
+                            }
+                            p.vx[i] = (p.vx[i] - p.ox[i] * 0.045 * step) * k;
+                            p.vy[i] = (p.vy[i] - p.oy[i] * 0.045 * step) * k;
+                            p.ox[i] += p.vx[i] * step;
+                            p.oy[i] += p.vy[i] * step;
+                            x += p.ox[i];
+                            y += p.oy[i];
+                            lastX[i] = x;
+                            lastY[i] = y;
+
+                            const twinkle = 0.5 + 0.5 * Math.sin(time * 1.6 + p.ph[i] * 3);
+                            const starAlpha = 0.1 + 0.24 * twinkle;
+                            const discAlpha = 0.09 + 0.72 * Math.pow(1 - u, 1.6) * (0.7 + 0.3 * twinkle);
+                            let a = starAlpha + (discAlpha - starAlpha) * o;
+
+                            // Particles passing behind the portrait are hidden, in front they soften.
+                            const px = x - cx, py = y - cy;
+                            const inside = px * px + py * py < avatarR * avatarR;
+                            if (inside && o > 0.5) a *= sa < 0 ? 0 : 0.55;
+
+                            a += (0.62 - a) * e;
+                            // Blend from violet at the outer edge to your cyan near the portrait.
+                            const mix = isStar ? 0.45 : u;
+                            let r = mix * 0.62, g = 0.94 - mix * 0.52, b = 1;
+                            r += (0.82 - r) * e;
+                            g += (0.98 - g) * e;
+
+                            positions[i * 3] = x;
+                            positions[i * 3 + 1] = y;
+                            colors[i * 3] = r;
+                            colors[i * 3 + 1] = g;
+                            colors[i * 3 + 2] = b;
+                            sizes[i] = p.base[i] + (3.1 - p.base[i]) * e;
+                            alphas[i] = a * master;
+                        }
+                        posAttr.needsUpdate = colAttr.needsUpdate = sizeAttr.needsUpdate = alphaAttr.needsUpdate = true;
                         renderer.render(scene, camera);
                     };
 
-                    animateParticles();
+                    // Skills on a tilted 3D orbit, passing behind and in front of the portrait
+                    const chips = chipEls.map((el, i) => ({ el, t: (i / chipEls.length) * Math.PI * 2 }));
+                    const drawChips = (dt) => {
+                        chips.forEach((chip) => {
+                            chip.t += 0.3 * state.spin * dt;
+                            const ca = Math.cos(chip.t), sa = Math.sin(chip.t);
+                            const ex = orbitRx * ca * state.chip;
+                            const ey = orbitRx * TILT * sa * state.chip;
+                            const x = ex * COS_D - ey * SIN_D;
+                            const y = ex * SIN_D + ey * COS_D;
+                            const depth = (sa + 1) / 2;
+                            chip.el.style.transform = `translate(-50%, -50%) translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${(0.8 + 0.22 * depth).toFixed(3)})`;
+                            chip.el.style.opacity = ((0.6 + 0.4 * depth) * Math.min(1, state.chip)).toFixed(3);
+                            chip.el.style.zIndex = sa > 0 ? 5 : 1;
+                        });
+                    };
 
-                    // Handle resize
+                    // Render loop, paused whenever the hero is off screen or the tab is hidden
+                    let heroVisible = true;
+                    let lastTime = performance.now();
+                    const frame = (now) => {
+                        requestAnimationFrame(frame);
+                        if (!heroVisible || document.hidden) { lastTime = now; return; }
+                        const dt = Math.min(0.05, (now - lastTime) / 1000);
+                        lastTime = now;
+                        if (renderer) drawParticles(dt, now / 1000);
+                        drawChips(dt);
+                    };
+                    new IntersectionObserver((entries) => {
+                        heroVisible = entries[0].isIntersecting;
+                    }).observe(hero);
+
+                    const shockwave = (force) => {
+                        gsap.fromTo(shockRing, { scale: 1, opacity: 0.85 }, { scale: 2.3, opacity: 0, duration: 1.1, ease: 'power2.out' });
+                        impulse(cx0 + (gsap.getProperty(stage, 'x') || 0), cy0 + (gsap.getProperty(stage, 'y') || 0), force, avatarR * 3.2);
+                    };
+
+                    // Interactions, available once the opening sequence has played
+                    const enableInteractions = () => {
+                        // Click the portrait: shockwave and a burst of orbital speed
+                        shell.addEventListener('click', () => {
+                            shockwave(13);
+                            gsap.fromTo(state, { spin: 9 }, { spin: finePointer && shell.matches(':hover') ? 3 : 1, duration: 1.8, ease: 'power3.out', overwrite: 'auto' });
+                        });
+
+                        // Recurring light sweeps
+                        gsap.fromTo(nameEl, { backgroundPosition: '0% 0%' }, { backgroundPosition: '100% 0%', duration: 1.7, ease: 'power1.inOut', repeat: -1, repeatDelay: 6 });
+                        gsap.fromTo(scan, { yPercent: -120, opacity: 0.8 }, { yPercent: 120, opacity: 0.8, duration: 1.5, ease: 'none', repeat: -1, repeatDelay: 7.5 });
+
+                        if (!finePointer) return;
+
+                        window.addEventListener('pointermove', (event) => {
+                            const rect = hero.getBoundingClientRect();
+                            pointer.x = event.clientX - rect.left;
+                            pointer.y = event.clientY - rect.top;
+                            pointer.active = pointer.y >= 0 && pointer.y <= rect.height;
+                        }, { passive: true });
+                        document.addEventListener('pointerleave', () => { pointer.active = false; });
+
+                        // Portrait tilts toward the cursor, with a moving highlight
+                        gsap.set(shell, { transformPerspective: 900 });
+                        const rotX = gsap.quickTo(shell, 'rotationX', { duration: 0.7, ease: 'power3.out' });
+                        const rotY = gsap.quickTo(shell, 'rotationY', { duration: 0.7, ease: 'power3.out' });
+                        window.addEventListener('pointermove', (event) => {
+                            const rect = stage.getBoundingClientRect();
+                            if (event.clientY > hero.getBoundingClientRect().bottom) return;
+                            const nx = clamp01((event.clientX - rect.left) / rect.width);
+                            const ny = clamp01((event.clientY - rect.top) / rect.height);
+                            const near = Math.max(-1.6, Math.min(1.6, (event.clientX - (rect.left + rect.width / 2)) / rect.width));
+                            const nearY = Math.max(-1.6, Math.min(1.6, (event.clientY - (rect.top + rect.height / 2)) / rect.height));
+                            rotY(near * 9);
+                            rotX(-nearY * 9);
+                            glare.style.setProperty('--gx', `${nx * 100}%`);
+                            glare.style.setProperty('--gy', `${ny * 100}%`);
+                        }, { passive: true });
+                        shell.addEventListener('pointerenter', () => {
+                            gsap.to(state, { spin: 3, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+                            gsap.to(glare, { opacity: 1, duration: 0.4 });
+                        });
+                        shell.addEventListener('pointerleave', () => {
+                            gsap.to(state, { spin: 1, duration: 1.4, ease: 'power2.out', overwrite: 'auto' });
+                            gsap.to(glare, { opacity: 0, duration: 0.5 });
+                        });
+
+                        // Hover the name: it dissolves into particles you can push around
+                        if (renderer && K) {
+                            let hoverTimer;
+                            nameEl.addEventListener('pointerenter', () => {
+                                clearTimeout(hoverTimer);
+                                hoverTimer = setTimeout(() => {
+                                    gsap.to(state, { gather: 1, duration: 1, ease: 'power2.inOut', overwrite: 'auto' });
+                                    gsap.to(nameEl, { opacity: 0, duration: 0.4, delay: 0.62, overwrite: 'auto' });
+                                }, 110);
+                            });
+                            nameEl.addEventListener('pointerleave', () => {
+                                clearTimeout(hoverTimer);
+                                gsap.to(nameEl, { opacity: 1, duration: 0.35, overwrite: 'auto' });
+                                gsap.to(state, { gather: 0, duration: 1.2, ease: 'power2.inOut', delay: 0.1, overwrite: 'auto' });
+                            });
+                        }
+
+                        // Social icons lean toward the cursor
+                        socials.forEach((link) => {
+                            const toX = gsap.quickTo(link, 'x', { duration: 0.5, ease: 'power3.out' });
+                            const toY = gsap.quickTo(link, 'y', { duration: 0.5, ease: 'power3.out' });
+                            link.addEventListener('pointermove', (event) => {
+                                const rect = link.getBoundingClientRect();
+                                toX((event.clientX - rect.left - rect.width / 2) * 0.45);
+                                toY((event.clientY - rect.top - rect.height / 2) * 0.45);
+                            });
+                            link.addEventListener('pointerleave', () => { toX(0); toY(0); });
+                        });
+                    };
+
+                    // The opening sequence
+                    const play = () => {
+                        const hasParticles = renderer && K > 0;
+                        const welcome = preTyped.textContent;
+                        preText.style.minHeight = `${preText.offsetHeight}px`;
+                        preTyped.textContent = '';
+
+                        const tl = gsap.timeline({ onComplete: enableInteractions });
+                        tl.to(state, { alpha: 1, duration: 0.7, ease: 'power1.out' }, 0);
+                        tl.to(caret, { opacity: 1, duration: 0.01 }, 0.1);
+                        tl.to(preTyped, { duration: 0.75, text: welcome, ease: 'none' }, 0.15);
+                        tl.to(caret, { opacity: 0, duration: 0.4 }, 4.2);
+
+                        if (hasParticles) {
+                            tl.to(state, { gather: 1, duration: 1.25, ease: 'power3.inOut' }, 0.3);
+                            tl.to(nameEl, { opacity: 1, duration: 0.3 }, 1.65);
+                            tl.to(state, { gather: 0, duration: 1.45, ease: 'power2.inOut' }, 1.85);
+                            tl.to(state, { orbit: 1, duration: 1.7, ease: 'power2.inOut' }, 1.6);
+                        } else {
+                            tl.fromTo(nameEl, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.4);
+                        }
+
+                        tl.to(words, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.6, stagger: 0.016, ease: 'power2.out', clearProps: 'filter,transform' }, 0.65);
+
+                        tl.to(stage, { opacity: 1, scale: 1, duration: 1.1, ease: 'expo.out' }, 1.9);
+                        tl.fromTo(portrait, { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', duration: 1, ease: 'power2.inOut', clearProps: 'clipPath' }, 1.95);
+                        tl.fromTo(scan, { yPercent: -120, opacity: 1 }, { yPercent: 120, opacity: 1, duration: 1, ease: 'power1.inOut' }, 1.95);
+                        tl.add(() => shockwave(10), 2.55);
+                        tl.to(tracks, { opacity: 1, duration: 0.9, ease: 'power1.out' }, 2.5);
+                        tl.fromTo(state, { chip: 0 }, { chip: 1, duration: 1.3, ease: 'back.out(1.5)' }, 2.5);
+                        tl.fromTo(state, { spin: 5 }, { spin: 1, duration: 2.4, ease: 'power3.out' }, 2.4);
+                        tl.to(socials, { opacity: 1, scale: 1, y: 0, duration: 0.7, stagger: 0.09, ease: 'back.out(2.2)' }, 2.75);
+                        tl.to(keywords, { backgroundSize: '100% 1px', duration: 0.6, stagger: 0.06, ease: 'power2.out' }, 2.9);
+                    };
+
+                    // Hide what the sequence will reveal, then start
+                    gsap.set(nameEl, { opacity: 0 });
+                    gsap.set(words, { opacity: 0, y: 12, filter: 'blur(6px)' });
+                    gsap.set(stage, { opacity: 0, scale: 0.86 });
+                    gsap.set(socials, { opacity: 0, scale: 0.4, y: 14 });
+                    gsap.set(tracks, { opacity: 0 });
+                    gsap.set(keywords, { backgroundSize: '0% 1px' });
+
+                    try {
+                        if (typeof THREE !== 'undefined') initParticles();
+                    } catch (error) {
+                        renderer = null;
+                        canvas.style.display = 'none';
+                    }
+
+                    const fontReady = document.fonts && document.fonts.load
+                        ? document.fonts.load('700 72px Poppins').catch(() => {})
+                        : Promise.resolve();
+                    Promise.race([fontReady, new Promise((resolve) => setTimeout(resolve, 1200))]).then(() => {
+                        measure();
+                        if (renderer) {
+                            lastX = new Float32Array(N);
+                            lastY = new Float32Array(N);
+                            resizeRenderer();
+                            sampleName();
+                            assignTargets();
+                        }
+                        lastTime = performance.now();
+                        requestAnimationFrame(frame);
+                        play();
+                    });
+
+                    // Portrait drifts gently on scroll
+                    gsap.to(stage, {
+                        y: -60,
+                        ease: 'none',
+                        scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6 }
+                    });
+
+                    let resizeTimer;
+                    let lastWidth = window.innerWidth;
                     window.addEventListener('resize', () => {
-                        camera.aspect = window.innerWidth / window.innerHeight;
-                        camera.updateProjectionMatrix();
-                        renderer.setSize(window.innerWidth, window.innerHeight);
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(() => {
+                            if (window.innerWidth === lastWidth) return;
+                            lastWidth = window.innerWidth;
+                            measure();
+                            if (renderer) {
+                                resizeRenderer();
+                                sampleName();
+                                assignTargets();
+                            }
+                        }, 180);
                     });
                 };
 
@@ -851,10 +1821,8 @@
                     // Initialize all animations and effects
                     initScrollReveal();
 
-                    // Initialize Three.js background if the container exists
-                    if (document.getElementById('webgl-container')) {
-                        initThreeJS();
-                    }
+                    // Hero animation
+                    initHeroExperience();
 
                     // Add dark mode detection
                     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
@@ -880,7 +1848,12 @@
                     toastMessage,
                     navItems,
                     projects,
-                    blogPosts,
+                    experience,
+                    skills,
+                    education,
+                    featuredPost,
+                    otherPosts,
+                    trackCardGlow,
                     scrollToSection,
                     scrollToTop,
                     toggleMobileMenu
@@ -888,3 +1861,6 @@
             }
         }).mount('#app');
     </script>
+</body>
+
+</html>
