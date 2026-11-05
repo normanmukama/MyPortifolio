@@ -14,6 +14,35 @@
     <meta property="og:url" content="https://norman-dev.netlify.app/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#00f0ff">
+    <!-- Visitor analytics (no backend needed). Paste your IDs below; each tool stays off until its ID is set. -->
+    <script>
+        (function () {
+            var UMAMI_WEBSITE_ID = 'e2e84849-2019-402a-a4da-475c4582f795';   // cloud.umami.is > Settings > Websites > Edit
+            var CLARITY_PROJECT_ID = 'YOUR_CLARITY_PROJECT_ID'; // clarity.microsoft.com > Settings > Overview
+            var LIVE_HOST = 'norman-dev.netlify.app';
+
+            if (location.hostname !== LIVE_HOST) return; // don't count local/dev visits
+
+            // Umami: visitors, referrers, countries, devices + click events (data-umami-event)
+            if (UMAMI_WEBSITE_ID.indexOf('YOUR_') !== 0) {
+                var u = document.createElement('script');
+                u.defer = true;
+                u.src = 'https://cloud.umami.is/script.js';
+                u.setAttribute('data-website-id', UMAMI_WEBSITE_ID);
+                u.setAttribute('data-domains', LIVE_HOST);
+                document.head.appendChild(u);
+            }
+
+            // Microsoft Clarity: session recordings, heatmaps, scroll depth
+            if (CLARITY_PROJECT_ID.indexOf('YOUR_') !== 0) {
+                (function (c, l, a, r, i, t, y) {
+                    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+                    t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+                    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+                })(window, document, 'clarity', 'script', CLARITY_PROJECT_ID);
+            }
+        })();
+    </script>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vue.js CDN -->
@@ -760,7 +789,8 @@
             <ul class="nav-links flex md:flex-row gap-8 text-lg font-medium code-font text-gray-200" :class="{'active': mobileMenuOpen}">
                 <li v-for="(item, index) in navItems" :key="index"
                     class="nav-item cursor-pointer transition code-font duration-300"
-                    :class="{'active-nav text-cyan-400': activeSection === item.id}" @click="scrollToSection(item.id)">
+                    :class="{'active-nav text-cyan-400': activeSection === item.id}" @click="scrollToSection(item.id)"
+                    data-umami-event="nav-click" :data-umami-event-section="item.id">
                     {{ item.name }}
                 </li>
             </ul>
@@ -814,13 +844,13 @@
                         </div>
 
                         <div class="mt-6 flex items-center gap-3 relative z-30">
-                            <a href="https://github.com/normanmukama" class="hero-social-link" aria-label="GitHub profile">
+                            <a href="https://github.com/normanmukama" data-umami-event="social-click" data-umami-event-network="github" data-umami-event-location="hero" class="hero-social-link" aria-label="GitHub profile">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/norman-hategyekamukama-7b455225b/" class="hero-social-link" aria-label="LinkedIn profile">
+                            <a href="https://www.linkedin.com/in/norman-hategyekamukama-7b455225b/" data-umami-event="social-click" data-umami-event-network="linkedin" data-umami-event-location="hero" class="hero-social-link" aria-label="LinkedIn profile">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://norman-dev.hashnode.dev/" class="hero-social-link" aria-label="Blog profile">
+                            <a href="https://norman-dev.hashnode.dev/" data-umami-event="social-click" data-umami-event-network="blog" data-umami-event-location="hero" class="hero-social-link" aria-label="Blog profile">
                                 <i class="fas fa-pen-nib"></i>
                             </a>
                         </div>
@@ -863,10 +893,12 @@
                             </div>
                             <div class="flex items-center gap-3 text-gray-400">
                                 <a v-if="project.codeLink" :href="project.codeLink" target="_blank" rel="noopener noreferrer"
+                                   data-umami-event="project-code-click" :data-umami-event-project="project.title"
                                    class="hover:text-cyan-400 transition-colors" aria-label="GitHub">
                                     <i class="fab fa-github text-xl"></i>
                                 </a>
                                 <a v-if="project.demoLink" :href="project.demoLink" target="_blank" rel="noopener noreferrer"
+                                   data-umami-event="project-demo-click" :data-umami-event-project="project.title"
                                    class="hover:text-cyan-400 transition-colors" aria-label="Live demo">
                                     <i class="fas fa-external-link-alt text-lg"></i>
                                 </a>
@@ -888,7 +920,7 @@
 
                 <!-- Show More -->
                 <div class="text-center mt-8">
-                    <a href="https://github.com/normanmukama" target="_blank" rel="noopener noreferrer"
+                    <a href="https://github.com/normanmukama" target="_blank" rel="noopener noreferrer" data-umami-event="projects-show-more"
                         class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
                         Show More
                     </a>
@@ -965,10 +997,10 @@
 
                 <div class="grid md:grid-cols-2 gap-5">
                     <div v-for="item in education" :key="item.title" class="rounded-2xl p-6 border border-cyan-500/30 bg-[#0d1224] hover:border-cyan-400 transition-all duration-300">
-                        <p class="text-xs text-cyan-400 code-font mb-3">{{ item.period }}</p>
+                        <p v-if="item.period" class="text-xs text-cyan-400 code-font mb-3">{{ item.period }}</p>
                         <h3 class="text-white font-semibold text-lg mb-1">{{ item.title }}</h3>
                         <p class="text-gray-300 text-sm mb-2">{{ item.school }}</p>
-                        <p class="text-gray-400 text-sm">{{ item.note }}</p>
+                        <p v-if="item.note" class="text-gray-400 text-sm">{{ item.note }}</p>
                     </div>
                 </div>
             </div>
@@ -989,6 +1021,7 @@
 
                 <!-- Featured article -->
                 <a :href="featuredPost.link" target="_blank" rel="noopener noreferrer" @pointermove="trackCardGlow"
+                    data-umami-event="article-click" :data-umami-event-title="featuredPost.title"
                     class="blog-card animate-in mb-5">
                     <div class="grid lg:grid-cols-[3fr_2fr] h-full">
                         <div class="blog-cover blog-cover--featured lg:order-2">
@@ -1029,6 +1062,7 @@
                 <div class="grid md:grid-cols-2 gap-5">
                     <component :is="post.link ? 'a' : 'article'" v-for="post in otherPosts" :key="post.title"
                         :href="post.link || undefined" :target="post.link ? '_blank' : undefined" :rel="post.link ? 'noopener noreferrer' : undefined"
+                        :data-umami-event="post.link ? 'article-click' : undefined" :data-umami-event-title="post.link ? post.title : undefined"
                         @pointermove="trackCardGlow"
                         class="blog-card animate-in" :class="{ 'blog-card--soon': !post.link }">
                         <div class="blog-cover">
@@ -1052,7 +1086,7 @@
 
                 <!-- Show More -->
                 <div class="text-center mt-8">
-                    <a href="https://norman-dev.hashnode.dev/" target="_blank" rel="noopener noreferrer"
+                    <a href="https://norman-dev.hashnode.dev/" target="_blank" rel="noopener noreferrer" data-umami-event="articles-view-all"
                         class="inline-block px-8 py-2.5 rounded-full border border-cyan-500 text-cyan-400 text-sm font-medium transition-all duration-300 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20">
                         View All Articles
                     </a>
@@ -1075,7 +1109,7 @@
                 <div class="max-w-lg mx-auto bg-glass rounded-2xl p-8 text-center">
                     <p class="text-cyan-400 mb-2 code-font text-sm text-cyan-400 animate-in">GET IN TOUCH</p>
                     <p class="text-xl md:text-xl font-bold text-white mb-6">Let's Connect for a further discussion</p>
-                    <a href="mailto:normanmukama11@gmail.com" class="block animate-in">
+                    <a href="mailto:normanmukama11@gmail.com" class="block animate-in" data-umami-event="contact-email-click">
                         <button type="button"
                             class="w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-[0.98]">
                             <i class="fas fa-paper-plane mr-2"></i> Send Message
@@ -1160,7 +1194,6 @@
                     { id: 'projects', name: 'Projects' },
                     { id: 'experience', name: 'Experience' },
                     { id: 'skills', name: 'Skills' },
-                    { id: 'education', name: 'Education' },
                     { id: 'blog', name: 'Blog' },
                     { id: 'contact', name: 'Contact' }
                 ];
@@ -1255,15 +1288,12 @@
                 const education = [
                     {
                         title: 'Bachelor of Science in Software Engineering',
-                        school: 'Victoria University, Kampala',
-                        period: '2026 – Present',
-                        note: 'Currently pursuing undergraduate studies in software engineering.'
+                        school: 'Victoria University, Kampala'
                     },
                     {
                         title: 'Diploma in Software Engineering',
                         school: 'Sai Pali Institute of Technology, Entebbe',
-                        period: '2021 – 2024',
-                        note: 'Class I: CGPA 4.7.'
+                        period: '2021 – 2024'
                     }
                 ];
 
@@ -1956,6 +1986,32 @@
                 };
             }
         }).mount('#app');
+    </script>
+
+    <!-- Analytics: record which sections each visitor actually scrolls into (once per section per visit) -->
+    <script>
+        (function () {
+            if (!('IntersectionObserver' in window)) return;
+            var seen = {};
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    var id = entry.target.id;
+                    if (!entry.isIntersecting || seen[id]) return;
+                    seen[id] = true;
+                    window.umami.track('section-view', { section: id });
+                    observer.unobserve(entry.target);
+                });
+            }, { threshold: 0.35 });
+            // Umami loads asynchronously; start observing once its tracker is ready (give up after ~15s).
+            var tries = 0;
+            (function start() {
+                if (window.umami && typeof window.umami.track === 'function') {
+                    document.querySelectorAll('section[id]').forEach(function (el) { observer.observe(el); });
+                } else if (++tries < 30) {
+                    setTimeout(start, 500);
+                }
+            })();
+        })();
     </script>
 
     <!-- Scroll-driven code wall behind the sections below the landing page -->
